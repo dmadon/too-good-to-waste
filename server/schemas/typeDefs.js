@@ -1,6 +1,10 @@
 const {gql} = require('apollo-server-express');
 
+
 const typeDefs = gql`
+
+    scalar Date
+
     type Product {
         _id: ID
         name: String!
@@ -12,7 +16,7 @@ const typeDefs = gql`
 
     type Order {
         _id: ID
-        purchaseDate: String
+        purchaseDate: Date
         products: [Product]
         customerComment: String
         status: String
@@ -21,7 +25,7 @@ const typeDefs = gql`
 
     type Inventory {
         _id: ID
-        inventoryDate: String
+        inventoryDate: Date
         productCount: Int
         products: [Product]
     }
@@ -76,7 +80,7 @@ const typeDefs = gql`
         getUser(id:ID!):User
         getPartners:[Partner]
         getPartner(id:ID!): Partner
-        getInventory(partnerId:ID!, inventoryDate:String!):Inventory
+        getInventory(partnerId:ID!, inventoryDate:Date!):Inventory
     }
 
     type Mutation{
@@ -84,7 +88,7 @@ const typeDefs = gql`
         loginUser(email: String!, password: String!):AuthUser
         addPartner(partnerData: PartnerData!): AuthPartner
         loginPartner(username: String!, password: String!): AuthPartner
-        createInventory(partnerId:ID!,inventoryDate:String!):Partner
+        createInventory(partnerId:ID!,inventoryDate:Date!):Partner
     }
 
 `;
