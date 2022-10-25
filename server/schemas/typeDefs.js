@@ -71,6 +71,12 @@ const typeDefs = gql`
 
     type Query {
         getProducts:[Product]
+        getProduct(id:ID, name:String): Product
+        getUsers:[User]
+        getUser(id:ID!):User
+        getPartners:[Partner]
+        getPartner(id:ID!): Partner
+        getInventory(partnerId:ID!, inventoryDate:String!):Inventory
     }
 
     type Mutation{
@@ -78,6 +84,7 @@ const typeDefs = gql`
         loginUser(email: String!, password: String!):AuthUser
         addPartner(partnerData: PartnerData!): AuthPartner
         loginPartner(username: String!, password: String!): AuthPartner
+        createInventory(partnerId:ID!,inventoryDate:String!):Partner
     }
 
 `;
