@@ -64,9 +64,10 @@ const typeDefs = gql`
         streetAddress: String!
         city: String!
         state: String!
-        zip: String!
-        
+        zip: String!        
     }
+
+   
 
     type AuthPartner {
         token: ID
@@ -81,6 +82,7 @@ const typeDefs = gql`
         getPartners:[Partner]
         getPartner(id:ID!): Partner
         getInventory(partnerId:ID!, inventoryDate:Date!):Inventory
+        getInventories(partnerId:ID!):Partner
     }
 
     type Mutation{
@@ -88,7 +90,9 @@ const typeDefs = gql`
         loginUser(email: String!, password: String!):AuthUser
         addPartner(partnerData: PartnerData!): AuthPartner
         loginPartner(username: String!, password: String!): AuthPartner
-        createInventory(partnerId:ID!,inventoryDate:Date!):Partner
+        displayInventory(partnerId:ID!, inventoryDate:Date!):Inventory
+        addToInventory(partnerId:ID!,inventoryId:ID!,productId:ID!,productPrice:Float,productStock:Int):Partner
+        
     }
 
 `;
