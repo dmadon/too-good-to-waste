@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Product = require('./Product');
 const { Schema } = mongoose;
 const dayjs = require('dayjs');
 
@@ -9,7 +8,12 @@ const orderSchema = new Schema({
     default: Date.now,
     get: purchaseDateVal => dayjs(purchaseDateVal).format("MM-DD-YYYY")
   },
-  products: [Product.schema],
+  products: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Product'
+    }
+  ],
   customerComment:{
     type: String,
     trim: true
