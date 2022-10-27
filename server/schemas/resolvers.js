@@ -1,14 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
 const {Product,User,Partner, Inventory} = require('../models');
 const {signUserToken, signPartnerToken} = require('../utils/auth');
-
 const { GraphQLScalarType, Kind } = require ('graphql');
 const dayjs = require('dayjs');
-
-
-
-
-
 
 const resolvers = {
     Date: dateScalar = new GraphQLScalarType({
@@ -44,21 +38,24 @@ const resolvers = {
             }
         },
         getUsers: async () => {
-            return await User.find()
+            return await User.find();
         },
         getUser: async (parent,{id}) => {
-            return await User.findOne({_id:id})
+            return await User.findOne({_id:id});
         },
         getPartners: async () => {
-            return await Partner.find()
+            return await Partner.find();
         },
         getPartner: async (parent,{id}) => {
-            return await Partner.findOne({_id:id}).populate('inventories').populate('orders')
+            return await Partner.findOne({_id:id}).populate('inventories').populate('orders');
+        },
+        getInventories: async (parent,{partnerId}) => {            
+            return await Partner.findOne({_id:partnerId}).populate('inventories');
         },
         getInventory: async(parent,{partnerId, inventoryDate}) => {
             const partner = await Partner.findOne({_id:partnerId}).populate('inventories');
-            const foundInventory = partner.inventories.find((inv) => dayjs(inv.inventoryDate).format("MM-DD-YYYY")===dayjs(inventoryDate).format("MM-DD-YYYY")); 
-            return foundInventory;
+            const foundInv = partner.inventories.find((inv) => dayjs(inv.inventoryDate).format("MM-DD-YYYY")===dayjs(inventoryDate).format("MM-DD-YYYY")); 
+            return foundInv;
         }
     },
     Mutation:{
@@ -108,31 +105,120 @@ const resolvers = {
 
             return {token, partner};
         },
-        createInventory: async(parent,{partnerId,inventoryDate}) => {
+        displayInventory: async(parent,{inventoryDate,partnerId}) => {
 
-            const partnerLookup = await Partner.findOne({_id:partnerId}).populate('inventories');
-            const foundInventory = partnerLookup.inventories.find((inv) => dayjs(inv.inventoryDate).format("MM-DD-YYYY") === dayjs(inventoryDate).format("MM-DD-YYYY"));
-    
+            // lookup this partner's inventories
+            const partnerData = await Partner.findOne({_id:partnerId}).populate('inventories');
+                        
+            // check to see if the partner already has an inventory for the selected date or if we need to create a new one
+            const foundInv = partnerData.inventories.find((inv) => dayjs(inv.inventoryDate).format("MM-DD-YYYY") === dayjs(inventoryDate).format("MM-DD-YYYY"));
 
-                if(!foundInventory){
-
-                    console.log(`created new inventory for ${inventoryDate}`)
-
+            // return the _id of the inventory we are going to display by either creating a new inventory or finding an existing one
+            const activateInv = async() => {
+                // if no inventory is found for the selected date, create one and assign that inventory's _id as the activeInvId
+                if(!foundInv){ 
                     const newInv = new Inventory({inventoryDate:inventoryDate});
-                    const partner = await Partner.findByIdAndUpdate( partnerId,                     
+                    await Partner.findByIdAndUpdate( partnerId,                     
                         {$push: {inventories:newInv}},
                         {new:true});
-
-                return partner;
-
+                    console.log(`created new inventory ${newInv._id} for ${dayjs(inventoryDate).format("MM-DD-YYYY")}`)
+                    return newInv._id;
                 }
                 
-                else 
-                console.log('there is already an inventory for that date')
-                return partnerLookup;
+                // if an existing inventory was found for that date, assign that inventory's _id as the activeInvId
+                else{
+                    console.log(`inventory ${foundInv._id} already exists for ${dayjs(inventoryDate).format("MM-DD-YYYY")}`)
+                    return foundInv._id;
+                };
             }
-        
-       
+
+            // the id of the inventory we are now going to display
+            const activeInvId = await activateInv() ;
+
+            console.log(`active inventory id: ${activeInvId}`)
+
+            const updatedPartnerData = await Partner.findOne({_id:partnerId}).populate('inventories');           
+            const displayedInv = updatedPartnerData.inventories.find((inv) => inv._id == `${activeInvId}`);
+
+            console.log(displayedInv)
+
+            return displayedInv;
+        },
+
+        addToInventory: async(parent,{partnerId,inventoryId,productId,productPrice,productStock}) => {
+            // lookup this partner's inventories
+            const partnerData = await Partner.findOne({_id:partnerId}).populate('inventories');
+            
+            // find the specified inventory
+            const foundInv = partnerData.inventories.find((inv) => inv._id == `${inventoryId}`);
+            console.log(`found inventory ${foundInv._id}`)
+
+            // see if the specified product is already in the inventory
+            const foundProd = foundInv.products.find((prod) => prod._id == `${productId}`)
+            
+            // if the product was already in the inventory, just update that product in the inventory
+            if(foundProd){
+                console.log(`found and updated product ${foundProd._id} in inventory ${foundInv._id}`)
+                
+                const updatedInv = await Partner.findOneAndUpdate(
+                    {_id:partnerId},
+                    // add products to the correct inventory by specifying that we are going to provide the inventory's _id, using the positional identifier '$' and an identifier [outer]
+                    // we are also providing the specific product's id that we wish to update in the products array by using the positional identifier '$' and an identifier [inner]
+                    {$set: {"inventories.$[outer].products.$[inner]":{"_id":foundProd._id,"name":foundProd.name,"description":foundProd.description,"price":productPrice, "stock":productStock}}},
+                    // give the identifiers' _id properties the value of the inventoryId and productId that were passed in by the user and return the updated partner object
+                    {"arrayFilters": [{"outer._id": foundInv._id}, {"inner._id":foundProd._id}], new:true},
+                );
+
+                return updatedInv;                        
+            }
+            // if the product was not already in the inventory, add it to the inventory
+            else{
+                console.log(`product not in inventory, adding product ${productId} to inventory ${inventoryId}`);
+                // get the product information from the Product model
+                const lookupProd = await Product.findOne({_id:productId})
+
+                // add the product to the products array and set the price and stock equal to the variables passed in by the user
+                const updatedInv = await Partner.findOneAndUpdate(
+                    {_id:partnerId},
+                    // add products to the correct inventory by specifying that we are going to provide the inventory's _id, using the positional identifier '$' and an identifier [outer]
+                    {$addToSet: {"inventories.$[outer].products":{"_id":lookupProd._id, "name":lookupProd.name, "description":lookupProd.description, "price":productPrice, "stock":productStock}}},
+                    // give the identifier's _id property the value of the inventoryId passed in by the user and return the updated partner object
+                    {"arrayFilters": [{"outer._id": foundInv._id}], new:true},
+                );
+
+                return updatedInv;
+            }          
+        },
+        deleteFromInventory: async(parent,{partnerId,inventoryId,productId}) => {
+
+            const updatedInv = await Partner.findOneAndUpdate(
+                {_id:partnerId},
+                {$pull: {"inventories.$[outer].products":{"_id":productId}}},
+                {"arrayFilters": [{"outer._id": inventoryId}], new:true},
+            );
+
+            return updatedInv;
+        },
+        deleteInventory: async(parent,{partnerId,inventoryId}) => {
+
+            const updatedPartner = await Partner.findOneAndUpdate(
+                {_id:partnerId},
+                {$pull: {inventories: {_id: inventoryId}}},
+                {new:true}
+            );
+
+            return updatedPartner;
+        },
+        deleteInventories: async(parent,{partnerId}) => {
+            
+            const updatedPartner = await Partner.findOneAndUpdate(
+                {_id:partnerId},
+                {$pull: {inventories:{}}},
+                {new:true}
+            );
+
+            return updatedPartner;
+        }
     }
 };
 
