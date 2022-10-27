@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const bcrypt = require('bcrypt');
-const Order = require('./Product');
 
 const userSchema = new Schema({
     firstName:{
@@ -26,7 +25,12 @@ const userSchema = new Schema({
         minlength: 8,
         trim: true
     },
-    orders: [Order.schema]
+    orders:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:'Order'
+        }
+    ]
 });
 
 // hash password before saving to database

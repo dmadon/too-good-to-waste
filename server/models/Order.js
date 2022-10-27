@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const Product = require('./Product');
 const { Schema } = mongoose;
+const dayjs = require('dayjs');
 
 const orderSchema = new Schema({
   purchaseDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: purchaseDateVal => dayjs(purchaseDateVal).format("MM-DD-YYYY")
   },
   products: [Product.schema],
   customerComment:{
@@ -26,9 +28,17 @@ const orderSchema = new Schema({
   }
 },
 {
-  timestamps:true
+  timestamps:true,
+  toJSON:{
+    getters:true,
+    virtuals:true
+  }
 }
 );
+
+orderSchema.virtual('productCount').get(function(){
+  return this.products.length;
+})
 
 const Order = mongoose.model('Order', orderSchema);
 

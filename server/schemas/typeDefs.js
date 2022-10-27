@@ -81,7 +81,7 @@ const typeDefs = gql`
         getUser(id:ID!):User
         getPartners:[Partner]
         getPartner(id:ID!): Partner
-        getInventory(partnerId:ID!, inventoryDate:Date!):Inventory
+        getInventory(partnerId:ID!, inventoryDate:Date!):Partner
         getInventories(partnerId:ID!):Partner
     }
 

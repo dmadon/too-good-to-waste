@@ -53,9 +53,7 @@ const resolvers = {
             return await Partner.findOne({_id:partnerId}).populate('inventories');
         },
         getInventory: async(parent,{partnerId, inventoryDate}) => {
-            const partner = await Partner.findOne({_id:partnerId}).populate('inventories');
-            const foundInv = partner.inventories.find((inv) => dayjs(inv.inventoryDate).format("MM-DD-YYYY")===dayjs(inventoryDate).format("MM-DD-YYYY")); 
-            return foundInv;
+            return await Partner.findOne({_id:partnerId, "inventories.inventoryDate":dayjs(inventoryDate).format("MM-DD-YYYY")},{streetAddress:1, city:1,state:1,zip:1,"inventories.$":1});
         }
     },
     Mutation:{
