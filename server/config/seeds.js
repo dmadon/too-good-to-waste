@@ -13,7 +13,7 @@ db.once('open', async () => {
             stock: 0        
         },
         { 
-            name: 'Meat and Poultry Box',
+            name: 'Meat, Fish and Poultry Box',
             description: 'Selected cuts of meat and poultry. These items should be cooked or frozen within 24 hours.',
             image: 'Placeholder Image of Meat and Poultry',
             price: 2.00,
