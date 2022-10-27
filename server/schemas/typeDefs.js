@@ -92,7 +92,9 @@ const typeDefs = gql`
         loginPartner(username: String!, password: String!): AuthPartner
         displayInventory(partnerId:ID!, inventoryDate:Date!):Inventory
         addToInventory(partnerId:ID!,inventoryId:ID!,productId:ID!,productPrice:Float,productStock:Int):Partner
-        
+        deleteFromInventory(partnerId:ID!,inventoryId:ID!,productId:ID!):Partner
+        deleteInventory(partnerId:ID!,inventoryId:ID!):Partner
+        deleteInventories(partnerId:ID!):Partner
     }
 
 `;
