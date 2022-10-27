@@ -47,7 +47,7 @@ const resolvers = {
             return await Partner.find();
         },
         getPartner: async (parent,{id}) => {
-            return await Partner.findOne({_id:id}).populate('inventories').populate('orders');
+            return await Partner.findOne({_id:id}).populate('orders');
         },
         getInventories: async (parent,{partnerId}) => {            
             return await Partner.findOne({_id:partnerId}).populate('inventories');
