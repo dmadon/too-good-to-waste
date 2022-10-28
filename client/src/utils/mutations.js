@@ -42,6 +42,9 @@ export const LOGIN_USER = gql`
 `;
 
 // Create a new parnter and assign a token
+// the partnerData parameter refers to the input typeDef 'PartnerData',
+// which includes username, email, password, partnerName(the displayed name of the grocery store),
+// city, state, and zip
 export const ADD_PARTNER = gql`
     mutation addPartner($partnerData:PartnerData!){
         addPartner(partnerData:$partnerData){
@@ -49,7 +52,12 @@ export const ADD_PARTNER = gql`
             partner {
                 _id
                 username
+                partnerName
                 email
+                streetAddress
+                city
+                state
+                zip
             }
         }
     }
@@ -63,7 +71,12 @@ export const LOGIN_PARTNER = gql`
             partner {
                 _id
                 username
+                partnerName
                 email
+                streetAddress
+                city
+                state
+                zip
                 inventories {
                 _id
                 inventoryDate
