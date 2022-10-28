@@ -1,18 +1,22 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const Product = require('./Product');
+const dayjs = require('dayjs');
 
 const inventorySchema = new Schema(
     {
         inventoryDate:{
             type:Date,
-            required: true
+            default:Date.now,
+            required: true,
+            get: purchaseDateVal => dayjs(purchaseDateVal).format("MM-DD-YYYY")
         },
         products:[Product.schema]
     },
     {
         toJSON:{
-            virtuals:true
+            virtuals:true,
+            getters:true
         }
     }
 );

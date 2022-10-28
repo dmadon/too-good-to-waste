@@ -12,6 +12,7 @@ const typeDefs = gql`
         image: String
         price: Float
         stock: Int
+        orderQty:Int
     }
 
     type Order {
@@ -21,6 +22,8 @@ const typeDefs = gql`
         customerComment: String
         status: String
         partnerComment: String
+        user:User
+        partner:Partner
     }
 
     type Inventory {
@@ -67,7 +70,12 @@ const typeDefs = gql`
         zip: String!        
     }
 
-   
+    input ProductInput{
+        _id:ID!
+        name:String!
+        price:Float!
+        orderQty:Int
+    }
 
     type AuthPartner {
         token: ID
@@ -76,13 +84,14 @@ const typeDefs = gql`
 
     type Query {
         getProducts:[Product]
-        getProduct(id:ID, name:String): Product
+        getProduct(_id:ID, name:String): Product
         getUsers:[User]
-        getUser(id:ID!):User
+        getUser(_id:ID!):User
         getPartners:[Partner]
-        getPartner(id:ID!): Partner
-        getInventory(partnerId:ID!, inventoryDate:Date!):Inventory
+        getPartner(_id:ID!): Partner
+        getInventory(partnerId:ID!, inventoryDate:Date!):Partner
         getInventories(partnerId:ID!):Partner
+        getOrders:[Order]
     }
 
     type Mutation{
@@ -94,7 +103,11 @@ const typeDefs = gql`
         addToInventory(partnerId:ID!,inventoryId:ID!,productId:ID!,productPrice:Float,productStock:Int):Partner
         deleteFromInventory(partnerId:ID!,inventoryId:ID!,productId:ID!):Partner
         deleteInventory(partnerId:ID!,inventoryId:ID!):Partner
-        deleteInventories(partnerId:ID!):Partner
+        deleteInventories(partnerId:ID!):Partner        
+        createOrder(products: [ProductInput]!, userId:ID!, partnerId:ID!): Order
+        deleteUserOrders(_id:ID!):User
+        deletePartnerOrders(_id:ID!):Partner
+        deleteAllOrders:Order
     }
 
 `;
