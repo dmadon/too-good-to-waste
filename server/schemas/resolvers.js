@@ -108,7 +108,7 @@ const resolvers = {
 
             return {token, partner};
         },
-        displayInventory: async(parent,{inventoryDate,partnerId}) => {
+        buildInventory: async(parent,{inventoryDate,partnerId}) => {
 
             // lookup this partner's inventories
             const partnerData = await Partner.findOne({_id:partnerId});
@@ -148,7 +148,7 @@ const resolvers = {
             return displayedInv;
         },
 
-        addToInventory: async(parent,{partnerId,inventoryId,productId,productPrice,productStock}) => {
+        addToInventory: async(parent,{partnerId,inventoryId,product}) => {
             // lookup this partner's inventories
             const partnerData = await Partner.findOne({_id:partnerId});
             
@@ -157,39 +157,54 @@ const resolvers = {
             console.log(`found inventory ${foundInv._id}`)
 
             // see if the specified product is already in the inventory
-            const foundProd = foundInv.products.find((prod) => prod._id == `${productId}`)
+            const foundProd = foundInv.products.find((prod) => prod._id == `${product._id}`)
             
             // if the product was already in the inventory, just update that product in the inventory
             if(foundProd){
-                console.log(`found and updated product ${foundProd._id} in inventory ${foundInv._id}`)
-                
-                const updatedInv = await Partner.findOneAndUpdate(
-                    {_id:partnerId},
+                    
+                    await Partner.findOneAndUpdate(
+                    {_id:partnerId, "inventories._id":foundInv._id},                    
                     // add products to the correct inventory by specifying that we are going to provide the inventory's _id, using the positional identifier '$' and an identifier [outer]
                     // we are also providing the specific product's id that we wish to update in the products array by using the positional identifier '$' and an identifier [inner]
-                    {$set: {"inventories.$[outer].products.$[inner]":{"_id":foundProd._id,"name":foundProd.name,"description":foundProd.description,"price":productPrice, "stock":productStock}}},
-                    // give the identifiers' _id properties the value of the inventoryId and productId that were passed in by the user and return the updated partner object
+                    {$set: {"inventories.$[outer].products.$[inner]":{"_id":foundProd._id,"name":foundProd.name,"description":foundProd.description,"price":product.price, "stock":product.stock}}},
+                    // give the identifiers' _id properties the value of the inventoryId and _id that were passed in by the user and return the updated partner object
                     {"arrayFilters": [{"outer._id": foundInv._id}, {"inner._id":foundProd._id}], new:true},
                 );
 
-                return updatedInv;                        
+                console.log(`found and updated product ${foundProd._id} in inventory ${foundInv._id}`);
+
+                // return only the updated inventory, rather than all the partner's inventories
+                const partner = await Partner.findOne(
+                    {_id:partnerId, "inventories._id":foundInv._id},
+                    {_id:1, username:1,partnerName:1,"inventories.$":1}
+                )
+
+                return partner;                        
             }
             // if the product was not already in the inventory, add it to the inventory
             else{
-                console.log(`product not in inventory, adding product ${productId} to inventory ${inventoryId}`);
+                
                 // get the product information from the Product model
-                const lookupProd = await Product.findOne({_id:productId})
+                const lookupProd = await Product.findOne({_id:product._id})
 
                 // add the product to the products array and set the price and stock equal to the variables passed in by the user
-                const updatedInv = await Partner.findOneAndUpdate(
+                await Partner.findOneAndUpdate(
                     {_id:partnerId},
                     // add products to the correct inventory by specifying that we are going to provide the inventory's _id, using the positional identifier '$' and an identifier [outer]
-                    {$addToSet: {"inventories.$[outer].products":{"_id":lookupProd._id, "name":lookupProd.name, "description":lookupProd.description, "price":productPrice, "stock":productStock}}},
+                    {$addToSet: {"inventories.$[outer].products":{"_id":lookupProd._id, "name":lookupProd.name, "description":lookupProd.description, "price":product.price, "stock":product.stock}}},
                     // give the identifier's _id property the value of the inventoryId passed in by the user and return the updated partner object
                     {"arrayFilters": [{"outer._id": foundInv._id}], new:true},
                 );
 
-                return updatedInv;
+                console.log(`product not in inventory, adding product ${product._id} to inventory ${inventoryId}`);
+
+                // return only the updated inventory, rather than all the partner's inventories
+                const partner = await Partner.findOne(
+                    {_id:partnerId, "inventories._id":foundInv._id},
+                    {_id:1, username:1,partnerName:1,"inventories.$":1}
+                )
+                
+                return partner;
             }          
         },
         deleteFromInventory: async(parent,{partnerId,inventoryId,productId}) => {

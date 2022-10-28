@@ -1,5 +1,6 @@
 const db = require('./connection');
 const {Product,Partner, User} = require('../models');
+const bcrypt = require ('bcrypt');
 
 db.once('open', async () => {
     await Product.deleteMany();
@@ -63,12 +64,14 @@ db.once('open', async () => {
         }
     ]);
 
+
+
     console.log('Products Seeded!');
 
 
     await Partner.deleteMany();
 
-    const partners = await Partner.insertMany([
+    const partnerData = [
         {
             username:'sprouts101',
             email:'sprouts101@sprouts.com',
@@ -225,14 +228,27 @@ db.once('open', async () => {
             inventories:[],
             orders:[]
         },
+    ];
 
-    ])
+    const hashedPasswordsPartner = partnerData.map(
+        async(partner) => {
+            let hashedPw = await bcrypt.hash(partner.password, 10);
+            partner.password = hashedPw;
+            return partner;
+        }
+    )
+
+    const updatedPartners = await Promise.all(hashedPasswordsPartner)
+
+    const seedPartners = await Partner.insertMany(updatedPartners)      
 
     console.log('Partners Seeded!');
 
-    await User.deleteMany();
 
-    await User.insertMany([
+
+    await User.deleteMany();
+    
+    const userData = [
         {
             firstName:'Alli',
             lastName:'Brodine',
@@ -261,8 +277,20 @@ db.once('open', async () => {
             password:'amanda1234',
             orders:[]
         }
-    ])
+    ];
+    
+    const hashedPasswordsUser = userData.map(
+        async(user) => {
+            let hashedPw = await bcrypt.hash(user.password, 10);
+            user.password = hashedPw;
+            return user;
+        }
+    )
 
+    const updatedUsers = await Promise.all(hashedPasswordsUser)
+
+    const seedUsers = await User.insertMany(updatedUsers)
+    
     console.log('Users Seeded!');
 
 
