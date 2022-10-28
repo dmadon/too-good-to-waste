@@ -5,7 +5,7 @@ import PhotoCarousel from '../components/Carousel/Carousel';
 const Home = () => {
     return (
         <div>
-            <Box mt={7} mb={7}>       
+            <Box mb={7} mt={7}>       
                 <PhotoCarousel /> 
             </Box>
 
@@ -16,7 +16,7 @@ const Home = () => {
             </Text>
 
             <Box display="flex" justifyContent="center" mt={10}>
-                <Button background='red' className='available'>See what's available near you!</Button>
+                <Button background='#B4CDE6' className='available'>See what's available near you!</Button>
             </Box>
 
             <Text fontSize='2xl' textAlign={'center'} mt={10}>*Subject to availability.</Text>
