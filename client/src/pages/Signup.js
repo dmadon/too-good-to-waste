@@ -13,9 +13,9 @@ const Signup = () => {
 
     return (
         <div>
-            <Box minH='1500px' bgColor='#B4CDE6' color='#040303'>
-                <Heading fontFamily={'Pacifico'} mt={5} pl={5} textShadow='0 0 8px #F5EFE6'>Sign Up</Heading>
+            <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Sign Up</Heading>
 
+            <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3}>             
                 <Box mt={5} pl={5}>
                     <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>First Name: </FormLabel>
                     <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your first name" />

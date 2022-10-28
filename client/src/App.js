@@ -2,15 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react';
-import { Box, Divider } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import NavMenu from './components/NavMenu/NavMenu';
-import PartnerInventory from './pages/PartnerInventory';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
-import CustomerPage from './pages/CustomerPage';
-
 
 function App() {
   document.title = 'Too Good To Waste';
@@ -36,9 +33,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/locator" element={<PartnerInventory />} />
+              {/* <Route path="/locator" element={<Locator />} /> */}
               <Route path="/partnerlogin" element={<PartnerLogin />} />
-              <Route path="/education" element={<CustomerPage />} />
+              {/* <Route path="/education" element={<Education />} /> */}
             </Routes>
           </main>
         </Box>
