@@ -8,6 +8,14 @@
   src: url(./assets/fonts/Pacifico/Pacifico-Regular.ttf);
 }
 
+:root {
+  --primary-color: #3C2317;
+  --secondary-color: #628E90;
+  --tertiary-color: #B4CDE6;
+  --quaternary-color: #F5EFE6;
+  --quinary-color: #040303;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,16 +24,16 @@
   font-family: rubik;
   font-size: 50px;
   padding-top: 45px;
-  color: var(--primary-color);
-  text-shadow: 0 0 10px var(--quaternary-color);
+  color: var(--quinary-color);
+  text-shadow: 0 0 8px var(--secondary-color);
 }
 
 .csv-let {
   font-family: pacifico;
   font-size: 80px;
   margin: 5px;
-  color: var(--primary-color);
-  text-shadow: 0 0 10px var(--quaternary-color);
+  color: var(--quinary-color);
+  text-shadow: 0 0 8px var(--secondary-color);
 }
 
 
