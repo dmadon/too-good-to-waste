@@ -105,12 +105,12 @@ const typeDefs = gql`
         loginUser(email: String!, password: String!):AuthUser
         addPartner(partnerData: PartnerData!): AuthPartner
         loginPartner(username: String!, password: String!): AuthPartner
-        buildInventory(partnerId:ID!, inventoryDate:Date!):Inventory
-        addToInventory(partnerId:ID!,inventoryId:ID!, product:InvProductInput!):Partner
-        deleteFromInventory(partnerId:ID!,inventoryId:ID!,productId:ID!):Partner
-        deleteInventory(partnerId:ID!,inventoryId:ID!):Partner
-        deleteInventories(partnerId:ID!):Partner        
-        createOrder(products: [ProductInput]!, userId:ID!, partnerId:ID!): Order
+        buildInventory(inventoryDate:Date!):Inventory
+        addToInventory(inventoryId:ID!, product:InvProductInput!):Partner
+        deleteFromInventory(inventoryId:ID!,productId:ID!):Partner
+        deleteInventory(inventoryId:ID!):Partner
+        deleteInventories:Partner        
+        createOrder(products: [ProductInput]!, customerComment:String, partnerId:ID!): Order
         deleteUserOrders(_id:ID!):User
         deletePartnerOrders(_id:ID!):Partner
         deleteAllOrders:Order
