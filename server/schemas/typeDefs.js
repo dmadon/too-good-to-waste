@@ -77,6 +77,12 @@ const typeDefs = gql`
         orderQty:Int
     }
 
+    input InvProductInput{
+        _id:ID!
+        price:Float!
+        stock:Int
+    }
+
     type AuthPartner {
         token: ID
         partner: Partner
@@ -99,8 +105,8 @@ const typeDefs = gql`
         loginUser(email: String!, password: String!):AuthUser
         addPartner(partnerData: PartnerData!): AuthPartner
         loginPartner(username: String!, password: String!): AuthPartner
-        displayInventory(partnerId:ID!, inventoryDate:Date!):Inventory
-        addToInventory(partnerId:ID!,inventoryId:ID!,productId:ID!,productPrice:Float,productStock:Int):Partner
+        buildInventory(partnerId:ID!, inventoryDate:Date!):Inventory
+        addToInventory(partnerId:ID!,inventoryId:ID!, product:InvProductInput!):Partner
         deleteFromInventory(partnerId:ID!,inventoryId:ID!,productId:ID!):Partner
         deleteInventory(partnerId:ID!,inventoryId:ID!):Partner
         deleteInventories(partnerId:ID!):Partner        

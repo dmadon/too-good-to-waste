@@ -102,8 +102,10 @@ export const QUERY_PARTNER = gql`
                 inventoryDate
                 productCount
                 products {
-                name
-                stock
+                    _id
+                    name
+                    stock
+                    price
                 }
             }
             orders {
