@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const {Product,User,Partner, Inventory} = require('../models');
+const {Product,User,Partner, Inventory,Order} = require('../models');
 const {signUserToken, signPartnerToken} = require('../utils/auth');
 const { GraphQLScalarType, Kind } = require ('graphql');
 const dayjs = require('dayjs');
@@ -16,7 +16,7 @@ const resolvers = {
         },
         parseLiteral(ast) {
           if (ast.kind === Kind.STRING) {
-            // Convert hard-coded AST string to integer and then to Date
+            // Convert hard-coded AST integer to string and then to Date
             return dayjs(ast.value);
           }
           // Invalid hard-coded value (not an integer)
@@ -29,9 +29,9 @@ const resolvers = {
         getProducts: async () => {
             return await Product.find()
         },
-        getProduct: async (parent,{id,name}) => {
-            if(id){
-                return await Product.findOne({_id:id})
+        getProduct: async (parent,{_id,name}) => {
+            if(_id){
+                return await Product.findOne({_id:_id})
             }
             else if(name){
                 return await Product.findOne({name:name})
@@ -40,21 +40,26 @@ const resolvers = {
         getUsers: async () => {
             return await User.find();
         },
-        getUser: async (parent,{id}) => {
-            return await User.findOne({_id:id});
+        getUser: async (parent,{_id}) => {
+            return await User.findById(_id).populate({path:'orders',populate:'partner'});
+
         },
         getPartners: async () => {
             return await Partner.find();
         },
-        getPartner: async (parent,{id}) => {
-            return await Partner.findOne({_id:id}).populate('orders');
+        getPartner: async (parent,{_id}) => {
+            return await Partner.findById(_id).populate({path:'orders',populate:'user'});
+
         },
         getInventories: async (parent,{partnerId}) => {            
-            return await Partner.findOne({_id:partnerId}).populate('inventories');
+            return await Partner.findOne({_id:partnerId});
         },
         getInventory: async(parent,{partnerId, inventoryDate}) => {
             return await Partner.findOne({_id:partnerId, "inventories.inventoryDate":dayjs(inventoryDate).format("MM-DD-YYYY")},{streetAddress:1, city:1,state:1,zip:1,"inventories.$":1});
-        }
+        },
+        getOrders: async() => {
+            return await Order.find().populate(['user','partner']);
+        },
     },
     Mutation:{
         addUser: async (parent,args) => {
@@ -106,7 +111,7 @@ const resolvers = {
         displayInventory: async(parent,{inventoryDate,partnerId}) => {
 
             // lookup this partner's inventories
-            const partnerData = await Partner.findOne({_id:partnerId}).populate('inventories');
+            const partnerData = await Partner.findOne({_id:partnerId});
                         
             // check to see if the partner already has an inventory for the selected date or if we need to create a new one
             const foundInv = partnerData.inventories.find((inv) => dayjs(inv.inventoryDate).format("MM-DD-YYYY") === dayjs(inventoryDate).format("MM-DD-YYYY"));
@@ -135,7 +140,7 @@ const resolvers = {
 
             console.log(`active inventory id: ${activeInvId}`)
 
-            const updatedPartnerData = await Partner.findOne({_id:partnerId}).populate('inventories');           
+            const updatedPartnerData = await Partner.findOne({_id:partnerId})           
             const displayedInv = updatedPartnerData.inventories.find((inv) => inv._id == `${activeInvId}`);
 
             console.log(displayedInv)
@@ -145,7 +150,7 @@ const resolvers = {
 
         addToInventory: async(parent,{partnerId,inventoryId,productId,productPrice,productStock}) => {
             // lookup this partner's inventories
-            const partnerData = await Partner.findOne({_id:partnerId}).populate('inventories');
+            const partnerData = await Partner.findOne({_id:partnerId});
             
             // find the specified inventory
             const foundInv = partnerData.inventories.find((inv) => inv._id == `${inventoryId}`);
@@ -207,8 +212,7 @@ const resolvers = {
 
             return updatedPartner;
         },
-        deleteInventories: async(parent,{partnerId}) => {
-            
+        deleteInventories: async(parent,{partnerId}) => {            
             const updatedPartner = await Partner.findOneAndUpdate(
                 {_id:partnerId},
                 {$pull: {inventories:{}}},
@@ -216,7 +220,41 @@ const resolvers = {
             );
 
             return updatedPartner;
-        }
+        },            
+        deleteUserOrders: async(parent, {_id}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id:_id},
+                {$pull: {orders:{}}},
+                {new:true}
+            );
+                console.log(updatedUser);
+            return updatedUser;
+        },
+        deletePartnerOrders: async(parent, {_id}) => {
+            const updatedPartner = await Partner.findOneAndUpdate(
+                {_id:_id},
+                {$pull: {orders:{}}},
+                {new:true}
+            );
+
+            return updatedPartner;
+        },
+        deleteAllOrders: async () => {
+            return await Order.deleteMany();
+        },
+        createOrder: async (parent, { products, userId, partnerId }, context) => {
+            // console.log(context);
+            // if (context.user) {
+            const order = await (await (await Order.create({products:products, user:userId, partner:partnerId})).populate('user')).populate('partner');
+                console.log(order)
+            await User.findByIdAndUpdate(userId, { $push: { orders: order._id } },{new:true}).populate({path:'orders', populate:'products'});
+            await Partner.findByIdAndUpdate(partnerId, { $push:{ orders: order._id } }, {new:true}).populate({path:'orders', populate:'products'});
+            return order;
+            // }
+      
+            // throw new AuthenticationError('Not logged in');
+          },
+
     }
 };
 

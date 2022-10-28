@@ -1,5 +1,5 @@
 const db = require('./connection');
-const {Product,Partner} = require('../models');
+const {Product,Partner, User} = require('../models');
 
 db.once('open', async () => {
     await Product.deleteMany();
@@ -10,49 +10,56 @@ db.once('open', async () => {
             description: 'An assortment of very ripe seasonal fruits and vegetables.',
             image: 'Placeholder Image of Produce',
             price: 2.00,
-            stock: 0        
+            stock: 0,
+            orderQty: 0       
         },
         { 
             name: 'Meat, Fish and Poultry Box',
             description: 'Selected cuts of meat and poultry. These items should be cooked or frozen within 24 hours.',
             image: 'Placeholder Image of Meat and Poultry',
             price: 2.00,
-            stock: 0        
+            stock: 0,
+            orderQty: 0     
         },
         { 
             name: 'Dairy Box',
             description: 'Various milk and cheese products that are ready for immediate use.',
             image: 'Placeholder Image of Milk and Cheese',
             price: 2.00,
-            stock: 0        
+            stock: 0,
+            orderQty: 0      
         },
         { 
             name: 'Eggs',
             description: 'Quantities will vary.',
             image: 'Placeholder Image of Eggs',
             price: 1.00,
-            stock: 0        
+            stock: 0,
+            orderQty: 0      
         },
         { 
             name: 'Pantry Box',
             description: 'Assorted cereals, canned, and boxed items. May include products containing gluten.',
             image: 'Placeholder Image of Grains',
             price: 1.00,
-            stock: 0        
+            stock: 0,
+            orderQty: 0        
         },
         { 
             name: 'Prepared Food Box',
             description: 'Cooked entrees and prepared side items ready to eat.',
             image: 'Placeholder Image of Prepared Foods',
             price: 2.00,
-            stock: 0        
+            stock: 0,
+            orderQty: 0     
         },
         {
             name: 'Compost Box',
             description: 'Produce that may be too ripe or too damaged for consumption, but still a rich source of nutrients for your compost bin.',
             image: 'Placeholder Image of Compost',
             price: 2.00,
-            stock: 0
+            stock: 0,
+            orderQty: 0
         }
     ]);
 
@@ -222,6 +229,42 @@ db.once('open', async () => {
     ])
 
     console.log('Partners Seeded!');
+
+    await User.deleteMany();
+
+    await User.insertMany([
+        {
+            firstName:'Alli',
+            lastName:'Brodine',
+            email:'alli@gmail.com',
+            password:'alli1234',
+            orders:[]
+        },
+        {
+            firstName:'Deanna',
+            lastName:'Madon',
+            email:'deanna@gmail.com',
+            password:'deanna1234',
+            orders:[]
+        },
+        {
+            firstName:'AJ',
+            lastName:'McCraw',
+            email:'aj@gmail.com',
+            password:'mccraw1234',
+            orders:[]
+        },        
+        {
+            firstName:'Amanda',
+            lastName:'Perry',
+            email:'amanda@gmail.com',
+            password:'amanda1234',
+            orders:[]
+        }
+    ])
+
+    console.log('Users Seeded!');
+
 
     process.exit();
 })
