@@ -7,32 +7,12 @@ import NavMenu from './components/NavMenu/NavMenu';
 import MapPicker from 'react-google-map-picker'
 // import Location from './components/Location';
 
-// const DefaultLocation = { lat: 10, lng: 106 };
-// const DefaultZoom = 10;
-
 
 const App = () => {
   document.title = 'Too Good To Waste';
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
-  // const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
-
-  // const [location, setLocation] = useState(defaultLocation);
-  // const [zoom, setZoom] = useState(DefaultZoom);
-
-  // function handleChangeLocation(lat, lng) {
-  //   setLocation({ lat: lat, lng: lng });
-  // }
-
-  // function handleChangeZoom(newZoom) {
-  //   setZoom(newZoom);
-  // }
-
-  // function handleResetLocation() {
-  //   setDefaultLocation({ ...DefaultLocation });
-  //   setZoom(DefaultZoom);
-  // }
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -83,14 +63,7 @@ const App = () => {
             {lng && <p>Longitude: {lng}</p>}
             <br />
 
-            {/* <MapPicker defaultLocation={defaultLocation}
-              zoom={zoom}
-              mapTypeId="roadmap satellite, hybrid, terrain"
-              style={{ height: '100px', width: '100px' }}
-              onChangeLocation={handleChangeLocation}
-              onChangeZoom={handleChangeZoom}
-              apiKey={process.env.REACT_APP_API_KEY} />
-            <MapPicker /> */}
+
           </Box>
           <Text fontSize='2xl' textAlign={'center'} mt={10}>*Subject to availability.</Text>
         </Box>
