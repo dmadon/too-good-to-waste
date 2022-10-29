@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import { Heading, 
          Text, 
          Box,
@@ -14,13 +14,22 @@ import { Heading,
          List,
          ListItem,
          ListIcon } from '@chakra-ui/react';
+import { useQuery } from '@apollo/client';
+import { QUERY_PRODUCTS } from '../../utils/queries';
+
 
 const PartnerInventory = () => {
     
     const format = (val) => `$` + val;
     const parse = (val) => val.replace(/^\$/, '');
 
-    const [value, setValue] = React.useState('1.00');
+    const [value, setValue] = useState('1.00');
+
+    const { loading, data } = useQuery(QUERY_PRODUCTS);
+
+    async function speak(){
+        await data
+        console.log(data)}
     
     return (
         <div>
