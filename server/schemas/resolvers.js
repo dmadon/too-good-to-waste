@@ -40,20 +40,46 @@ const resolvers = {
         getUsers: async () => {
             return await User.find();
         },
-        getUser: async (parent,{_id}) => {
-            return await User.findById(_id).populate({path:'orders',populate:'partner'});
+        getUser: async (parent, args, context) => {
+            if(context.user){
 
+                const user = await User.findById(context.user._id).populate({path:'orders',populate:'partner'});
+                user.orders.sort((a,b) => b.purchaseDate - a.purchaseDate);
+
+                return user;
+            }
+
+            throw new AuthenticationError('Please log in.');
         },
         getPartners: async () => {
             return await Partner.find();
         },
-        getPartner: async (parent,{_id}) => {
-            return await Partner.findById(_id).populate({path:'orders',populate:'user'});
+        getPartner: async (parent, args, context) => {
+            if(context.user){
+
+                const partner = await Partner.findById(context.user._id).populate({path:'orders',populate:'user'});
+                partner.orders.sort((a,b) => b.purchaseDate - a.purchaseDate);
+                
+                return partner;
+            }
+
+            throw new AuthenticationError('Please log in.');
+        },
+        getInventories: async (parent, args, context) => {   
+            
+            if(context.user){
+
+                 const partner = await Partner.findOne({_id:context.user._id});
+                 partner.inventories.sort((a,b) => b.inventoryDate - a.inventoryDate);
+
+                 return partner;
+
+            }
+
+            throw new AuthenticationError('Please log in.');
 
         },
-        getInventories: async (parent,{partnerId}) => {            
-            return await Partner.findOne({_id:partnerId});
-        },
+        // this is the user-side query that gets an inventory based on the user's chosen partner and specified date
         getInventory: async(parent,{partnerId, inventoryDate}) => {
             return await Partner.findOne({_id:partnerId, "inventories.inventoryDate":dayjs(inventoryDate).format("MM-DD-YYYY")},{streetAddress:1, city:1,state:1,zip:1,"inventories.$":1});
         },
@@ -275,24 +301,6 @@ const resolvers = {
 
             throw new AuthenticationError('Please log in.'); 
         },            
-        // deleteUserOrders: async(parent, {_id}) => {
-        //     const updatedUser = await User.findOneAndUpdate(
-        //         {_id:_id},
-        //         {$pull: {orders:{}}},
-        //         {new:true}
-        //     );
-        //         console.log(updatedUser);
-        //     return updatedUser;
-        // },
-        // deletePartnerOrders: async(parent, {_id}) => {
-        //     const updatedPartner = await Partner.findOneAndUpdate(
-        //         {_id:_id},
-        //         {$pull: {orders:{}}},
-        //         {new:true}
-        //     );
-
-        //     return updatedPartner;
-        // },
         deleteAllOrders: async () => {
             return await Order.deleteMany();
         },

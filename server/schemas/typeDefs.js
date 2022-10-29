@@ -92,11 +92,11 @@ const typeDefs = gql`
         getProducts:[Product]
         getProduct(_id:ID, name:String): Product
         getUsers:[User]
-        getUser(_id:ID!):User
+        getUser:User
         getPartners:[Partner]
-        getPartner(_id:ID!): Partner
+        getPartner: Partner
+        getInventories:Partner
         getInventory(partnerId:ID!, inventoryDate:Date!):Partner
-        getInventories(partnerId:ID!):Partner
         getOrders:[Order]
     }
 
@@ -111,8 +111,6 @@ const typeDefs = gql`
         deleteInventory(inventoryId:ID!):Partner
         deleteInventories:Partner        
         createOrder(products: [ProductInput]!, customerComment:String, partnerId:ID!): Order
-        deleteUserOrders(_id:ID!):User
-        deletePartnerOrders(_id:ID!):Partner
         deleteAllOrders:Order
     }
 
