@@ -1,0 +1,96 @@
+:root {
+    --primary-color: #3C2317;
+    --secondary-color: #628E90;
+    --tertiary-color: #B4CDE6;
+    --quaternary-color: #F5EFE6;
+    --quinary-color: #040303;
+  }
+
+  @font-face {
+    font-family: rubik;
+    src: url(../../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf);
+  }
+  
+  @font-face {
+    font-family: pacifico;
+    src: url(../../assets/fonts/Pacifico/Pacifico-Regular.ttf);
+  }
+
+.cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-width: 20%;
+    max-width: 30%;
+    max-height: 60%;
+    background-color: var(--secondary-color);
+    overflow: auto;
+    padding: .5rem;
+    box-shadow: 0 0 1rem rgba(4, 4, 3, .5);
+    border-bottom-left-radius: .5rem;
+    z-index: 1;
+  }
+  
+  .cart h2 {
+    font-family: "Pacifico";
+    font-size: 25px;
+    margin-top: 0;
+    border-bottom: 1px solid var(--dark);
+    padding-bottom: .5rem;
+    margin: 1rem 0;
+  }
+  
+  .cart .close {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    cursor: pointer;
+    color: var(--tertiary);
+  }
+  
+  .cart .close:hover {
+    text-decoration: underline;
+  }
+  
+  .cart-closed {
+    position: fixed;
+    top: 2%;
+    right: 1%;
+    font-size: 2rem;
+    cursor: pointer;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    padding: .25rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .cart-closed:hover {
+    transform: rotate(8deg);
+  }
+  
+  .cart img {
+    width: 70px;
+    margin-right: 1rem;
+  }
+  
+  .cart input {
+    width: 50px;
+    padding: 0;
+    margin: 0 .5rem 1rem 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .cart {
+      position: relative;
+      max-width: 100%;
+      max-height: auto;
+      box-shadow: none;
+      background-color: inherit;
+    }
+  
+    .cart-closed {
+      position: relative;
+      margin: 0 auto;
+    }
+  }

@@ -15,6 +15,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
+import Cart from './components/Cart/Cart.js';
+import CustomerPage from './pages/CustomerPage';
+import { StoreProvider } from './utils/GlobalState.js';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -41,6 +44,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <StoreProvider>
         <ChakraProvider>
         <Box minH='1500px' bgColor='#F5EFE6'>
           <header>
@@ -51,7 +55,9 @@ function App() {
               <Link id="home" to="/" className="csv-let">Good</Link>
               <Link id="home" to="/" className="blk-let">TO</Link>
               <Link id="home" to="/" className="csv-let">Waste</Link>   
-            </Box>        
+            </Box>  
+
+            <Cart />      
           </header>      
 
           <main>
@@ -61,11 +67,12 @@ function App() {
               <Route path="/login" element={<Login />} />
               {/* <Route path="/locator" element={<Locator />} /> */}
               <Route path="/partnerlogin" element={<PartnerLogin />} />
-              {/* <Route path="/education" element={<Education />} /> */}
+              <Route path="/education" element={<CustomerPage />} />
             </Routes>
           </main>
         </Box>
         </ChakraProvider>
+        </StoreProvider>
       </Router>
     </ApolloProvider>
   );
