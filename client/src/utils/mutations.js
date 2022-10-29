@@ -199,15 +199,17 @@ export const DELETE_INVENTORY = gql`
 
 // This mutation deletes all of a partner's inventories
 export const DELETE_ALL_INVENTORIES = gql`    
-        deleteInventories{
+{
+    deleteInventories{
+        _id
+        partnerName
+        inventories {
             _id
-            partnerName
-            inventories {
-                _id
-                inventoryDate
-                productCount
-            }
+            inventoryDate
+            productCount
         }
+    }
+}
    
 `;
 

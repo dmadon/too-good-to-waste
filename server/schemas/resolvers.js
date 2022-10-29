@@ -9,17 +9,15 @@ const resolvers = {
         name: 'Date',
         description: 'Date custom scalar type',
         serialize(value) {
-          return dayjs(value).format("MM-DD-YYYY"); // Convert outgoing Date to integer for JSON
+          return dayjs(value).format("MM-DD-YYYY");
         },
         parseValue(value) {
-          return dayjs(value); // Convert incoming integer to Date
+          return dayjs(value); 
         },
         parseLiteral(ast) {
-          if (ast.kind === Kind.STRING) {
-            // Convert hard-coded AST integer to string and then to Date
+          if (ast.kind === Kind.STRING) {            
             return dayjs(ast.value);
           }
-          // Invalid hard-coded value (not an integer)
           return null;
         },
       }),
