@@ -10,10 +10,8 @@ import { Heading,
          NumberInputField,
          NumberInputStepper,
          NumberIncrementStepper,
-         NumberDecrementStepper,
-         List,
-         ListItem,
-         ListIcon } from '@chakra-ui/react';
+         NumberDecrementStepper } from '@chakra-ui/react';
+import AddInventory from '../components/AddInventory/AddInventory';
 
 const PartnerInventory = () => {
     
@@ -69,13 +67,7 @@ const PartnerInventory = () => {
 
                 <div className="inventory-list">
                     <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Available Inventory</Heading>
-                        <List spacing={2}>
-                            <ListItem>
-                                {/* <ListIcon as={MdCheckCircle} /> */}
-                            </ListItem>
-                        </List>
-
-                        <Button ml={5} mt={3} bgColor='#B4CDE6' fontFamily='Pacifico' color='#3C2317' fontSize={'18px'}>Delete Inventory</Button>
+                        <AddInventory />
                 </div>
             </Box>
         </div>
