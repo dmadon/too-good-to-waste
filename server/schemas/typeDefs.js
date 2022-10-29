@@ -92,11 +92,11 @@ const typeDefs = gql`
         getProducts:[Product]
         getProduct(_id:ID, name:String): Product
         getUsers:[User]
-        getUser(_id:ID!):User
+        getUser:User
         getPartners:[Partner]
-        getPartner(_id:ID!): Partner
+        getPartner: Partner
+        getInventories:Partner
         getInventory(partnerId:ID!, inventoryDate:Date!):Partner
-        getInventories(partnerId:ID!):Partner
         getOrders:[Order]
     }
 
@@ -105,14 +105,12 @@ const typeDefs = gql`
         loginUser(email: String!, password: String!):AuthUser
         addPartner(partnerData: PartnerData!): AuthPartner
         loginPartner(username: String!, password: String!): AuthPartner
-        buildInventory(partnerId:ID!, inventoryDate:Date!):Inventory
-        addToInventory(partnerId:ID!,inventoryId:ID!, product:InvProductInput!):Partner
-        deleteFromInventory(partnerId:ID!,inventoryId:ID!,productId:ID!):Partner
-        deleteInventory(partnerId:ID!,inventoryId:ID!):Partner
-        deleteInventories(partnerId:ID!):Partner        
-        createOrder(products: [ProductInput]!, userId:ID!, partnerId:ID!): Order
-        deleteUserOrders(_id:ID!):User
-        deletePartnerOrders(_id:ID!):Partner
+        buildInventory(inventoryDate:Date!):Inventory
+        addToInventory(inventoryId:ID!, product:InvProductInput!):Partner
+        deleteFromInventory(inventoryId:ID!,productId:ID!):Partner
+        deleteInventory(inventoryId:ID!):Partner
+        deleteInventories:Partner        
+        createOrder(products: [ProductInput]!, customerComment:String, partnerId:ID!): Order
         deleteAllOrders:Order
     }
 
