@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
 import PartnerInventory from './pages/PartnerInventory';
+import { StoreProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -42,6 +43,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <StoreProvider>
         <ChakraProvider>
         <Box minH='1500px' bgColor='#F5EFE6'>
           <header>
@@ -67,6 +69,7 @@ function App() {
           </main>
         </Box>
         </ChakraProvider>
+        </StoreProvider>
       </Router>
     </ApolloProvider>
   );
