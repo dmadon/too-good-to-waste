@@ -3,42 +3,124 @@ import PhotoCarousel from './components/Carousel/Carousel';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Box, Button, Text } from '@chakra-ui/react';
 import NavMenu from './components/NavMenu/NavMenu';
+import React, { Component } from 'react';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
-function App() {
-  document.title = 'Too Good To Waste';
 
-  return (
-    <div>
-      <ChakraProvider>
-      <Box>
-      <NavMenu />
-        
-        <Box display="flex" justifyContent="center">          
-          <h1 className="blk-let">TOO</h1>
-          <h1 className="csv-let">Good</h1>
-          <h1 className="blk-let">TO</h1>
-          <h1 className="csv-let">Waste</h1>   
-        </Box>
+const style = {
+  width: '25%',
+  height: '25%'
+}
+class App extends Component {
+  // state = {
+  //   showingInfoWindow: false,
+  //   activeMarker: {},
+  //   selectedPlace: {},
+  // };
 
-        <Box mt={7} mb={7}>       
-          <PhotoCarousel /> 
-        </Box>
+  // onMarkerClick = (props, marker, e) =>
+  //   this.setState({
+  //     selectedPlace: props,
+  //     activeMarker: marker,
+  //     showingInfoWindow: true
+  //   });
 
-        <Text fontSize='3xl' textAlign={'center'} p={5}>
-          If 25% of the food currently being lost or wasted globally was saved, it would be enough to feed 870
-          million people around the world. Do your part to help reduce food waste by purchasing discounted grocery 
-          items that would have otherwise been thrown away. 
-        </Text>
+  // onMapClicked = (props) => {
+  //   if (this.state.showingInfoWindow) {
+  //     this.setState({
+  //       showingInfoWindow: false,
+  //       activeMarker: null
+  //     })
+  //   }
+  // };
 
-        <Box display="flex" justifyContent="center" mt={10}>
-          <Button background='red' className='available'>See what's available near you!</Button>
-        </Box>
+  render() {
 
-        <Text fontSize='2xl' textAlign={'center'} mt={10}>*Subject to availability.</Text>
-        </Box>      
-      </ChakraProvider>
-    </div>
-  );
+    return (
+      <div>
+        <ChakraProvider>
+          <Box>
+            <NavMenu />
+
+            <Box display="flex" justifyContent="center">
+              <h1 className="blk-let">TOO</h1>
+              <h1 className="csv-let">Good</h1>
+              <h1 className="blk-let">TO</h1>
+              <h1 className="csv-let">Waste</h1>
+            </Box>
+
+            <Box mt={7} mb={7}>
+              <PhotoCarousel />
+            </Box>
+
+            <Text fontSize='3xl' textAlign={'center'} p={5}>
+              If 25% of the food currently being lost or wasted globally was saved, it would be enough to feed 870
+              million people around the world. Do your part to help reduce food waste by purchasing discounted grocery
+              items that would have otherwise been thrown away.
+            </Text>
+
+            <Box display="flex" justifyContent="center" mt={10}>
+              <Button background='red' className='available'>See what's available near you!</Button>
+
+            </Box>
+
+            <Text fontSize='2xl' textAlign={'center'} mt={10}>*Subject to availability.</Text>
+          </Box>
+          <Box display="flex" justifyContent="center">
+
+            <Map
+              google={this.props.google}
+              style={style}
+              className={'map'}
+              initialCenter={{
+                lat: 32.779167,
+                lng: -96.808891
+              }}
+              zoom={12}
+              onClick={this.onMapClicked}
+            >
+
+              <Marker
+                title={'Sprouts1'}
+                onClick={this.onMarkerClick}
+                name={'Sprouts #101 - Plano'}
+                position={{ lat: 33.07010, lng: -96.77337 }} />
+              <Marker
+                title={'Sprouts2'}
+                onClick={this.onMarkerClick}
+                name={'Sprouts #103 - Dallas (Marsh Ln.'}
+                position={{ lat: 32.90867, lng: -96.85540 }} />
+              <Marker
+                title={'Sprouts3'}
+                onClick={this.onMarkerClick}
+                name={'Sprouts #106 - Richardson'}
+                position={{ lat: 32.97702, lng: -96.76494 }} />
+              <Marker
+                title={'Current Location'}
+                onClick={this.onMarkerClick}
+                name={'Current Location'}
+                // icon={{
+                //   url: "./assets/images/icon.png",
+                //   // anchor: new google.maps.Point(32, 32),
+                //   // scaledSize: new google.maps.Size(64, 64)
+                // }}
+                position={{ lat: 32.43, lng: -96.88 }} />
+              <InfoWindow onClose={this.onInfoWindowClose}>
+                {/* <div>
+                      <h1>{this.state.selectedPlace.name}</h1>
+                    </div> */}
+              </InfoWindow>
+
+            </Map>
+          </Box>
+        </ChakraProvider>
+      </div>
+    );
+  }
 }
 
-export default App;
+// export default App;
+export default GoogleApiWrapper({
+  apiKey: (process.env.REACT_APP_API_KEY)
+})(App)
+
