@@ -3,13 +3,13 @@ import {gql} from '@apollo/client';
 // Retrieve all products from the Product collection.
 // The Product collection contains the pre-defined product types with default prices for each product.
 export const QUERY_ALL_PRODUCTS = gql`
-    query getProducts {
+    {
         getProducts {
-        _id
-        name
-        description
-        image
-        price
+            _id
+            name
+            description
+            image
+            price
         }
     }
 `;
@@ -18,28 +18,30 @@ export const QUERY_ALL_PRODUCTS = gql`
 export const QUERY_PRODUCT = gql`
     query getProduct($_id:ID, $name:String){
         getProduct (_id:$_id, name:$name){
-        _id
-        name
-        price
-        stock
+            _id
+            name
+            price
+            stock
         }
     } 
 `;
 
 // Retrieve all users and their associated orders
-export const QUERY_ALL_USERS = gql`
-    getUsers {
-        _id
-        firstName
-        lastName
-        email
-        orders {
+export const QUERY_ALL_USERS = gql`    
+    {    
+        getUsers {
             _id
-            products {
+            firstName
+            lastName
+            email
+            orders {
                 _id
-                name
-                price
-            }        
+                products {
+                    _id
+                    name
+                    price
+                }        
+            }
         }
     }
 `;
@@ -75,15 +77,17 @@ export const QUERY_USER = gql`
 
 // Retrieve all partners' basic information, does not include associated orders and inventories.
 export const QUERY_ALL_PARTNERS = gql`
-    getPartners {
-        _id
-        username
-        partnerName
-        streetAddress
-        city
-        streetAddress
-        zip
-    }    
+    {    
+        getPartners {
+            _id
+            username
+            partnerName
+            streetAddress
+            city
+            streetAddress
+            zip
+        } 
+    }   
 `;
 
 // Retrieve a single partner by _id, including associated inventories and orders 

@@ -1,5 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Box } from '@chakra-ui/react';
@@ -9,14 +16,41 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
 import Education from './pages/Education/Education';
+import PartnerInventory from './pages/PartnerInventory';
+import Cart from './components/Cart/Cart.js';
+import CustomerPage from './pages/CustomerPage';
+import { StoreProvider } from './utils/GlobalState.js';
+
+
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
 
 function App() {
   document.title = 'Too Good To Waste';
 
   return (
-    <div>
+    <ApolloProvider client={client}>
       <Router>
+        <StoreProvider>
         <ChakraProvider>
+
           <Box minH='1500px' bgColor='#F5EFE6'>
             <header>
               <NavMenu />
@@ -40,9 +74,11 @@ function App() {
               </Routes>
             </main>
           </Box>
+
         </ChakraProvider>
+        </StoreProvider>
       </Router>
-    </div>
+    </ApolloProvider>
   );
 }
 
