@@ -37,7 +37,7 @@ const CustomerPage = () => {
         }catch(err){
             console.log(err);
         }
-    }
+    };
     useEffect(() => { 
         getInventory();
     },[data,loading,selectedInventory]);    
