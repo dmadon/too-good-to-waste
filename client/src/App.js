@@ -15,9 +15,11 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
+import PartnerInventory from './pages/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
