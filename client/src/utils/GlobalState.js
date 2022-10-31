@@ -16,6 +16,8 @@ const StoreProvider = ({ value = [], ...props }) => {
     cartOpen: false,
   });
 
+  console.log(state);
+
   return <Provider value={[state, dispatch]} {...props} />;
 };
 

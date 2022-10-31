@@ -13,6 +13,7 @@ import { Heading,
          NumberDecrementStepper, 
          UnorderedList,
          ListItem, ListIcon } from '@chakra-ui/react';
+
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../utils/queries';
 import { BUILD_INVENTORY, ADD_TO_INVENTORY, DELETE_FROM_INVENTORY } from '../utils/mutations';
@@ -65,9 +66,11 @@ const PartnerInventory = () => {
 
 
     useEffect(() => { currentInventory() },[selectedDate]);
+
     
     console.table(list)
     
+
 
     const handleDateChange = (event) => {
         const {value} = event.target;
@@ -132,6 +135,7 @@ const PartnerInventory = () => {
                 <Text className="field-titles" fontFamily='Rubik' ml={5}>Select Date: </Text>
                 <Input defaultValue={dayjs(today).format("YYYY-MM-DD")} placeholder="Select Date" type="date" ml={5} bgColor='#F5EFE6' htmlSize={50} width='auto' onChange={handleDateChange}/>
 
+
                 <form id="productForm" onSubmit={handleFormSubmit}>                
                 
                     <Box className="inventory-input" ml={5}>
@@ -171,6 +175,7 @@ const PartnerInventory = () => {
 
                 <div className="inventory-list">
                     <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Available Inventory</Heading>
+
                         
                     {list.map((product) => (
                         <UnorderedList key={product._id} ml={7}>
@@ -184,6 +189,7 @@ const PartnerInventory = () => {
                             
                         </UnorderedList>
                     ))}
+
                 </div>
             </Box>
         </div>

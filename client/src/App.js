@@ -16,7 +16,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
 import PartnerInventory from './pages/PartnerInventory';
-import { StoreProvider } from './utils/GlobalState';
+import Cart from './components/Cart/Cart.js';
+import CustomerPage from './pages/CustomerPage';
+import { StoreProvider } from './utils/GlobalState.js';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -54,7 +57,9 @@ function App() {
               <Link id="home" to="/" className="csv-let">Good</Link>
               <Link id="home" to="/" className="blk-let">TO</Link>
               <Link id="home" to="/" className="csv-let">Waste</Link>   
-            </Box>        
+            </Box>  
+
+            <Cart />      
           </header>      
 
           <main>
@@ -62,9 +67,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/locator" element={<PartnerInventory />} />
+              {/* <Route path="/locator" element={<Locator />} /> */}
               <Route path="/partnerlogin" element={<PartnerLogin />} />
-              {/* <Route path="/education" element={<Education />} /> */}
+              <Route path="/education" element={<CustomerPage />} />
             </Routes>
           </main>
         </Box>

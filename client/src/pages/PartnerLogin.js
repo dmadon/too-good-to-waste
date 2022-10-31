@@ -11,6 +11,11 @@ import { LOGIN_PARTNER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 
+import { useMutation } from '@apollo/client';
+import { LOGIN_PARTNER } from '../utils/mutations';
+import Auth from '../utils/auth';
+
+
 const PartnerLogin = () => {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
