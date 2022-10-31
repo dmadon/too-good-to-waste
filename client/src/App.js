@@ -19,6 +19,7 @@ import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
 import Locator from './components/Locator/index'
+import NoMatch from './components/NoMatch'
 
 
 
@@ -66,6 +67,7 @@ function App() {
               <main>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="*" element={<NoMatch />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/locator" element={<Locator />} />
