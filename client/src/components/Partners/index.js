@@ -1,36 +1,60 @@
 import React from 'react';
-import { Box, Button, ChakraProvider } from '@chakra-ui/react';
+// import { Box, Button, ChakraProvider } from '@chakra-ui/react';
+// importing the useQuery Hook from Apollo Client, allowing req to the connected GraphQL server (available to the app using <ApolloProvider> in App.js)
+import { useQuery } from '@apollo/client';
+import { QUERY_ALL_PARTNERS } from '../../utils/queries'
+import PartnersList from '../PartnersList';
 
-// import { QUERY_ALL_PARTNERS } from '../../utils/queries'
 
 
-
-const PartnerList = ({ partners, partnerName }) => {
-  if (!partners.length) {
-    return <h3>No partners available at this time.</h3>;
-  }
-
+const Partners = () => {
+  // use useQuery Hook to make query req
+  const { loading, data } = useQuery(QUERY_ALL_PARTNERS);
+  const getPartners = data?.getPartners || [];
+  console.log(getPartners);
   return (
-    <div>
-      <ChakraProvider>
-        <Box>
-          <h3>{partnerName}</h3>
-          {partners &&
-            partners.map((partnerName) => (
-              <div key={partnerName._id} className="card mb-3">
-                <p className="card-header">
-                  <h1>Located at:</h1>
-                  {partnerName.streetAddress}, {partnerName.city}, {partnerName.zip}
-                </p>
-                <div className="card-body">
-                  <Button onClick="../../pages/CustomerPage"> Select this store.</Button>
-                </div>
-              </div>
-            ))}
-        </Box>
-      </ChakraProvider>
-    </div>
+    <main>
+      <div className='flex-row justify-space-between'>
+        <div className='col-12 mb-3'>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <PartnersList getPartners={getPartners} title="Participating Stores" />
+          )}
+        </div>
+      </div>
+    </main>
   )
-}
+};
 
-export default PartnerList;
+export default Partners
+
+// const PartnerList = ({ partners, partnerName }) => {
+//   if (!partners.length) {
+//     return <h3>No partners available at this time.</h3>;
+//   }
+
+//   return (
+//     <div>
+//       <ChakraProvider>
+//         <Box>
+//           <h3>{partnerName}</h3>
+//           {partners &&
+//             partners.map((partnerName) => (
+//               <div key={partnerName._id} className="card mb-3">
+//                 <p className="card-header">
+//                   <h1>Located at:</h1>
+//                   {partnerName.streetAddress}, {partnerName.city}, {partnerName.zip}
+//                 </p>
+//                 <div className="card-body">
+//                   <Button onClick="../../pages/CustomerPage"> Select this store.</Button>
+//                 </div>
+//               </div>
+//             ))}
+//         </Box>
+//       </ChakraProvider>
+//     </div>
+//   )
+// }
+
+// export default PartnerList;

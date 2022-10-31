@@ -1,6 +1,6 @@
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 import React, { Component } from 'react';
-import Loc from '../CurrentLocation/index';
+// import CurrentLocation from '../CurrentLocation/index';
 import StoresList from '../Menu/index';
 import {
   Box,
@@ -12,6 +12,7 @@ import {
   // MenuList,
   // MenuItem
 } from '@chakra-ui/react'
+import Partners from '../Partners';
 // import { Link } from 'react-router-dom';
 
 
@@ -42,6 +43,15 @@ class Locator extends Component {
         showingInfoWindow: false,
         activeMarker: null
       })
+    }
+  };
+
+  onClose = props => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
     }
   };
 
@@ -92,15 +102,20 @@ class Locator extends Component {
                   <h1>Howdy!</h1>
                 </div>
               </InfoWindow>
-              {/* <Link id="partnerPage" to="/partner{$_id}" className="menu-item">{getPartner.partnerName}</Link> */}
             </Map>
           </Box>
+
           <Box display="flex" justifyContent="center">
-            <Loc />
+            {/* <CurrentLocation /> */}
           </Box>
+
           <Box display="flex" justifyContent="end">
             <StoresList />
           </Box>
+          <Box display="flex" justifyContent="end">
+            <Partners />
+          </Box>
+
         </ChakraProvider>
 
       </div>
