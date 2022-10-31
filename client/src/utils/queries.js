@@ -162,6 +162,7 @@ export const QUERY_INVENTORY = gql`
     query getInventory($partnerId: ID!, $inventoryDate: Date!){
         getInventory(partnerId: $partnerId, inventoryDate: $inventoryDate){
             _id
+            partnerName
             streetAddress
             city
             state
