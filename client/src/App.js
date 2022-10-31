@@ -15,10 +15,12 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
+import Education from './pages/Education/Education';
 import PartnerInventory from './pages/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -38,6 +40,7 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
 
 function App() {
   document.title = 'Too Good To Waste';
@@ -61,18 +64,19 @@ function App() {
                 <Cart />      
               </header>      
 
-              <main>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/signup" element={<Signup />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/locator" element={<PartnerInventory />} />
-                  <Route path="/partnerlogin" element={<PartnerLogin />} />
-                  <Route path="/education" element={<CustomerPage />} />
-                </Routes>
-              </main>
-            </Box>
-          </ChakraProvider>
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                {/* <Route path="/locator" element={<Locator />} /> */}
+                <Route path="/partnerlogin" element={<PartnerLogin />} />
+                <Route path="/education" element={<Education />} />
+              </Routes>
+            </main>
+          </Box>
+
+        </ChakraProvider>
         </StoreProvider>
       </Router>
     </ApolloProvider>
