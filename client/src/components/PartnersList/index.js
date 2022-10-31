@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Box, Text, Button } from '@chakra-ui/react';
 
 const getPartnersList = ({ getPartners, title }) => {
@@ -7,22 +8,25 @@ const getPartnersList = ({ getPartners, title }) => {
   }
 
   return (
-    <Box display="flex" flexDirection="column">
+    <Box display="flex" width="100%" border="3px solid green" flexDirection="column">
       <Text>{title}</Text>
       <Box display="flex" flexDirection="column" alignItems="space-evenly" margin="4" border="3px solid green" background="lightgray">
         {getPartners &&
           getPartners.map(partner => (
             <Box display="flex" flexDirection="column" margin="2" border="3px solid green" background="lightgray">
               <div key={partner._id} className="card mb-3">
-                <Button size="lg" margin="2" border="3px solid green" className="card-header">
-                  {partner.partnerName}
-                </Button>
-                <div className="card-body">
+                <Link to="./CustomerPage">
+                  <Button size="md" width="90%" margin="2" border="3px solid green" className="card-header">
+                    {partner.partnerName}
+                  </Button>
+                </Link>
+                <Box display="flex" justifyContent="center">
                   <p>
                     {partner.streetAddress},
-                    {partner.city},{partner.state}{partner.zip}
+                    <br />
+                    {partner.city}, {partner.zip}
                   </p>
-                </div>
+                </Box>
               </div>
             </Box>
           ))}

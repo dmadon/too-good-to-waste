@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Box, Button, ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 // importing the useQuery Hook from Apollo Client, allowing req to the connected GraphQL server (available to the app using <ApolloProvider> in App.js)
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PARTNERS } from '../../utils/queries'
@@ -13,17 +13,17 @@ const Partners = () => {
   const getPartners = data?.getPartners || [];
   console.log(getPartners);
   return (
-    <main>
-      <div className='flex-row justify-space-between'>
-        <div className='col-12 mb-3'>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <PartnersList getPartners={getPartners} title="Participating Stores" />
-          )}
-        </div>
-      </div>
-    </main>
+    <ChakraProvider>
+      <Box display="flex" margin="10px" width="50%" border="3px solid green">
+
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <PartnersList getPartners={getPartners} title="Participating Stores" />
+        )}
+
+      </Box>
+    </ChakraProvider>
   )
 };
 

@@ -73,6 +73,7 @@ function App() {
                   <Route path="/locator" element={<Locator />} />
                   <Route path="/partnerlogin" element={<PartnerLogin />} />
                   <Route path="/education" element={<CustomerPage />} />
+                  <Route path="/CustomerPage" element={<CustomerPage />} />
                 </Routes>
               </main>
             </Box>
