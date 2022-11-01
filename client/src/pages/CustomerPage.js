@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
-import { Heading,
-         Box,
-         Text,
-         UnorderedList,       
-         Divider } from '@chakra-ui/react';
+// import React, { useEffect } from 'react';
+import {
+    Heading,
+    Box,
+    Text,
+    UnorderedList,
+    Divider
+} from '@chakra-ui/react';
 import ProductItem from '../components/ProductItem/ProductItem';
 
 const CustomerPage = () => {
@@ -16,16 +18,16 @@ const CustomerPage = () => {
             <Divider orientation='horizontal' />
 
             <Box bgColor='#628E90' minH='1500px'>
-            <Text fontFamily='Rubik' fontSize={'30px'}>Box Types:</Text>
-            
-            <UnorderedList listStyleType={'none'}>
-                <Box border='2px' bordercolor='#3C2317' borderRadius='6px' mr={4} p={3} mb={4} className="box-type">
-                    
-                    <ProductItem />
-                
-                </Box>
+                <Text fontFamily='Rubik' fontSize={'30px'}>Box Types:</Text>
 
-                {/* <Box border='2px' bordercolor='#3C2317' borderRadius='6px' mr={4} p={3} mb={4} className="box-type">
+                <UnorderedList listStyleType={'none'}>
+                    <Box border='2px' bordercolor='#3C2317' borderRadius='6px' mr={4} p={3} mb={4} className="box-type">
+
+                        <ProductItem />
+
+                    </Box>
+
+                    {/* <Box border='2px' bordercolor='#3C2317' borderRadius='6px' mr={4} p={3} mb={4} className="box-type">
                     <ListItem fontSize={'3xl'} fontFamily='Pacifico' color='#F5EFE6'>Meat, Fish and Poultry Box</ListItem>
                         <Text fontSize={'16px'} fontFamily='Rubik' color='#040303'>Selected cuts of meat, poultry and fish (if available). These items should be cooked or frozen within 24 hours.</Text>
                         
@@ -104,7 +106,7 @@ const CustomerPage = () => {
                     <Button ml={5} bgColor='#B4CDE6' fontFamily='Pacifico' color='#3C2317' fontSize={'18px'}>Add to Cart</Button>
                 </Box> */}
 
-            </UnorderedList>
+                </UnorderedList>
             </Box>
         </div>
     )

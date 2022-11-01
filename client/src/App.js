@@ -20,6 +20,10 @@ import PartnerInventory from './pages/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
+import Locator from './components/Locator/index'
+import NoMatch from './components/NoMatch'
+
+
 
 
 const httpLink = createHttpLink({
@@ -49,33 +53,35 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <StoreProvider>
-        <ChakraProvider>
+          <ChakraProvider>
+            <Box minH='1500px' bgColor='#F5EFE6'>
+              <header>
+                <NavMenu />
 
-          <Box minH='1500px' bgColor='#F5EFE6'>
-            <header>
-              <NavMenu />
-                          
-              <Box display="flex" justifyContent="center">          
-                <Link id="home" to="/" className="blk-let">TOO</Link>
-                <Link id="home" to="/" className="csv-let">Good</Link>
-                <Link id="home" to="/" className="blk-let">TO</Link>
-                <Link id="home" to="/" className="csv-let">Waste</Link>   
-              </Box>        
-            </header>      
+                <Box display="flex" justifyContent="center">
+                  <Link id="home" to="/" className="blk-let">TOO</Link>
+                  <Link id="home" to="/" className="csv-let">Good</Link>
+                  <Link id="home" to="/" className="blk-let">TO</Link>
+                  <Link id="home" to="/" className="csv-let">Waste</Link>
+                </Box>
 
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login />} />
-                {/* <Route path="/locator" element={<Locator />} /> */}
-                <Route path="/partnerlogin" element={<PartnerLogin />} />
-                <Route path="/education" element={<Education />} />
-              </Routes>
-            </main>
-          </Box>
+                <Cart />
+              </header>
 
-        </ChakraProvider>
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="*" element={<NoMatch />} />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/locator" element={<Locator />} />
+                  <Route path="/partnerlogin" element={<PartnerLogin />} />
+                  <Route path="/education" element={<CustomerPage />} />
+                  <Route path="/CustomerPage" element={<CustomerPage />} />
+                </Routes>
+              </main>
+            </Box>
+          </ChakraProvider>
         </StoreProvider>
       </Router>
     </ApolloProvider>
