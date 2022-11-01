@@ -1,13 +1,21 @@
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import React, { Component } from 'react';
+// import { useQuery } from '@apollo/client';
+// import { QUERY_ALL_PARTNERS } from '../../utils/queries'
 
 // import CurrentLocation from '../CurrentLocation/index';
+
+// const { loading, data } = useQuery(QUERY_ALL_PARTNERS);
+// const getPartners = data?.getPartners || [];
+// console.log(getPartners);
 
 const style = {
   width: '40%',
   height: '30%'
 }
 
+// todo: put {lat} and {lng} values dynamically into Map Markers
+// issues with this class extends rather than arrow function...
 class MapBox extends Component {
 
   render() {
@@ -39,11 +47,11 @@ class MapBox extends Component {
             onClick={this.onMarkerClick}
             name={'Sprouts #106 - Richardson'}
             position={{ lat: 32.97702, lng: -96.76494 }} />
-          {/* <Marker
-                title={'Current Location'}
-                onClick={this.onMarkerClick}
-                name={'Current Location'}
-                position={{ lat: 32.99, lng: -96.88 }} /> */}
+          <Marker
+            title={'Current Location'}
+            onClick={this.onMarkerClick}
+            name={'Current Location'}
+            position={{ lat: 32.99, lng: -96.88 }} />
 
         </Map>
       </div>

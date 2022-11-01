@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 // Retrieve all products from the Product collection.
 // The Product collection contains the pre-defined product types with default prices for each product.
@@ -86,6 +86,8 @@ export const QUERY_ALL_PARTNERS = gql`
             city
             streetAddress
             zip
+            lat
+            lng
         } 
     }   
 `;
@@ -101,6 +103,8 @@ export const QUERY_PARTNER = gql`
             city
             streetAddress
             zip
+            lat
+            lng
             inventories {
                 _id
                 inventoryDate

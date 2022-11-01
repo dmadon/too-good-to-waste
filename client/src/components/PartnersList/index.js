@@ -15,7 +15,7 @@ const getPartnersList = ({ getPartners, title }) => {
           getPartners.map(partner => (
             <Box display="flex" flexDirection="column" margin="2" border="3px solid green" background="lightgray">
               <div key={partner._id} className="card mb-3">
-                <Link to="./CustomerPage">
+                <Link to="/CustomerPage">
                   <Button size="md" width="90%" margin="2" border="3px solid green" className="card-header">
                     {partner.partnerName}
                   </Button>
