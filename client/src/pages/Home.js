@@ -88,7 +88,7 @@ const Home = () => {
                 </Text>
 
             <Box display="flex" justifyContent="center" mt={10}>
-                {/* <Button background='#B4CDE6' className='available' key='go-to-locator'>See what's available near you!</Button> */}
+                <Link to={'/locator'}><Button background='#B4CDE6' className='available' key='go-to-locator'>See what's available near you!</Button></Link> 
                 
                 {/* Deanna added these buttons to test the logic for clicking on a selected partner and adding that partner's _id 
                 to the global state before directing the customer to that partner's inventory */}
