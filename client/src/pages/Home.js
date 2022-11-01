@@ -5,17 +5,34 @@ import PhotoCarousel from '../components/Carousel/Carousel';
 
 // Deanna added these imports to test setting the partner's _id to global state...
 import { useStoreContext } from '../utils/GlobalState';
-import { SET_SELECTED_PARTNER} from '../utils/actions';
+import { SET_SELECTED_PARTNER, SET_SELECTED_INVENTORY} from '../utils/actions';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PARTNERS } from '../utils/queries';
+import dayjs from 'dayjs';
 
 
 
 const Home = () => {
     const [state, dispatch] = useStoreContext();
     const {data, loading} = useQuery(QUERY_ALL_PARTNERS);
-    const [partners, setPartners] = useState([])
+    const [partners, setPartners] = useState([]);
+    const {selectedInventory, today} = state;
+
+    const clearSelectedInventory = async () => {
+        if(selectedInventory){
+            await dispatch({
+                type:SET_SELECTED_INVENTORY,
+                inventoryData:{}
+            });
+        }
+    };
+
+    useEffect(() => {
+        clearSelectedInventory();
+    },[]);
+
+
 
     const handleSelectPartner = async (event) => {
         // the id attribute of the clicked button should be set to that partner's _id
@@ -30,24 +47,32 @@ const Home = () => {
 
     console.log(`selected partner id: ${state.selectedPartner}`)
 
-const getPartners = async () => {
-    try{
-        await data;
-        if(data){
-            setPartners(data.getPartners);
+    const getPartners = async () => {
+        try{
+            await data;
+            if(data){
+                setPartners(data.getPartners);
+            }
+        }catch(err){
+            console.log(err)
         }
-    }catch(err){
-        console.log(err)
-    }
-};
+    };
 
-useEffect(() => {
-    getPartners();
-},[data,loading])
+    
+    useEffect(() => {
+        getPartners();
+    },[data,loading,setPartners,partners])
 
 
 
-console.log(partners)
+    console.log(partners)
+
+
+    
+
+
+
+
 
 
     return (
@@ -62,17 +87,29 @@ console.log(partners)
                 items that would have otherwise been thrown away. 
             </Text>
 
-            <Box display="flex-" justifyContent="center" mt={10}>
-                <Button background='#B4CDE6' className='available'>See what's available near you!</Button>
+            <Box display="flex" justifyContent="center" mt={10}>
+                {/* <Button background='#B4CDE6' className='available' key='go-to-locator'>See what's available near you!</Button> */}
                 
                 {/* Deanna added these buttons to test the logic for clicking on a selected partner and adding that partner's _id 
                 to the global state before directing the customer to that partner's inventory */}
                 
                 {partners.map((partner) => (
-                    <Link to={'/customer'}><Button onClick={handleSelectPartner} background='#B4CDE6' className='available' id={partner._id}>{partner.partnerName}</Button></Link>
+                    <Box className="flex">
+                    
+                        <p>{partner.partnerName}</p>                        
+                       
+                        {partner.inventories.filter((inv) => (inv.inventoryDate == dayjs(today).format("MM-DD-YYYY"))).map(thing => (
+                            <Link to={'/customer'}><Button onClick={handleSelectPartner} background='#B4CDE6' className='available' key={`btn-${partner._id}`} id={partner._id}>{thing.length} view today's inventory</Button></Link> 
+                        ))}
+                     
+
+                    </Box>
+
 
                 ))}
-                
+
+              
+               
               
                 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -55,10 +55,10 @@ function App() {
                 <NavMenu />
                             
                 <Box display="flex" justifyContent="center">          
-                  <Link id="home" to="/" className="blk-let">TOO</Link>
-                  <Link id="home" to="/" className="csv-let">Good</Link>
-                  <Link id="home" to="/" className="blk-let">TO</Link>
-                  <Link id="home" to="/" className="csv-let">Waste</Link>   
+                  <Link id="home" to="/" className="blk-let" key="logo-word-1">TOO</Link>
+                  <Link id="home" to="/" className="csv-let" key="logo-word-2">Good</Link>
+                  <Link id="home" to="/" className="blk-let" key="logo-word-3">TO</Link>
+                  <Link id="home" to="/" className="csv-let" key="logo-word-4">Waste</Link>   
                 </Box>  
 
                 <Cart />      
@@ -73,6 +73,7 @@ function App() {
                 <Route path="/partnerlogin" element={<PartnerLogin />} />
                 {/* <Route path="/education" element={<Education />} /> */}
                 <Route path="/customer" element={<CustomerPage />} />
+                <Route path="/partnerInventory" element={<PartnerInventory />} />
               </Routes>
             </main>
           </Box>

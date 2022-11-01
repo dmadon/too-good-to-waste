@@ -86,6 +86,10 @@ export const QUERY_ALL_PARTNERS = gql`
             city
             streetAddress
             zip
+            inventories {
+                _id
+                inventoryDate
+            }
         } 
     }   
 `;

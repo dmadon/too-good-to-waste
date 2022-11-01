@@ -33,20 +33,23 @@ const CustomerPage = () => {
                     inventoryData:data.getInventory
                 });                
                 setProducts(selectedInventory.inventories[0].products);                
-                }  
+            }  
+            else{
+                setProducts([])
+            }
         }catch(err){
             console.log(err);
         }
     };
     useEffect(() => { 
         getInventory();
-    },[data,loading,selectedInventory]);    
+    },[data,loading,selectedInventory,dispatch]);    
 
 
     return (
         <div>
             <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5}>Pick Your Boxes!</Heading>
-            <Text fontFamily='Rubik' fontSize={'20px'} textAlign='end'>Your Store: {selectedInventory.partnerName}</Text>
+            <Text fontFamily='Rubik' fontSize={'20px'} textAlign='end'>Your Store: {selectedInventory.partnerName} </Text>
 
             <Divider orientation='horizontal' />  
 
