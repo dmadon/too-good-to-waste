@@ -198,16 +198,14 @@ const PartnerInventory = () => {
                             <Text display='inline-block'>In Stock: {product.stock} @</Text> 
                             <Text display='inline-block'>${product.price}.00 each</Text>
                             
-                            <Button type='button' size='xs' id={product._id} onClick={handleDeleteButton} ml={2} fontWeight='bold'>Remove Item</Button>
+                            <Button type='button' size='xs' id={product._id} onClick={handleDeleteButton} bgColor='#B4CDE6' ml={2} fontFamily="Rubik" fontWeight='bold'>✖️ Remove Item</Button>
                             
                         </UnorderedList>
                     ))}
 
                 </div>
 
-
-                <Button onClick={handleDeleteInventory}>Delete This Inventory</Button>
-
+                <Button onClick={handleDeleteInventory} bgColor='#3C2317' _hover={{ bg: '#B4CDE6' }} fontFamily='Pacifico' fontWeight='none' color='#F5EFE6' ml={7} mt={5}>Delete This Inventory</Button>
 
             </Box>
         </div>
