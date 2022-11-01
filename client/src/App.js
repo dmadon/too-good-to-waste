@@ -15,11 +15,14 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
+import Education from './pages/Education/Education';
+import PartnerInventory from './pages/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
 import Locator from './components/Locator/index'
 import NoMatch from './components/NoMatch'
+
 
 
 
@@ -41,6 +44,7 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
 
 function App() {
   document.title = 'Too Good To Waste';
