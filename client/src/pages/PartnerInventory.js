@@ -94,8 +94,8 @@ const PartnerInventory = () => {
         });
         currentInventory();
         formEl.reset();
-        priceEl.value="1"; // WHY DOESN'T THIS WORK????
-        stockEl.value="0"; // WHY DOESN'T THIS WORK????
+        setValue(0); // WHY DOESN'T THIS WORK????
+        stockEl.value=0; // WHY DOESN'T THIS WORK????
     };
 
     const handleFormChange = async () => {
