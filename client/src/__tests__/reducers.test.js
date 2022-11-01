@@ -17,7 +17,7 @@ const initialState = {
   myId:'',
   today:new Date(),
   selectedPartner:'',
-  selectedInventory:'',
+  selectedInventory:{prop:0},
   cart: [
     {
       _id: '1',
@@ -145,9 +145,9 @@ test('SET_SELECTED_PARTNER', () => {
 test('SET_SELECTED_INVENTORY', () => {
     let newState = reducer(initialState,{
         type: SET_SELECTED_INVENTORY,
-        _id:3
+        inventoryData:{prop:1}
     });
 
-    expect(newState.selectedInventory).toBe(3);
-    expect(initialState.selectedInventory).toBe('');
+    expect(newState.selectedInventory.prop).toBe(1);
+    expect(initialState.selectedInventory.prop).toBe(0);
 });

@@ -86,6 +86,10 @@ export const QUERY_ALL_PARTNERS = gql`
             city
             streetAddress
             zip
+            inventories {
+                _id
+                inventoryDate
+            }
         } 
     }   
 `;
@@ -162,6 +166,7 @@ export const QUERY_INVENTORY = gql`
     query getInventory($partnerId: ID!, $inventoryDate: Date!){
         getInventory(partnerId: $partnerId, inventoryDate: $inventoryDate){
             _id
+            partnerName
             streetAddress
             city
             state
