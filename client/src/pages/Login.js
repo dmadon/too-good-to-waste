@@ -1,13 +1,14 @@
 import React,{useState} from 'react';
 import { Heading,
          Box,
+         Text,
          Input,
          InputGroup,
          InputRightAddon,
          Button,
          FormLabel } from '@chakra-ui/react';
-
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
@@ -19,9 +20,8 @@ const Login = () => {
     const [formState,setFormState] = useState({email:'',password:''});
     const [loginUser, { error }] = useMutation(LOGIN_USER);
 
+    const navigate = useNavigate();
 
-    // TODO: insert a little error message somewhere on the login page for if the user enters invalid credentials
-    
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -30,6 +30,10 @@ const Login = () => {
             });
             const token = response.data.loginUser.token;
             Auth.login(token);
+
+            navigate('/customer');
+
+            return;
         }
         catch(err){
             console.log(err);
@@ -66,6 +70,7 @@ const Login = () => {
                     </InputGroup>
                 </Box>
                 <Button mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
+                {error && <Text fontFamily='Rubik' mt={2}>✖️ Login failed!</Text>}
             </Box>
         </div>
     )
