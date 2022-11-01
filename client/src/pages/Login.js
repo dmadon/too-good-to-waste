@@ -7,8 +7,8 @@ import { Heading,
          InputRightAddon,
          Button,
          FormLabel } from '@chakra-ui/react';
-
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
@@ -20,6 +20,8 @@ const Login = () => {
     const [formState,setFormState] = useState({email:'',password:''});
     const [loginUser, { error }] = useMutation(LOGIN_USER);
 
+    const navigate = useNavigate();
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -28,6 +30,10 @@ const Login = () => {
             });
             const token = response.data.loginUser.token;
             Auth.login(token);
+
+            navigate('/customer');
+
+            return;
         }
         catch(err){
             console.log(err);

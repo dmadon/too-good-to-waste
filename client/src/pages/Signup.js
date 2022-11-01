@@ -8,6 +8,7 @@ import { Heading,
         Button,
         FormLabel } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
@@ -17,6 +18,8 @@ const Signup = () => {
 
     const [formState, setFormState] = useState({ firstName:'', lastName:'', email:'', password:'' });
     const [addUser, { error }] = useMutation(ADD_USER);
+
+    const navigate = useNavigate();
 
     //update state based on form input changes
     const handleChange = (event) => {
@@ -38,6 +41,10 @@ const Signup = () => {
             
             const token = data.addUser.token;
             Auth.login(token);
+
+            navigate('/locator');
+
+            return;
         } catch (e) {
             console.error(e);
         }
