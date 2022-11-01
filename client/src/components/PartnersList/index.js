@@ -25,6 +25,7 @@ const PartnersList = ({ title }) => {
   };
 
   useEffect(() => {
+
     clearSelectedInventory();
   }, []);
 

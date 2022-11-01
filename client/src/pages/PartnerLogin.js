@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import {
     Heading,
@@ -9,49 +8,21 @@ import {
     Button,
     FormLabel
 } from '@chakra-ui/react';
+// unused  Navigate
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_PARTNER } from '../utils/mutations';
 import Auth from '../utils/auth';
-=======
-import React, {useState} from 'react';
-import { Heading,
-        Input,
-        Box,
-        InputGroup,
-        InputRightAddon,
-        Button,
-        FormLabel
-        } from '@chakra-ui/react';
-import { useNavigate,Navigate } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { LOGIN_PARTNER } from '../utils/mutations';
-import Auth from '../utils/auth';
-
-
-
->>>>>>> cec674540a573aaf61d50c6f4612b0bc6fbd874c
-
 
 const PartnerLogin = () => {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
-<<<<<<< HEAD
-
+    const navigate = useNavigate();
     const [formState, setFormState] = useState({ username: '', password: '' });
     const [loginPartner, { error }] = useMutation(LOGIN_PARTNER);
-
-
-    // TODO: insert a little error message somewhere on the login page for if the user enters invalid credentials
-
-=======
-    const navigate = useNavigate();
-    const [formState,setFormState] = useState({username:'',password:''});
-    const [loginPartner, { error }] = useMutation(LOGIN_PARTNER);
-
->>>>>>> cec674540a573aaf61d50c6f4612b0bc6fbd874c
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        
+
         console.log('default prevented')
         try {
             const response = await loginPartner({
@@ -62,7 +33,7 @@ const PartnerLogin = () => {
             console.log(response.data.loginPartner.partner.partnerName)
             event.preventDefault();
             navigate('/partnerInventory');
-            
+
             return;
         }
         catch (err) {
@@ -85,60 +56,32 @@ const PartnerLogin = () => {
             <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Partner Login</Heading>
 
             <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3}>
-<<<<<<< HEAD
-                <Box mt={5} pl={5}>
-                    <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Username: </FormLabel>
-                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your email username" name="username" onChange={handleChange} />
-
-                    <InputGroup size='md' mt={5}>
-                        <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Password: </FormLabel>
-                        <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" onChange={handleChange} />
-                        <InputRightAddon width="4.5rem">
-                            <Button h='1.75rem' size='sm' onClick={handleClick}>
-                                {show ? 'Hide' : 'Show'}
-                            </Button>
-                        </InputRightAddon>
-                    </InputGroup>
-                </Box>
-                <Button mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
-=======
-                
                 <form onSubmit={handleFormSubmit} >
-                
-                
                     <Box mt={5} pl={5}>
-                                
+
                         <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Username: </FormLabel>
-                        <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your email username" name="username" onChange={handleChange}/>
+                        <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your email username" name="username" onChange={handleChange} />
 
                         <InputGroup size='md' mt={5}>
                             <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Password: </FormLabel>
-                            <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" onChange={handleChange}/>
+                            <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" onChange={handleChange} />
                             <InputRightAddon width="4.5rem">
                                 <Button h='1.75rem' size='sm' onClick={handleClick}>
                                     {show ? 'Hide' : 'Show'}
                                 </Button>
-                            </InputRightAddon>       
+                            </InputRightAddon>
                         </InputGroup>
 
                         {error ? (
                             <div>
-                                <p className = "error-text">Incorrect credentials.</p>
-                            </div>              
-                        ):null}                    
-
+                                <p className="error-text">Incorrect credentials.</p>
+                            </div>
+                        ) : null}
                     </Box>
-                        
-                        
-                                <Button type='submit' mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
-                         
-
+                    <Button type='submit' mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
                 </form>
-
-            
->>>>>>> cec674540a573aaf61d50c6f4612b0bc6fbd874c
-            </Box>
-        </div>
+            </Box >
+        </div >
     )
 }
 
