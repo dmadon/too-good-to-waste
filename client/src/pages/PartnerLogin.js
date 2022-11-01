@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Heading,
         Input,
+        Text,
         Box,
         InputGroup,
         InputRightAddon,
@@ -78,17 +79,17 @@ const PartnerLogin = () => {
                             </InputRightAddon>       
                         </InputGroup>
 
-                        {error ? (
+                        {/* {error ? (
                             <div>
                                 <p className = "error-text">Incorrect credentials.</p>
                             </div>              
-                        ):null}                    
+                        ):null}                     */}
 
                     </Box>
                         
                         
-                                <Button type='submit' mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
-                         
+                    <Button type='submit' mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
+                    {error && <Text fontFamily='Rubik' mt={2}>✖️ Incorrect credentials!</Text>}     
 
                 </form>
 

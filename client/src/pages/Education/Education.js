@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Text, Heading, ListItem, UnorderedList, Link} from '@chakra-ui/react';
 import FoodWaste from '../../assets/images/food-waste-image.jpg';
 import './Education.css';
-import react animations
 import styled, { keyframes } from 'styled-components';
 import { zoomIn } from 'react-animations';
 

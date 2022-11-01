@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { Heading,
          Box,
+         Text,
          Input,
          InputGroup,
          InputRightAddon,
@@ -19,9 +20,6 @@ const Login = () => {
     const [formState,setFormState] = useState({email:'',password:''});
     const [loginUser, { error }] = useMutation(LOGIN_USER);
 
-
-    // TODO: insert a little error message somewhere on the login page for if the user enters invalid credentials
-    
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -66,6 +64,7 @@ const Login = () => {
                     </InputGroup>
                 </Box>
                 <Button mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
+                {error && <Text fontFamily='Rubik' mt={2}>✖️ Login failed!</Text>}
             </Box>
         </div>
     )
