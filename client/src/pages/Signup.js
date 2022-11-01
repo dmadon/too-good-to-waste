@@ -35,8 +35,9 @@ const Signup = () => {
             const { data } = await addUser({
                 variables: { ...formState }
             });
-
-            Auth.login(data.addUser.token);
+            
+            const token = data.addUser.token;
+            Auth.login(token);
         } catch (e) {
             console.error(e);
         }
@@ -49,17 +50,17 @@ const Signup = () => {
             <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3}>             
                 <Box mt={5} pl={5}>
                     <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>First Name: </FormLabel>
-                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your first name" onChange={handleChange} />
+                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' name='firstName' placeholder="Enter your first name" onChange={handleChange} />
                     <br />
                     <FormLabel mt={5} fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Last Name: </FormLabel>
-                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your last name" onChange={handleChange} />
+                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' name='lastName' placeholder="Enter your last name" onChange={handleChange} />
                     <br />
                     <FormLabel mt={5} fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Email address: </FormLabel>
-                    <Input htmlSize={47} width='auto' bgColor='#F5EFE6'placeholder="Enter your email address" type="email" onChange={handleChange} />
+                    <Input htmlSize={47} width='auto' bgColor='#F5EFE6'name='email' placeholder="Enter your email address" type="email" onChange={handleChange} />
 
                     <InputGroup size='md' mt={5}>
                         <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Password: </FormLabel>
-                        <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" onChange={handleChange} />
+                        <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} name='password' placeholder="Enter password" onChange={handleChange} />
                         <InputRightAddon width="4.5rem">
                             <Button h='1.75rem' size='sm' onClick={handleClick}>
                                 {show ? 'Hide' : 'Show'}
