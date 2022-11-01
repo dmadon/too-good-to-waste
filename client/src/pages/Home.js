@@ -14,58 +14,58 @@ import dayjs from 'dayjs';
 
 
 const Home = () => {
-    const [state, dispatch] = useStoreContext();
-    const {data, loading} = useQuery(QUERY_ALL_PARTNERS);
-    const [partners, setPartners] = useState([]);
-    const {selectedInventory, today} = state;
+    // const [state, dispatch] = useStoreContext();
+    // const {data, loading} = useQuery(QUERY_ALL_PARTNERS);
+    // const [partners, setPartners] = useState([]);
+    // const {selectedInventory, today} = state;
 
-    const clearSelectedInventory = async () => {
-        if(selectedInventory){
-            await dispatch({
-                type:SET_SELECTED_INVENTORY,
-                inventoryData:{}
-            });
-        }
-    };
+    // const clearSelectedInventory = async () => {
+    //     if(selectedInventory){
+    //         await dispatch({
+    //             type:SET_SELECTED_INVENTORY,
+    //             inventoryData:{}
+    //         });
+    //     }
+    // };
 
-    useEffect(() => {
-        clearSelectedInventory();
-    },[]);
+    // useEffect(() => {
+    //     clearSelectedInventory();
+    // },[]);
 
 
 
-    const handleSelectPartner = async (event) => {
-        // the id attribute of the clicked button should be set to that partner's _id
-        const {id} = event.target;
+    // const handleSelectPartner = async (event) => {
+    //     // the id attribute of the clicked button should be set to that partner's _id
+    //     const {id} = event.target;
 
-        // use the id of the clicked button to set the selectedPartner in global state
-        await dispatch({
-            type: SET_SELECTED_PARTNER,
-            _id:id
-        });
-    }; 
+    //     // use the id of the clicked button to set the selectedPartner in global state
+    //     await dispatch({
+    //         type: SET_SELECTED_PARTNER,
+    //         _id:id
+    //     });
+    // }; 
 
-    console.log(`selected partner id: ${state.selectedPartner}`)
+    // console.log(`selected partner id: ${state.selectedPartner}`)
 
-    const getPartners = async () => {
-        try{
-            await data;
-            if(data){
-                setPartners(data.getPartners);
-            }
-        }catch(err){
-            console.log(err)
-        }
-    };
+    // const getPartners = async () => {
+    //     try{
+    //         await data;
+    //         if(data){
+    //             setPartners(data.getPartners);
+    //         }
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // };
 
     
-    useEffect(() => {
-        getPartners();
-    },[data,loading,setPartners,partners])
+    // useEffect(() => {
+    //     getPartners();
+    // },[data,loading,setPartners,partners])
 
 
 
-    console.log(partners)
+    // console.log(partners)
 
 
     
@@ -92,7 +92,7 @@ const Home = () => {
                 
                 {/* Deanna added these buttons to test the logic for clicking on a selected partner and adding that partner's _id 
                 to the global state before directing the customer to that partner's inventory */}
-                
+{/*                 
                 {partners.map((partner) => (
                     <Box className="flex">
                     
@@ -106,7 +106,7 @@ const Home = () => {
                     </Box>
 
 
-                ))}
+                ))} */}
 
               
                
