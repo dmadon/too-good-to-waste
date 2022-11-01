@@ -11,12 +11,12 @@ const StoreProvider = ({ value = [], ...props }) => {
     myId:'',
     today: new Date(),
     selectedPartner:'',
-    selectedInventory:'',
+    selectedInventory:{},
     cart: [],
     cartOpen: false,
   });
 
-  console.log(state);
+  console.table(state);
 
   return <Provider value={[state, dispatch]} {...props} />;
 };

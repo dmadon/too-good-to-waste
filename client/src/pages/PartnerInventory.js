@@ -18,7 +18,7 @@ import {
 
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../utils/queries';
-import { BUILD_INVENTORY, ADD_TO_INVENTORY, DELETE_FROM_INVENTORY } from '../utils/mutations';
+import { BUILD_INVENTORY, ADD_TO_INVENTORY, DELETE_FROM_INVENTORY, DELETE_INVENTORY } from '../utils/mutations';
 import { useStoreContext } from '../utils/GlobalState';
 import dayjs from 'dayjs';
 
@@ -41,6 +41,7 @@ const PartnerInventory = () => {
     const [buildInventory] = useMutation(BUILD_INVENTORY);
     const [addToInventory] = useMutation(ADD_TO_INVENTORY);
     const [deleteFromInventory] = useMutation(DELETE_FROM_INVENTORY);
+    const [deleteInventory] = useMutation(DELETE_INVENTORY);
     const stockEl = document.getElementById('stock');
     const productEl = document.getElementById('productId');
     const priceEl = document.getElementById('price');
@@ -121,7 +122,15 @@ const PartnerInventory = () => {
         currentInventory();
     };
 
-
+    const handleDeleteInventory = async (event) => {
+        event.preventDefault();
+        await deleteInventory({
+            variables:{
+                inventoryId: inventory._id
+            }
+        });
+        currentInventory();
+    }
 
 
 
@@ -160,8 +169,13 @@ const PartnerInventory = () => {
                         </NumberInput>
 
                         <Text className="field-titles" fontFamily='Rubik' display='inline-block'>Price: </Text>
+<<<<<<< HEAD
                         <NumberInput defaultValue={1} onChange={(valueString) => setValue(parse(valueString))} onBlur={handleFormChange} onInput={handleFormChange} borderRadius={'8px'} min={0} max={10} bgColor='#F5EFE6' width={'100px'} id="price">
                             <NumberInputField onClick={handleFormChange} />
+=======
+                        <NumberInput defaultValue={0} onChange={(valueString) => setValue(parse(valueString))} onBlur={handleFormChange} onInput={handleFormChange}  borderRadius={'8px'} min={0} max={10} bgColor='#F5EFE6' width={'100px'} id="price">
+                            <NumberInputField onClick={handleFormChange}/>
+>>>>>>> cec674540a573aaf61d50c6f4612b0bc6fbd874c
                             <NumberInputStepper onClick={handleFormChange}>
                                 <NumberIncrementStepper onClick={handleFormChange} />
                                 <NumberDecrementStepper onClick={handleFormChange} />
@@ -174,7 +188,15 @@ const PartnerInventory = () => {
                 </form>
 
 
+<<<<<<< HEAD
                 <Divider orientation='horizontal' mt={10} />
+=======
+
+                
+                
+                
+                <Divider orientation='horizontal' mt={10}/>
+>>>>>>> cec674540a573aaf61d50c6f4612b0bc6fbd874c
 
                 <div className="inventory-list">
                     <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Available Inventory</Heading>
@@ -187,13 +209,24 @@ const PartnerInventory = () => {
                             </ListItem>
                             <Text display='inline-block'>In Stock: {product.stock} @</Text>
                             <Text display='inline-block'>${product.price}.00 each</Text>
+<<<<<<< HEAD
 
                             <Button type='button' size='xs' id={product._id} onClick={handleDeleteButton} ml={2} fontWeight='bold'>X</Button>
 
+=======
+                            
+                            <Button type='button' size='xs' id={product._id} onClick={handleDeleteButton} ml={2} fontWeight='bold'>Remove Item</Button>
+                            
+>>>>>>> cec674540a573aaf61d50c6f4612b0bc6fbd874c
                         </UnorderedList>
                     ))}
 
                 </div>
+
+
+                <Button onClick={handleDeleteInventory}>Delete This Inventory</Button>
+
+
             </Box>
         </div>
     )

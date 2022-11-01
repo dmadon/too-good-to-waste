@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -15,8 +15,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
-import Education from './pages/Education/Education';
-// import PartnerInventory from './pages/PartnerInventory';
+import PartnerInventory from './pages/PartnerInventory';
+// import Education from './pages/Education/Education';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
@@ -76,15 +76,16 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/locator" element={<Locator />} />
                   <Route path="/partnerlogin" element={<PartnerLogin />} />
-                  <Route path="/education" element={<Education />} />
-                  <Route path="/CustomerPage" element={<CustomerPage />} />
-                </Routes>
-              </main>
-            </Box>
-          </ChakraProvider>
-        </StoreProvider>
-      </Router>
-    </ApolloProvider>
+                  <Route path="/education" element={<CustomerPage />} />
+                  <Route path="/customer" element={<CustomerPage />} />
+                  <Route path="/partnerInventory" element={<PartnerInventory />} />
+                </Routes >
+              </main >
+            </Box >
+          </ChakraProvider >
+        </StoreProvider >
+      </Router >
+    </ApolloProvider >
   );
 }
 

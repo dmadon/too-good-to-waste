@@ -84,7 +84,7 @@ export const reducer = (state, action) => {
     case SET_SELECTED_INVENTORY:
         return {
             ...state,
-            selectedInventory: action._id
+            selectedInventory: action.inventoryData
         };
 
    
