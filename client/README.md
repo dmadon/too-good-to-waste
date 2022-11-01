@@ -68,3 +68,49 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+swapped out: "google-maps-react":"^2.0.6" for google-map-react which is the newest and best version and this code crashed:
+            <Map
+              google={this.props.google}
+              style={style}
+              className={'map'}
+              initialCenter={{
+                lat: 32.979167,
+                lng: -96.808891
+              }}
+              zoom={10}
+              onClick={this.onMapClicked}
+            >
+              <Marker
+                title={'Sprouts1'}
+                onClick={this.onMarkerClick}
+                name={'Sprouts #101 - Plano'}
+                position={{ lat: 33.07010, lng: -96.77337 }} />
+              <Marker
+                title={'Sprouts2'}
+                onClick={this.onMarkerClick}
+                name={'Sprouts #103 - Dallas (Marsh Ln.'}
+                position={{ lat: 32.90867, lng: -96.85540 }} />
+              <Marker
+                title={'Sprouts3'}
+                onClick={this.onMarkerClick}
+                name={'Sprouts #106 - Richardson'}
+                position={{ lat: 32.97702, lng: -96.76494 }} />
+              <Marker
+                title={'Current Location'}
+                onClick={this.onMarkerClick}
+                name={'Current Location'}
+                // icon={{
+                //   url: "./assets/images/icon.png",
+                //   anchor: new google.maps.Point(32, 32),
+                //   scaledSize: new google.maps.Size(64, 64)
+                // }}
+                position={{ lat: 32.99, lng: -96.88 }} />
+              <InfoWindow onClose={this.onInfoWindowClose}>
+                {/* <div>
+                      <h1>{this.state.selectedPlace.name}</h1>
+                    </div> */}
+              </InfoWindow>
+            </Map>
+          
