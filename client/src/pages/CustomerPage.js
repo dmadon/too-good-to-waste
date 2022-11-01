@@ -54,30 +54,23 @@ const CustomerPage = () => {
             <Divider orientation='horizontal' />  
 
             <Box bgColor='#628E90' minH='1500px'>
-                <Text fontFamily='Rubik' fontSize={'30px'}>Box Types:</Text>
-                
+            <Text fontFamily='Rubik' fontSize={'30px'}>Box Types:</Text>
+
                 <UnorderedList listStyleType={'none'}>
-                    <Box border='2px' bordercolor='#3C2317' borderRadius='6px' mr={4} p={3} mb={4} className="box-type">
-                        
                         
                         {products.map((product) => (
-
-                        <ProductItem 
+                        
+                        <ProductItem  
                             key={product._id}
                             name={product.name}
                             description={product.description}
                             price={product.price}
                             stock={product.stock}
                             _id={product._id}
-                        />
-
-                        ))}                    
-                
+                        /> ))}                    
                     
-                    </Box>
-
-
                 </UnorderedList>
+                
             </Box>
         </div>
     )
