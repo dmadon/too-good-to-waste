@@ -26,8 +26,7 @@ const PartnerLogin = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        
-        console.log('default prevented')
+
         try {
             const response = await loginPartner({
                 variables:{username:formState.username, password:formState.password}
