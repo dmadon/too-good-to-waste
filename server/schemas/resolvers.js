@@ -83,7 +83,7 @@ const resolvers = {
         },
         getOrders: async() => {
             return await Order.find().populate(['user','partner']);
-        },
+        }   
     },
     Mutation:{
         addUser: async (parent,args) => {
@@ -153,27 +153,19 @@ const resolvers = {
                             {$push: {inventories:newInv}},
                             {new:true});
                         console.log(`created new inventory ${newInv._id} for ${dayjs(inventoryDate).format("MM-DD-YYYY")}`)
-                        return newInv._id;
+                        return  newInv;
                     }
                     
                     // if an existing inventory was found for that date, assign that inventory's _id as the activeInvId
                     else{
                         console.log(`inventory ${foundInv._id} already exists for ${dayjs(inventoryDate).format("MM-DD-YYYY")}`)
-                        return foundInv._id;
+                        return foundInv;
                     };
                 }
 
-                // the id of the inventory we are now going to display
-                const activeInvId = await activateInv() ;
-
-                console.log(`active inventory id: ${activeInvId}`)
-
-                const updatedPartnerData = await Partner.findOne({_id:partnerId})           
-                const displayedInv = updatedPartnerData.inventories.find((inv) => inv._id == `${activeInvId}`);
-
-                console.log(displayedInv)
-
-                return displayedInv;
+                console.log(partnerId);
+                const activeInv = await activateInv() ;
+                return activeInv;
             }
 
             throw new AuthenticationError('Please log in.');
