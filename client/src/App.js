@@ -23,9 +23,6 @@ import { StoreProvider } from './utils/GlobalState.js';
 import Locator from './components/Locator/index'
 import NoMatch from './components/NoMatch'
 
-
-
-
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -54,7 +51,7 @@ function App() {
       <Router>
         <StoreProvider>
           <ChakraProvider>
-            <Box minH='1500px' bgColor='#F5EFE6'>
+            <Box minH='1500px' bgColor='#F5EFE6' id="background">
               <header>
                 <NavMenu />
 

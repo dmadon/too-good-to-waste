@@ -63,3 +63,12 @@
 .bm-overlay {
     background: white;
 }
+
+@media screen and (max-width: 575px) {
+    .bm-burger-button {
+        width: 24px;
+        height: 18px;
+        left: 24px;
+        top: 36px;
+    }
+}

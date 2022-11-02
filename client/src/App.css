@@ -36,14 +36,44 @@
   text-shadow: 0 0 8px var(--secondary-color);
 }
 
+@media screen and (max-width: 980) {
+
+}
+
+@media screen and (max-width: 768) {
+
+}
+
 
 @media screen and (max-width: 575px) {
   .blk-let {
-    font-size: 20px;
-    margin-top: 25px;
+    font-size: 30px;
+    margin-top: 45px;
   }
 
-  .csv.let {
-    font-size: .25em;
+  .csv-let {
+    font-size: 50px;
+    margin-top: 65px;
+  }
+
+  #home-text, #available {
+    font-size: small;
+  }
+
+  #home-text {
+    margin-bottom: 2px;
+  }
+
+  #carousel {
+    margin-bottom: 2px;
+    margin-top: 3px;
+  }
+  
+  #home-btn {
+    margin-top: 5px;
+  }
+
+  #background {
+    min-height: 700px;
   }
 }

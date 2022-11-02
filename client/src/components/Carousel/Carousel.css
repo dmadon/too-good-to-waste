@@ -3,7 +3,7 @@
     top: 20%;
     left: 14%;
     width: 75%;
-    background-color: rgba(246, 246, 246, 0.5);
+    background-color: rgba(246, 246, 246, 0.6);
     border-radius: 8px;
 }
 
@@ -11,4 +11,20 @@ p {
     padding: 5px;
     font-size: 24px;
     font-weight: bold;
+}
+
+@media screen and (max-width: 980) {
+    
+}
+
+@media screen and (max-width: 768) {
+  
+}
+
+
+@media screen and (max-width: 575px) {
+    .facts {
+        font-size: 16px;
+    }
+  
 }
