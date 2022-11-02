@@ -9,8 +9,7 @@ import { ListItem, Text, Box,
     Button } from '@chakra-ui/react';
 import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
-
-
+import { idbPromise } from '../../utils/helpers';
 
 const ProductItem = (item) => {
     const [state, dispatch] = useStoreContext();
@@ -28,11 +27,18 @@ const ProductItem = (item) => {
                 _id: item._id,
                 purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
             });
+            //update quantitiy in IDB
+            idbPromise('cart', 'put', {
+                ...itemInCart,
+                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+            });
         } else {
             dispatch({
                 type: ADD_TO_CART,
                 product: { ...item, purchaseQuantity: 1 }
                 });
+            //add item in cart in IDB
+            idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
         }
     };
   
