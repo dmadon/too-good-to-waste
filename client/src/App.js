@@ -16,7 +16,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import PartnerLogin from './pages/PartnerLogin';
 import Education from './pages/Education/Education';
-import PartnerInventory from './pages/PartnerInventory';
+import PartnerInventory from './pages/PartnerInventory/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
