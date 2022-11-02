@@ -97,7 +97,7 @@ const typeDefs = gql`
         getPartner: Partner
         getInventories:Partner
         getInventory(partnerId:ID!, inventoryDate:Date!):Partner
-        getOrders:[Order]
+        getOrders:[Order]        
     }
 
     type Mutation{
