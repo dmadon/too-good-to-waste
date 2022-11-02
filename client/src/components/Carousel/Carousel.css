@@ -1,3 +1,8 @@
+@font-face {
+    font-family: rubik;
+    src: url(../../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf);
+  }
+
 .facts {
     position: absolute;
     top: 20%;
@@ -10,6 +15,7 @@
 p {
     padding: 5px;
     font-size: 24px;
+    font-family: 'rubik';
     font-weight: bold;
 }
 
