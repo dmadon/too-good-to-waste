@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge } from '@chakra-ui/react';
+import { Badge, Text } from '@chakra-ui/react';
 import { useStoreContext } from '../../utils/GlobalState';
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 
@@ -31,12 +31,12 @@ const CartItem = ({ item }) => {
     };
 
     return (
-        <div className="flex-row">
-            <div>{item.name}, ${item.price}</div>
+        <div className="flex-row" id="cart-box">
+            <Text fontFamily="Rubik" fontSize='medium'>{item.name}, ${item.price}</Text>
             <div>
-                <span>Qty:</span>
+                <span>Qty: </span>
                 <input type="number" placeholder="1" value={item.purchasQuantity} onChange={onChange}/>
-                <Badge onClick={() => removeFromCart(item)}>Delete</Badge>
+                <Badge onClick={() => removeFromCart(item)} id="delete">Delete</Badge>
             </div>
         </div>
     );   

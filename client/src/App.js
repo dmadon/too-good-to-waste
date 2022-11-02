@@ -18,7 +18,7 @@ import PartnerLogin from './pages/PartnerLogin';
 import Education from './pages/Education/Education';
 import PartnerInventory from './pages/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
-import CustomerPage from './pages/CustomerPage';
+import CustomerPage from './pages/CustomerPage/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
 import Locator from './components/Locator/index'
 import NoMatch from './components/NoMatch'

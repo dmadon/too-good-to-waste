@@ -1,0 +1,34 @@
+@media screen and (max-width: 575px) {
+    #pick {
+        margin-top: 1px;
+        margin-bottom: 2px;
+    }
+
+    #your-store {
+        text-align: left;
+        font-size: 16px;
+    }
+
+    #types {
+        font-size: 20px;
+        margin-top: 2px;
+    }
+
+    #columns {
+        width: 100%;
+    }
+
+    #item-name {
+        font-size: 22px;
+        width: 100%;
+    }
+
+    #item-avail {
+        font-size: 16px;
+        margin-left: 1px;
+    }
+
+    #background {
+        min-height: 700px;
+    }
+}
