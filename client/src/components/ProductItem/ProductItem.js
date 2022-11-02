@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ListItem, Text, Box, 
     SimpleGrid,
     NumberInput,
@@ -13,8 +14,9 @@ import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 
 const ProductItem = (item) => {
     const [state, dispatch] = useStoreContext();
-
-    const { cart,selectedInventory } = state;
+    const { id } = useParams();
+    const [ currentProduct, setCurrentProduct ] = useState({});
+    const { products, cart } = state;
     
     const addToCart = () => {
         //find item with matching ID
@@ -34,7 +36,7 @@ const ProductItem = (item) => {
                 });
         }
     };
-   
+  
 
     return (
         <SimpleGrid columns={1} width='80%'>

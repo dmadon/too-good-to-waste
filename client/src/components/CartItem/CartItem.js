@@ -3,7 +3,7 @@ import { Badge } from '@chakra-ui/react';
 import { useStoreContext } from '../../utils/GlobalState';
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 
-const CartItem = ({ item }) => {
+const CartItem = ({item}) => {
     const [, dispatch] = useStoreContext();
 
     const removeFromCart = item => {
@@ -25,7 +25,7 @@ const CartItem = ({ item }) => {
             dispatch({
                 type: UPDATE_CART_QUANTITY,
                 _id: item._id,
-                purchasQuantity: parseInt(value)
+                purchaseQuantity: parseInt(value)
             });
         }
     };
@@ -35,7 +35,7 @@ const CartItem = ({ item }) => {
             <div>{item.name}, ${item.price}</div>
             <div>
                 <span>Qty:</span>
-                <input type="number" placeholder="1" value={item.purchasQuantity} onChange={onChange}/>
+                <input type="number" placeholder="1" value={item.purchaseQuantity} onChange={onChange}/>
                 <Badge onClick={() => removeFromCart(item)}>Delete</Badge>
             </div>
         </div>
