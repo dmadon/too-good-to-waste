@@ -35,7 +35,7 @@ const CartItem = ({item}) => {
             <div>{item.name}, ${item.price}</div>
             <div>
                 <span>Qty:</span>
-                <input type="number" placeholder="1" value={item.purchaseQuantity} onChange={onChange}/>
+                <input type="number" placeholder="1" value={item.purchaseQuantity} onChange={onChange} />
                 <Badge onClick={() => removeFromCart(item)}>Delete</Badge>
             </div>
         </div>
