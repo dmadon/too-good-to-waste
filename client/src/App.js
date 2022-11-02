@@ -21,7 +21,10 @@ import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage/CustomerPage';
 import { StoreProvider } from './utils/GlobalState.js';
 import Locator from './components/Locator/index'
-import NoMatch from './components/NoMatch'
+import NoMatch from './components/NoMatch';
+//import react animations
+import styled, { keyframes } from 'styled-components';
+import { fadeInDown } from 'react-animations';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -46,6 +49,8 @@ const client = new ApolloClient({
 function App() {
   document.title = 'Too Good To Waste';
 
+  const Fade = styled.div`animation: 2s ${keyframes`${fadeInDown}`}`;
+
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -55,12 +60,12 @@ function App() {
               <header>
                 <NavMenu />
 
-                <Box display="flex" justifyContent="center">
+                <Fade><Box display="flex" justifyContent="center">
                   <Link id="home" to="/" className="blk-let">TOO</Link>
                   <Link id="home" to="/" className="csv-let">Good</Link>
                   <Link id="home" to="/" className="blk-let">TO</Link>
                   <Link id="home" to="/" className="csv-let">Waste</Link>
-                </Box>
+                </Box></Fade>
 
                 <Cart />
               </header>
