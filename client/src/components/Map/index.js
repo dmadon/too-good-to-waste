@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 // import CurrentLocation from '../CurrentLocation/index';
 
 const style = {
-  width: '40%',
-  height: '30%'
+  width: '600px',
+  height: '600px'
 }
 
 class MapBox extends Component {

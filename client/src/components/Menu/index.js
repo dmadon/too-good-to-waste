@@ -1,4 +1,4 @@
-import React, { BiChevronDown } from 'react';
+import React from 'react';
 import {
   Box,
   Button,
@@ -9,14 +9,15 @@ import {
   MenuList,
   MenuItem
 } from '@chakra-ui/react'
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 function StoresList() {
   return (
     <div>
       <ChakraProvider>
         <Box>
-          <Menu display="flex" justifyContent="end">
-            <MenuButton as={Button} rightIcon={BiChevronDown}>
+          <Menu display="flex" justifyContent="end" >
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} closeOnSelect={true} bgColor='#B4CDE6'>
               Choose Your Store
             </MenuButton>
             <MenuList>

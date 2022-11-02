@@ -15,7 +15,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import PartnerLogin from './pages/PartnerLogin';
-// import Education from './pages/Education/Education';
+import Education from './pages/Education/Education';
 import PartnerInventory from './pages/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage';
@@ -76,7 +76,7 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/locator" element={<Locator />} />
                   <Route path="/partnerlogin" element={<PartnerLogin />} />
-                  <Route path="/education" element={<CustomerPage />} />
+                  <Route path="/education" element={<Education />} />
                   <Route path="/customer" element={<CustomerPage />} />
                   <Route path="/partnerInventory" element={<PartnerInventory />} />
                 </Routes>

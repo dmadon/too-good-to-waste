@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import StoresList from '../Menu/index';
-import { Box, ChakraProvider } from '@chakra-ui/react'
+import { Box, ChakraProvider, Divider } from '@chakra-ui/react'
 import Partners from '../Partners';
 import MapBox from '../Map';
+import './style.css';
 
 
 class Locator extends Component {
@@ -14,17 +15,16 @@ class Locator extends Component {
         <ChakraProvider>
           <Box display="flex" justifyContent="center">
             <StoresList />
-          </Box>
-          <Box display="flex" justifyContent="center">
-            Select your store to see availability.
-          </Box>
+          </Box> 
 
-          <Box>
-            <Box display="flex" justifyContent="space-around" margin="30px" border="3px solid green" >
-              <Partners />
-              <Box display="flex" justifyContent="start" width="50%" margin="10px" border="3px solid green" >
+          <Box bgColor='#628E90' minH='3500px' mt={3}>
+         
+            <Box className='map-box' display='inline-flex' ml={5}>
                 <MapBox />
-              </Box>
+            </Box>
+           
+            <Box display='flex' justifyContent='right'>
+                <Partners />
             </Box>
 
           </Box>
