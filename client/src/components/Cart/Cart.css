@@ -95,6 +95,7 @@
       max-height: auto;
       box-shadow: none;
       background-color: inherit;
+      z-index: 2;
     }
   }
 
