@@ -89,6 +89,7 @@ export const QUERY_ALL_PARTNERS = gql`
             inventories {
                 _id
                 inventoryDate
+                productCount
             }
         } 
     }   
