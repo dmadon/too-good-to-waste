@@ -163,7 +163,7 @@ const resolvers = {
                     };
                 }
 
-                console.log(partnerId);
+                console.log(`partner ID: ${partnerId}`);
                 const activeInv = await activateInv() ;
                 return activeInv;
             }
