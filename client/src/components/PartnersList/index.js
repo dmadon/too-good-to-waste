@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Text, Button } from '@chakra-ui/react';
 import { useStoreContext } from '../../utils/GlobalState';
-import { SET_SELECTED_PARTNER, SET_SELECTED_INVENTORY } from '../../utils/actions';
+import { SET_SELECTED_PARTNER } from '../../utils/actions';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { QUERY_ALL_PARTNERS } from '../../utils/queries';
+// import { useQuery } from '@apollo/client';
+// import { QUERY_ALL_PARTNERS } from '../../utils/queries';
 import dayjs from 'dayjs';
 
-const PartnersList = ({ title }) => {
+const PartnersList = ({ partners }) => {
 
 
   const [state, dispatch] = useStoreContext();
-  const { data, loading } = useQuery(QUERY_ALL_PARTNERS);
-  const [partners, setPartners] = useState([]);
-  const { selectedInventory, today } = state;
 
-  const clearSelectedInventory = async () => {
-    if (selectedInventory) {
-      await dispatch({
-        type: SET_SELECTED_INVENTORY,
-        inventoryData: {}
-      });
-    }
-  };
+  const { today } = state;
 
-  useEffect(() => {
+  // const clearSelectedInventory = async () => {
+  //   if (selectedInventory) {
+  //     await dispatch({
+  //       type: SET_SELECTED_INVENTORY,
+  //       inventoryData: {}
+  //     });
+  //   }
+  // };
 
-    clearSelectedInventory();
-  }, []);
+  // useEffect(() => {
+
+  //   clearSelectedInventory();
+  // }, []);
 
 
 
@@ -42,27 +41,27 @@ const PartnersList = ({ title }) => {
     });
   };
 
-  console.log(`selected partner id: ${state.selectedPartner}`)
+  // console.log(`selected partner id: ${state.selectedPartner}`)
 
-  const getPartners = async () => {
-    try {
-      await data;
-      if (data) {
-        setPartners(data.getPartners);
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  };
-
-
-  useEffect(() => {
-    getPartners();
-  }, [data, loading, setPartners, partners])
+  // const getPartners = async () => {
+  //   try {
+  //     await data;
+  //     if (data) {
+  //       setPartners(data.getPartners);
+  //     }
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // };
 
 
+  // useEffect(() => {
+  //   getPartners();
+  // }, [data, loading, setPartners, partners])
 
-  console.log(partners)
+
+
+  // console.log(partners)
 
   if (!partners.length) {
     return <h3>No stores available currently</h3>;
@@ -70,23 +69,21 @@ const PartnersList = ({ title }) => {
 
   return (
     <Box>
-      <Text fontFamily='Pacifico' fontSize='30px' color='#F5EFE6' textShadow='2px 2px #040303' fontWeight='normal' mb={3}>{title}</Text>
+      <Text fontFamily='Pacifico' fontSize='30px' color='#F5EFE6' textShadow='2px 2px #040303' fontWeight='normal' mb={3}>Participating Stores</Text>
       <Box>
 
         {partners && partners.map(partner => (
           <Box >
             <div key={partner._id}>
               <Box border='2px' bordercolor='##040303' borderRadius='6px' mr={8} p={3} mb={4} bgColor='#F5EFE6'>
-                <Link to="./CustomerPage">
-                  <Text fontFamily='Rubik' color='#040303'>
-                    {partner.partnerName}
-                    <br />
-                    {partner.streetAddress},
-                    <br />
-                    {partner.city}, {partner.zip}
-                    <br />
-                  </Text>
-                </Link>
+                <Text fontFamily='Rubik' color='#040303'>
+                  {partner.partnerName}
+                  <br />
+                  {partner.streetAddress},
+                  <br />
+                  {partner.city}, {partner.zip}
+                  <br />
+                </Text>
                 <p>
                   {partner.inventories
                     .filter((inv) => (inv.inventoryDate === dayjs(today).format("MM-DD-YYYY")))
