@@ -13,10 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_PARTNER } from '../utils/mutations';
 import Auth from '../utils/auth';
-<<<<<<< HEAD
-=======
 import './Login/Login.css';
->>>>>>> develop
 
 const PartnerLogin = () => {
     const [show, setShow] = React.useState(false)
@@ -27,10 +24,8 @@ const PartnerLogin = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-<<<<<<< HEAD
         console.log('default prevented')
-=======
->>>>>>> develop
+
         try {
             const response = await loginPartner({
                 variables: { username: formState.username, password: formState.password }
@@ -62,30 +57,16 @@ const PartnerLogin = () => {
         <div>
             <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' id="cust-head" textAlign={'center'} mt={5} mb={4}>Partner Login</Heading>
 
-<<<<<<< HEAD
-            <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3}>
-                <form onSubmit={handleFormSubmit} >
-
-                    <Box mt={5} pl={5}>
-
-                        <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Username: </FormLabel>
-                        <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your email username" name="username" onChange={handleChange} />
-
-                        <InputGroup size='md' mt={5}>
-                            <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Password: </FormLabel>
-                            <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" onChange={handleChange} />
-=======
             <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3} id="background">
-                
-                <form onSubmit={handleFormSubmit} >               
-                    <Box mt={5} pl={5} id="input-box">                               
+
+                <form onSubmit={handleFormSubmit} >
+                    <Box mt={5} pl={5} id="input-box">
                         <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Username: </FormLabel>
-                        <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your username" name="username" id="email-input" onChange={handleChange}/>
+                        <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your username" name="username" id="email-input" onChange={handleChange} />
 
                         <InputGroup size='md' mt={5}>
                             <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Password: </FormLabel>
-                            <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" id="password-input" onChange={handleChange}/>
->>>>>>> develop
+                            <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" id="password-input" onChange={handleChange} />
                             <InputRightAddon width="4.5rem">
                                 <Button h='1.75rem' size='sm' onClick={handleClick}>
                                     {show ? 'Hide' : 'Show'}
@@ -93,18 +74,11 @@ const PartnerLogin = () => {
                             </InputRightAddon>
                         </InputGroup>
                     </Box>
-<<<<<<< HEAD
 
-                    <Button type='submit' mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
-                    {error && <Text fontFamily='Rubik' mt={2}>✖️ Incorrect credentials!</Text>}
-
-=======
-                        
-                    <Box id="login-btn"> 
+                    <Box id="login-btn">
                         <Button type='submit' mt={5} ml={5} pb={1} id='btn' boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
-                    </Box>     
-                    {error && <Text fontFamily='Rubik' mt={2}>✖️ Incorrect credentials!</Text>}     
->>>>>>> develop
+                    </Box>
+                    {error && <Text fontFamily='Rubik' mt={2}>✖️ Incorrect credentials!</Text>}
                 </form>
             </Box>
         </div>
