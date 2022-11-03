@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import {
     Heading,
     Input,
+    Text,
     Box,
     InputGroup,
     InputRightAddon,
     Button,
     FormLabel
 } from '@chakra-ui/react';
-// unused  Navigate
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_PARTNER } from '../utils/mutations';
@@ -57,6 +57,7 @@ const PartnerLogin = () => {
 
             <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3}>
                 <form onSubmit={handleFormSubmit} >
+
                     <Box mt={5} pl={5}>
 
                         <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Username: </FormLabel>
@@ -71,17 +72,14 @@ const PartnerLogin = () => {
                                 </Button>
                             </InputRightAddon>
                         </InputGroup>
-
-                        {error ? (
-                            <div>
-                                <p className="error-text">Incorrect credentials.</p>
-                            </div>
-                        ) : null}
                     </Box>
+
                     <Button type='submit' mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
+                    {error && <Text fontFamily='Rubik' mt={2}>✖️ Incorrect credentials!</Text>}
+
                 </form>
-            </Box >
-        </div >
+            </Box>
+        </div>
     )
 }
 

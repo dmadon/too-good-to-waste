@@ -5,3 +5,13 @@
   --quaternary-color: #F5EFE6;
   --quinary-color: #040303;
 }
+
+#html,
+#body,
+#map-container {
+  height: 100%;
+}
+
+#map {
+  height: 40%;
+}

@@ -32,7 +32,6 @@ const PartnerInventory = () => {
     const [value, setValue] = useState('1.00');
     const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
     const [state, dispatch] = useStoreContext();
-    console.log(value, loading, dispatch, dollarFormat)
     const { today } = state;
     const [selectedDate, setSelectedDate] = useState(dayjs(today).format("MM-DD-YYYY"));
     const [inventory, setInventory] = useState('');
@@ -47,6 +46,7 @@ const PartnerInventory = () => {
     const priceEl = document.getElementById('price');
     const formEl = document.getElementById('productForm');
 
+    console.log(value, loading, dispatch, dollarFormat)
 
     let products = []
 
@@ -169,7 +169,6 @@ const PartnerInventory = () => {
                         </NumberInput>
 
                         <Text className="field-titles" fontFamily='Rubik' display='inline-block'>Price: </Text>
-
                         <NumberInput defaultValue={0} onChange={(valueString) => setValue(parse(valueString))} onBlur={handleFormChange} onInput={handleFormChange} borderRadius={'8px'} min={0} max={10} bgColor='#F5EFE6' width={'100px'} id="price">
                             <NumberInputField onClick={handleFormChange} />
                             <NumberInputStepper onClick={handleFormChange}>
@@ -186,6 +185,7 @@ const PartnerInventory = () => {
                 <Divider orientation='horizontal' mt={10} />
 
 
+>>>>>>> 88169bf55721c0a813d8eb21312cc0e67117b925
                 <div className="inventory-list">
                     <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Available Inventory</Heading>
 
@@ -198,17 +198,14 @@ const PartnerInventory = () => {
                             <Text display='inline-block'>In Stock: {product.stock} @</Text>
                             <Text display='inline-block'>${product.price}.00 each</Text>
 
-                            <Button type='button' size='xs' id={product._id} onClick={handleDeleteButton} ml={2} fontWeight='bold'>Remove Item</Button>
-
+                            <Button type='button' size='xs' id={product._id} onClick={handleDeleteButton} bgColor='#B4CDE6' ml={2} fontFamily="Rubik" fontWeight='bold'>✖️ Remove Item</Button>
 
                         </UnorderedList>
                     ))}
 
                 </div>
 
-
-                <Button onClick={handleDeleteInventory}>Delete This Inventory</Button>
-
+                <Button onClick={handleDeleteInventory} bgColor='#3C2317' _hover={{ bg: '#B4CDE6' }} fontFamily='Pacifico' fontWeight='none' color='#F5EFE6' ml={7} mt={5}>Delete This Inventory</Button>
 
             </Box >
         </div >

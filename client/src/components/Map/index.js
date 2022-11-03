@@ -1,13 +1,7 @@
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import React, { Component } from 'react';
-// import { useQuery } from '@apollo/client';
-// import { QUERY_ALL_PARTNERS } from '../../utils/queries'
 
 // import CurrentLocation from '../CurrentLocation/index';
-
-// const { loading, data } = useQuery(QUERY_ALL_PARTNERS);
-// const getPartners = data?.getPartners || [];
-// console.log(getPartners);
 
 const style = {
   width: '40%',
@@ -47,12 +41,46 @@ class MapBox extends Component {
             onClick={this.onMarkerClick}
             name={'Sprouts #106 - Richardson'}
             position={{ lat: 32.97702, lng: -96.76494 }} />
-          <Marker
-            title={'Current Location'}
+          {/* <Marker
+            title={'Sprouts4'}
             onClick={this.onMarkerClick}
-            name={'Current Location'}
-            position={{ lat: 32.99, lng: -96.88 }} />
-
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts5'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts6'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts7'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts8'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts9'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts10'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} /> */}
+          {/* <Marker
+                title={'Current Location'}
+                onClick={this.onMarkerClick}
+                name={'Current Location'}
+                position={{ lat: 32.99, lng: -96.88 }} /> */}
         </Map>
       </div>
     )

@@ -71,7 +71,7 @@ const typeDefs = gql`
         state: String!
         zip: String!
         lat: String!
-        lng: String!        
+        lng: String!    
     }
 
     input ProductInput{

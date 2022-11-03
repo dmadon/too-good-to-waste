@@ -64,47 +64,38 @@ const PartnersList = ({ title }) => {
 
   console.log(partners)
 
-
   if (!partners.length) {
     return <h3>No stores available currently</h3>;
   }
 
   return (
-    <Box display="flex" width="100%" border="3px solid green" flexDirection="column">
-      <Text>{title}</Text>
-      <Box display="flex" flexDirection="column" alignItems="space-evenly" margin="4" border="3px solid green" background="lightgray">
+    <Box>
+      <Text fontFamily='Pacifico' fontSize='30px' color='#F5EFE6' textShadow='2px 2px #040303' fontWeight='normal' mb={3}>{title}</Text>
+      <Box>
 
-        {partners &&
-          partners.map(partner => (
-            <Box display="flex" flexDirection="column" margin="2" border="3px solid green" background="lightgray">
-              <div key={partner._id} className="card mb-3">
-                <Link to="/CustomerPage">
-                  <Button size="md" width="90%" margin="2" border="3px solid green" className="card-header">
-                    {partner.partnerName}
-                  </Button>
-
-                </Link>
-                <Box display="flex" justifyContent="space-between" alignItems="center">
-                  <p>
+        {partners && partners.map(partner => (
+          <Box >
+            <div key={partner._id}>
+              <Box border='2px' bordercolor='##040303' borderRadius='6px' mr={8} p={3} mb={4} bgColor='#F5EFE6'>
+                <Link to="./CustomerPage">
+                  <Text fontFamily='Rubik' color='#040303'>
                     {partner.partnerName}
                     <br />
                     {partner.streetAddress},
                     <br />
                     {partner.city}, {partner.zip}
                     <br />
-                  </p>
-                  <p>
-                    {partner.inventories.filter((inv) => (inv.inventoryDate == dayjs(today).format("MM-DD-YYYY"))).map(thing => (
-                      <Link to={'/customer'}><Button onClick={handleSelectPartner} background='green' color='lightgray' className='available' key={`btn-${partner._id}`} id={partner._id}>{thing.length} view today's inventory</Button></Link>
-                    ))}
-                  </p>
-
-
-
-                </Box>
-              </div>
-            </Box>
-          ))}
+                  </Text>
+                </Link>
+                <p>
+                  {partner.inventories.filter((inv) => (inv.inventoryDate === dayjs(today).format("MM-DD-YYYY"))).map(thing => (
+                    <Link to={'/customer'}><Button onClick={handleSelectPartner} display='inline-block' bgColor='#B4CDE6' fontFamily='Pacifico' color='#3C2317' fontSize={'18px'} key={`btn-${partner._id}`} id={partner._id}>{thing.length}View Today's Inventory</Button></Link>
+                  ))}
+                </p>
+              </Box>
+            </div>
+          </Box>
+        ))}
 
       </Box>
     </Box>
