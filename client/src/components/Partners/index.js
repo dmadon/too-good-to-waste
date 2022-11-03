@@ -28,5 +28,5 @@ const Partners = () => {
   )
 };
 
-<<<<<<< HEAD
+
 export default Partners
