@@ -30,10 +30,10 @@ const CartItem = ({item}) => {
             dispatch({
                 type: UPDATE_CART_QUANTITY,
                 _id: item._id,
-                purchaseQuantity: parseInt(value)
+                orderQty: parseInt(value)
             });
             //update product quantity in IDB
-            idbPromise('cart', 'put', { ...item, purchaseQuantity: parseInt(value) });
+            idbPromise('cart', 'put', { ...item, orderQty: parseInt(value) });
         }
     };
 
@@ -42,7 +42,7 @@ const CartItem = ({item}) => {
             <div>{item.name}, ${item.price}</div>
             <div>
                 <span>Qty:</span>
-                <input type="number" placeholder="1" value={item.purchaseQuantity} onChange={onChange} />
+                <input type="number" placeholder="1" value={item.orderQty} onChange={onChange} />
                 <Badge onClick={() => removeFromCart(item)}>Delete</Badge>
             </div>
         </div>

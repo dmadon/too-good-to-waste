@@ -74,7 +74,9 @@ const typeDefs = gql`
         _id:ID!
         name:String!
         price:Float!
-        orderQty:Int
+        orderQty:Int!
+        description:String
+        stock:Int
     }
 
     input InvProductInput{
@@ -88,6 +90,10 @@ const typeDefs = gql`
         partner: Partner
     }
 
+    type Checkout {
+        session: ID
+    }
+
     type Query {
         getProducts:[Product]
         getProduct(_id:ID, name:String): Product
@@ -97,7 +103,8 @@ const typeDefs = gql`
         getPartner: Partner
         getInventories:Partner
         getInventory(partnerId:ID!, inventoryDate:Date!):Partner
-        getOrders:[Order]        
+        getOrders:[Order]  
+        checkout(products:[ProductInput]!):Checkout
     }
 
     type Mutation{
@@ -110,7 +117,7 @@ const typeDefs = gql`
         deleteFromInventory(inventoryId:ID!,productId:ID!):Partner
         deleteInventory(inventoryId:ID!):Partner
         deleteInventories:Partner        
-        createOrder(products: [ProductInput]!, customerComment:String, partnerId:ID!): Order
+        createOrder(products: [ProductInput]!): Order
         deleteAllOrders:Order
     }
 

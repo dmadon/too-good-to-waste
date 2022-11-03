@@ -25,20 +25,20 @@ const ProductItem = (item) => {
             dispatch({
                 type: UPDATE_CART_QUANTITY,
                 _id: item._id,
-                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+                orderQty: parseInt(itemInCart.orderQty) + 1
             });
             //update quantitiy in IDB
             idbPromise('cart', 'put', {
                 ...itemInCart,
-                purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+                orderQty: parseInt(itemInCart.orderQty) + 1
             });
         } else {
             dispatch({
                 type: ADD_TO_CART,
-                product: { ...item, purchaseQuantity: 1 }
+                product: { ...item, orderQty: 1 }
                 });
             //add item in cart in IDB
-            idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
+            idbPromise('cart', 'put', { ...item, orderQty: 1 });
         }
     };
   
