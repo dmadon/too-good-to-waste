@@ -3,9 +3,6 @@
 ## Description
 A MERN stack single-page application that works with real-world data to solve a real-world challenge, food waste, with a focus on data and user demand.
 
-## Goal
-The goal is for a user to be login and select items 
-
 ## Installation
 
 ## User Story
