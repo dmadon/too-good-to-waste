@@ -1,16 +1,18 @@
 # Too Good To Waste
 
 ## Description
+A MERN stack single-page application that works with real-world data to solve a real-world challenge, food waste, with a focus on data and user demand.
 
 ## Goal
+The goal is for a user to be login and select items 
 
 ## Installation
 
 ## User Story
-
-## Acceptance Criteria
+As a user, I want a way to purchase food so that I can reduce food waste.
 
 ## Usage
+![screenshot of Too Good To Waste web application]()
 
 ## Website
 https://ancient-ocean-76067.herokuapp.com/
