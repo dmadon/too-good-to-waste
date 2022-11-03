@@ -86,15 +86,12 @@ export const QUERY_ALL_PARTNERS = gql`
             city
             streetAddress
             zip
-<<<<<<< HEAD
             lat
             lng
-=======
             inventories {
                 _id
                 inventoryDate
             }
->>>>>>> cec674540a573aaf61d50c6f4612b0bc6fbd874c
         } 
     }   
 `;
@@ -178,6 +175,8 @@ export const QUERY_INVENTORY = gql`
             city
             state
             zip 
+            lat
+            lng
             inventories {
                 _id
                 inventoryDate
