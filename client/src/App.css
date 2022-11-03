@@ -36,4 +36,17 @@
   text-shadow: 0 0 8px var(--secondary-color);
 }
 
+#html,
+#body,
+#map-container {
+  height: 100%;
+}
 
+#map {
+  height: 40%;
+}
+
+.leaflet-container {
+  width: "vw";
+  height: "vh"
+}

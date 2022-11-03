@@ -40,11 +40,45 @@ class MapBox extends Component {
             name={'Sprouts #106 - Richardson'}
             position={{ lat: 32.97702, lng: -96.76494 }} />
           {/* <Marker
+            title={'Sprouts4'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts5'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts6'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts7'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts8'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts9'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} />
+          <Marker
+            title={'Sprouts10'}
+            onClick={this.onMarkerClick}
+            name={'Sprouts #10'}
+            position={{ lat: , lng: - }} /> */}
+          {/* <Marker
                 title={'Current Location'}
                 onClick={this.onMarkerClick}
                 name={'Current Location'}
                 position={{ lat: 32.99, lng: -96.88 }} /> */}
-
         </Map>
       </div>
     )
