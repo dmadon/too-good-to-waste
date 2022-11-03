@@ -1,0 +1,41 @@
+@media screen and (max-width: 575px) {
+    #sign-head {
+        margin-top: 2px;
+    }
+
+    #background {
+        min-height: 700px;
+    }
+
+    #input-box {
+        margin-top: 2px;
+    }
+
+    #form {
+        margin-right: 1px;
+    }
+
+    #name-input {
+        width: 65%;
+    }
+
+    #email-input {
+        width: 58%;
+    }
+
+    #pw-input {
+        width: 48%;
+    }
+
+    #name-input, #email-input, #pw-input {
+        margin-left: 20px;
+    }
+
+    #signup-btn {
+        text-align: center;
+    }
+
+    #btn {
+        margin-left: 0px;
+    }
+}

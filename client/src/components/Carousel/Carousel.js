@@ -10,7 +10,7 @@ import Dumpsite from '../../assets/images/dumpsite.jpg';
 class PhotoCarousel extends React.Component {
     render() {
         return (
-            <Carousel autoPlay interval="3000" transitionTime="2000" showArrows={true} showThumbs={false} >
+            <Carousel autoPlay interval="6000" transitionTime="2000" showArrows={true} showThumbs={false} >
                 <div>
                     <img src={Dumpsite} alt='dumpsite' />
                     <p className="facts">Food loss and waste accounts for about 4.4 gigatons of greenhouse gas
