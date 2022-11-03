@@ -35,7 +35,7 @@ const PartnerInventory = () => {
     const [selectedDate,setSelectedDate] = useState(dayjs(today).format("MM-DD-YYYY"));
     const [inventory,setInventory] = useState('');
     const [formState,setFormState] = useState({_id:'',price:'',stock:''});
-    const [list,setList] = useState([])
+    const [list,setList] = useState([]);
     const [buildInventory] = useMutation(BUILD_INVENTORY);
     const [addToInventory] = useMutation(ADD_TO_INVENTORY);
     const [deleteFromInventory] = useMutation(DELETE_FROM_INVENTORY);
@@ -60,17 +60,13 @@ const PartnerInventory = () => {
         const inventory = await buildInventory({
             variables:{inventoryDate:selectedDate}
         });
-        setInventory(inventory.data.buildInventory);
-        // console.table(inventory.data.buildInventory.products);
+        if(inventory){
+            setInventory(inventory.data.buildInventory);
+        }
+        console.table(inventory.data.buildInventory.products);
         setList(inventory.data.buildInventory.products)
         
     };
-
-
-    useEffect(() => { currentInventory() },[selectedDate]);
-
-    
-    console.table(list)
     
 
 
@@ -95,8 +91,6 @@ const PartnerInventory = () => {
         });
         currentInventory();
         formEl.reset();
-        priceEl.value="1"; // WHY DOESN'T THIS WORK????
-        stockEl.value="0"; // WHY DOESN'T THIS WORK????
     };
 
     const handleFormChange = async () => {
@@ -128,11 +122,14 @@ const PartnerInventory = () => {
             }
         });
         currentInventory();
-    }
+    };
 
+    useEffect(() => { currentInventory() },[selectedDate]);
 
-
-    console.log(`Inventory ID for ${selectedDate}: ${inventory._id}`)
+    // console.log(`Inventory ID for ${selectedDate}: ${inventory._id}`);
+    // console.table(list);
+    // console.log(products);
+    // console.log(inventory)
     
 
     return (

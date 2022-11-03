@@ -22,12 +22,12 @@ const initialState = {
     {
       _id: '1',
       name: 'Soup',
-      purchaseQuantity: 1
+      orderQty: 1
     },
     {
       _id: '2',
       name: 'Bread',
-      purchaseQuantity: 2
+      orderQty: 2
     }
   ],
   cartOpen: false,
@@ -46,7 +46,7 @@ test('UPDATE_PRODUCTS', () => {
 test('ADD_TO_CART', () => {
   let newState = reducer(initialState, {
     type: ADD_TO_CART,
-    product: { purchaseQuantity: 1 }
+    product: { orderQty: 1 }
   });
 
   expect(newState.cart.length).toBe(3);
@@ -57,12 +57,12 @@ test('UPDATE_CART_QUANTITY', () => {
   let newState = reducer(initialState, {
     type: UPDATE_CART_QUANTITY,
     _id: '1',
-    purchaseQuantity: 3
+    orderQty: 3
   });
 
   expect(newState.cartOpen).toBe(true);
-  expect(newState.cart[0].purchaseQuantity).toBe(3);
-  expect(newState.cart[1].purchaseQuantity).toBe(2);
+  expect(newState.cart[0].orderQty).toBe(3);
+  expect(newState.cart[1].orderQty).toBe(2);
   expect(initialState.cartOpen).toBe(false);
 });
 

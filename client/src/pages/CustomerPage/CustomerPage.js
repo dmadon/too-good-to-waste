@@ -42,8 +42,10 @@ const CustomerPage = () => {
             console.log(err);
         }
     };
+
     useEffect(() => { 
         getInventory();
+
     },[data,loading,selectedInventory,dispatch]);    
 
 
