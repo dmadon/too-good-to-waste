@@ -19,7 +19,6 @@ import Education from './pages/Education/Education';
 import PartnerInventory from './pages/PartnerInventory/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage/CustomerPage';
-import CustomerPage from './pages/CustomerPage';
 import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
 import { StoreProvider } from './utils/GlobalState.js';

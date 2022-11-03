@@ -57,15 +57,8 @@ const PartnerLogin = () => {
 
             <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3} id="background">
                 
-<<<<<<< HEAD
                 <form onSubmit={handleFormSubmit} >               
-                    <Box mt={5} pl={5} id="input-box">
-=======
-                <form onSubmit={handleFormSubmit} >
-                
-                    <Box mt={5} pl={5}>
->>>>>>> develop
-                                
+                    <Box mt={5} pl={5} id="input-box">                               
                         <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Username: </FormLabel>
                         <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your username" name="username" id="email-input" onChange={handleChange}/>
 
@@ -80,15 +73,10 @@ const PartnerLogin = () => {
                         </InputGroup>
                     </Box>
                         
-<<<<<<< HEAD
                     <Box id="login-btn"> 
                         <Button type='submit' mt={5} ml={5} pb={1} id='btn' boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
                     </Box>     
-=======
-                    <Button type='submit' mt={5} ml={5} pb={1} boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Login</Button>
                     {error && <Text fontFamily='Rubik' mt={2}>✖️ Incorrect credentials!</Text>}     
->>>>>>> develop
-
                 </form>
             </Box>
         </div>

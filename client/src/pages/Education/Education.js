@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Heading, ListItem, UnorderedList, OrderedList, Link, List} from '@chakra-ui/react';
+import { Box, Text, Heading, ListItem, UnorderedList, OrderedList, Link } from '@chakra-ui/react';
 import { ExternalLinkIcon, CheckCircleIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import FoodWaste from '../../assets/images/food-waste-image.jpg';
 import './Education.css';

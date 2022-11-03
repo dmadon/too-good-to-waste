@@ -12,8 +12,7 @@ import { Heading,
          NumberIncrementStepper,
          NumberDecrementStepper, 
          UnorderedList,
-         ListItem, ListIcon } from '@chakra-ui/react';
-
+         ListItem} from '@chakra-ui/react';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
 import { BUILD_INVENTORY, ADD_TO_INVENTORY, DELETE_FROM_INVENTORY, DELETE_INVENTORY } from '../../utils/mutations';
@@ -25,7 +24,7 @@ import './PartnerInventory.css';
 
 const PartnerInventory = () => {
     
-    const dollarFormat = (val) => `$` + val;
+    //const dollarFormat = (val) => `$` + val;
     const parse = (val) => val.replace(/^\$/, '');
 
     const [value, setValue] = useState('1.00');

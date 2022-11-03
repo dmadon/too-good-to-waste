@@ -1,11 +1,11 @@
 import React from 'react';
 import { ListItem, Text, Box, 
     SimpleGrid,
-    NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
+    // NumberInput,
+    // NumberInputField,
+    // NumberInputStepper,
+    // NumberIncrementStepper,
+    // NumberDecrementStepper,
     Button } from '@chakra-ui/react';
 import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
