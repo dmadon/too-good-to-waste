@@ -180,8 +180,6 @@ const PartnerInventory = () => {
 
                 <Divider orientation='horizontal' mt={10} />
 
-
->>>>>>> 88169bf55721c0a813d8eb21312cc0e67117b925
                 <div className="inventory-list">
                     <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Available Inventory</Heading>
 
@@ -202,19 +200,11 @@ const PartnerInventory = () => {
                     ))}
 
                 </div>
-<<<<<<< HEAD:client/src/pages/PartnerInventory.js
-
-                <Button onClick={handleDeleteInventory} bgColor='#3C2317' _hover={{ bg: '#B4CDE6' }} fontFamily='Pacifico' fontWeight='none' color='#F5EFE6' ml={7} mt={5}>Delete This Inventory</Button>
-
-            </Box >
-        </div >
-=======
                 <div id="delete-btn">
                     <Button onClick={handleDeleteInventory} bgColor='#3C2317' _hover={{ bg: '#B4CDE6' }} fontFamily='Pacifico' fontWeight='none' color='#F5EFE6' ml={7} mt={5}>Delete This Inventory</Button>
                 </div>
             </Box>
         </div>
->>>>>>> develop:client/src/pages/PartnerInventory/PartnerInventory.js
     )
 }
 

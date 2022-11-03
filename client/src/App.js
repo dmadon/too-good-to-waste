@@ -83,15 +83,6 @@ function App() {
                   <Route path="/education" element={<Education />} />
                   <Route path="/customer" element={<CustomerPage />} />
                   <Route path="/partnerInventory" element={<PartnerInventory />} />
-<<<<<<< HEAD
-                </Routes >
-              </main >
-            </Box >
-          </ChakraProvider >
-        </StoreProvider >
-      </Router >
-    </ApolloProvider >
-=======
                   <Route path="/success" element={<Success />} />
                   <Route path="/orderHistory" element={<OrderHistory />} 
               />
@@ -102,7 +93,6 @@ function App() {
         </StoreProvider>
       </Router>
     </ApolloProvider>
->>>>>>> develop
   );
 }
 

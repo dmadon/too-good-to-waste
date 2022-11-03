@@ -86,6 +86,7 @@ const PartnersList = ({ title }) => {
                     {partner.city}, {partner.zip}
                     <br />
                   </Text>
+                  </Link>
                   <p>
                     {partner.inventories
                       .filter((inv) => (inv.inventoryDate === dayjs(today).format("MM-DD-YYYY")))
