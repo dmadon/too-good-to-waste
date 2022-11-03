@@ -6,12 +6,13 @@ import {
     UnorderedList,
     Divider
 } from '@chakra-ui/react';
-import ProductItem from '../components/ProductItem/ProductItem';
-import { useStoreContext } from '../utils/GlobalState';
+import ProductItem from '../../components/ProductItem/ProductItem';
+import { useStoreContext } from '../../utils/GlobalState';
 import { useQuery } from '@apollo/client';
-import { QUERY_INVENTORY } from '../utils/queries';
+import { QUERY_INVENTORY } from '../../utils/queries';
 import dayjs from 'dayjs';
-import { SET_SELECTED_INVENTORY } from '../utils/actions';
+import { SET_SELECTED_INVENTORY } from '../../utils/actions';
+import './CustomerPage.css';
 
 const CustomerPage = () => {
 
@@ -26,7 +27,7 @@ const CustomerPage = () => {
         }
     })
 
-    const getInventory = async (data) => {
+    const getInventory = async () => {
         try {
             await data;
             if (data) {
@@ -43,20 +44,22 @@ const CustomerPage = () => {
             console.log(err);
         }
     };
+
     useEffect(() => {
         getInventory();
+
     }, [data, loading, selectedInventory, dispatch]);
 
 
     return (
         <div>
-            <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5}>Pick Your Boxes!</Heading>
-            <Text fontFamily='Rubik' fontSize={'20px'} textAlign='end'>Your Store: {selectedInventory.partnerName} </Text>
+            <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} id="pick" mt={5}>Pick Your Boxes!</Heading>
+            <Text fontFamily='Rubik' fontSize={'20px'} textAlign='end' id="your-store">Your Store: {selectedInventory.partnerName} </Text>
 
             <Divider orientation='horizontal' />
 
-            <Box bgColor='#628E90' minH='1500px'>
-                <Text fontFamily='Rubik' fontSize={'30px'}>Box Types:</Text>
+            <Box bgColor='#628E90' minH='1500px' id="background">
+                <Text fontFamily='Rubik' fontSize={'30px'} id="types">Box Types:</Text>
 
                 <UnorderedList listStyleType={'none'}>
 

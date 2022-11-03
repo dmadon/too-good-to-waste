@@ -12,19 +12,21 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Box } from '@chakra-ui/react';
 import NavMenu from './components/NavMenu/NavMenu';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
 import PartnerLogin from './pages/PartnerLogin';
 import Education from './pages/Education/Education';
-import PartnerInventory from './pages/PartnerInventory';
+import PartnerInventory from './pages/PartnerInventory/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
-import CustomerPage from './pages/CustomerPage';
+import CustomerPage from './pages/CustomerPage/CustomerPage';
+import Success from './pages/Success';
+import OrderHistory from './pages/OrderHistory';
 import { StoreProvider } from './utils/GlobalState.js';
 import Locator from './components/Locator/index'
-import NoMatch from './components/NoMatch'
-
-
-
+import NoMatch from './components/NoMatch';
+//import react animations
+import styled, { keyframes } from 'styled-components';
+import { fadeInDown } from 'react-animations';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -49,21 +51,23 @@ const client = new ApolloClient({
 function App() {
   document.title = 'Too Good To Waste';
 
+  const Fade = styled.div`animation: 2s ${keyframes`${fadeInDown}`}`;
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <StoreProvider>
           <ChakraProvider>
-            <Box minH='1500px' bgColor='#F5EFE6'>
+            <Box minH='1500px' bgColor='#F5EFE6' id="background">
               <header>
                 <NavMenu />
 
-                <Box display="flex" justifyContent="center">
+                <Fade><Box display="flex" justifyContent="center">
                   <Link id="home" to="/" className="blk-let">TOO</Link>
                   <Link id="home" to="/" className="csv-let">Good</Link>
                   <Link id="home" to="/" className="blk-let">TO</Link>
                   <Link id="home" to="/" className="csv-let">Waste</Link>
-                </Box>
+                </Box></Fade>
 
                 <Cart />
               </header>
@@ -79,6 +83,7 @@ function App() {
                   <Route path="/education" element={<Education />} />
                   <Route path="/customer" element={<CustomerPage />} />
                   <Route path="/partnerInventory" element={<PartnerInventory />} />
+<<<<<<< HEAD
                 </Routes >
               </main >
             </Box >
@@ -86,6 +91,18 @@ function App() {
         </StoreProvider >
       </Router >
     </ApolloProvider >
+=======
+                  <Route path="/success" element={<Success />} />
+                  <Route path="/orderHistory" element={<OrderHistory />} 
+              />
+                </Routes>
+              </main>
+            </Box>
+          </ChakraProvider>
+        </StoreProvider>
+      </Router>
+    </ApolloProvider>
+>>>>>>> develop
   );
 }
 

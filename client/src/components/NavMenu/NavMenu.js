@@ -30,7 +30,13 @@ const NavMenu = () => {
             <Link id="partner" to="/partnerlogin" className="menu-item" onClick={closeMenu}>Partner Login</Link>
             <Link id="education" to="/education" className="menu-item" onClick={closeMenu}>Education</Link>
             <Link id="locator" to="/locator" className="menu-item" onClick={closeMenu}>Store Locator</Link>
-            {Auth.loggedIn() && <Link id="logout" to="/logout" className="menu-item" onClick={logout}>Logout</Link>}
+            {Auth.loggedIn() && 
+                <>
+                <Link id="orderHistory" to="/orderHistory" className="menu-item">Order History        </Link>
+                <Link id="logout" to="/logout" className="menu-item" onClick={logout}>Logout</Link>
+                
+                </>
+            }
         </Menu>        
     );
 };

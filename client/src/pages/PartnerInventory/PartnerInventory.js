@@ -15,18 +15,18 @@ import {
     UnorderedList,
     ListItem
 } from '@chakra-ui/react';
-
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_PRODUCTS } from '../utils/queries';
-import { BUILD_INVENTORY, ADD_TO_INVENTORY, DELETE_FROM_INVENTORY, DELETE_INVENTORY } from '../utils/mutations';
-import { useStoreContext } from '../utils/GlobalState';
+import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
+import { BUILD_INVENTORY, ADD_TO_INVENTORY, DELETE_FROM_INVENTORY, DELETE_INVENTORY } from '../../utils/mutations';
+import { useStoreContext } from '../../utils/GlobalState';
 import dayjs from 'dayjs';
+import './PartnerInventory.css';
 
 
 
 const PartnerInventory = () => {
 
-    const dollarFormat = (val) => `$` + val;
+    //const dollarFormat = (val) => `$` + val;
     const parse = (val) => val.replace(/^\$/, '');
 
     const [value, setValue] = useState('1.00');
@@ -36,7 +36,7 @@ const PartnerInventory = () => {
     const [selectedDate, setSelectedDate] = useState(dayjs(today).format("MM-DD-YYYY"));
     const [inventory, setInventory] = useState('');
     const [formState, setFormState] = useState({ _id: '', price: '', stock: '' });
-    const [list, setList] = useState([])
+    const [list, setList] = useState([]);
     const [buildInventory] = useMutation(BUILD_INVENTORY);
     const [addToInventory] = useMutation(ADD_TO_INVENTORY);
     const [deleteFromInventory] = useMutation(DELETE_FROM_INVENTORY);
@@ -46,7 +46,6 @@ const PartnerInventory = () => {
     const priceEl = document.getElementById('price');
     const formEl = document.getElementById('productForm');
 
-    console.log(value, loading, dispatch, dollarFormat)
 
     let products = []
 
@@ -62,17 +61,13 @@ const PartnerInventory = () => {
         const inventory = await buildInventory({
             variables: { inventoryDate: selectedDate }
         });
-        setInventory(inventory.data.buildInventory);
-        // console.table(inventory.data.buildInventory.products);
+        if (inventory) {
+            setInventory(inventory.data.buildInventory);
+        }
+        console.table(inventory.data.buildInventory.products);
         setList(inventory.data.buildInventory.products)
 
     };
-
-
-    useEffect(() => { currentInventory() }, [selectedDate]);
-
-
-    console.table(list)
 
 
 
@@ -97,8 +92,6 @@ const PartnerInventory = () => {
         });
         currentInventory();
         formEl.reset();
-        priceEl.value = "1"; // WHY DOESN'T THIS WORK????
-        stockEl.value = "0"; // WHY DOESN'T THIS WORK????
     };
 
     const handleFormChange = async () => {
@@ -130,28 +123,31 @@ const PartnerInventory = () => {
             }
         });
         currentInventory();
-    }
+    };
 
+    useEffect(() => { currentInventory() }, [selectedDate]);
 
-
-    console.log(`Inventory ID for ${selectedDate}: ${inventory._id}`)
+    // console.log(`Inventory ID for ${selectedDate}: ${inventory._id}`);
+    // console.table(list);
+    // console.log(products);
+    // console.log(inventory)
 
 
     return (
-        <div>
-            <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Add Inventory</Heading>
+        <div id="page-container">
+            <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4} id="add">Add Inventory</Heading>
 
             <Divider orientation='horizontal' />
 
-            <Box bgColor='#628E90' minH='1500px'>
-                <Text className="field-titles" fontFamily='Rubik' ml={5}>Select Date: </Text>
+            <Box bgColor='#628E90' minH='1500px' id="background">
+                <Text className="field-titles" fontFamily='Rubik' ml={5} id="text">Select Date: </Text>
                 <Input defaultValue={dayjs(today).format("YYYY-MM-DD")} placeholder="Select Date" type="date" ml={5} bgColor='#F5EFE6' htmlSize={50} width='auto' onChange={handleDateChange} />
 
 
                 <form id="productForm" onSubmit={handleFormSubmit}>
 
                     <Box className="inventory-input" ml={5}>
-                        <Text className="field-titles" fontFamily='Rubik' display='inline-block'  >Product: </Text>
+                        <Text className="field-titles" fontFamily='Rubik' display='inline-block' id="text">Product: </Text>
                         <Select placeholder="Select Product" bgColor='#F5EFE6' width={'500px'} id="productId" onChange={handleFormChange} >
                             {products.map((product) => (
                                 <option key={product._id} value={product._id} >{product.name}</option>
@@ -159,7 +155,7 @@ const PartnerInventory = () => {
 
                         </Select>
 
-                        <Text className="field-titles" fontFamily='Rubik' display='inline-block'>Quantity: </Text>
+                        <Text className="field-titles" fontFamily='Rubik' display='inline-block' id="text">Quantity: </Text>
                         <NumberInput defaultValue={0} min={0} max={20} bgColor='#F5EFE6' width={'100px'} borderRadius={'8px'} onChange={handleFormChange} onBlur={handleFormChange} onInput={handleFormChange} id="stock">
                             <NumberInputField onClick={handleFormChange} />
                             <NumberInputStepper onClick={handleFormChange}>
@@ -168,7 +164,7 @@ const PartnerInventory = () => {
                             </NumberInputStepper>
                         </NumberInput>
 
-                        <Text className="field-titles" fontFamily='Rubik' display='inline-block'>Price: </Text>
+                        <Text className="field-titles" fontFamily='Rubik' display='inline-block' id="text">Price: </Text>
                         <NumberInput defaultValue={0} onChange={(valueString) => setValue(parse(valueString))} onBlur={handleFormChange} onInput={handleFormChange} borderRadius={'8px'} min={0} max={10} bgColor='#F5EFE6' width={'100px'} id="price">
                             <NumberInputField onClick={handleFormChange} />
                             <NumberInputStepper onClick={handleFormChange}>
@@ -192,23 +188,33 @@ const PartnerInventory = () => {
 
                     {list.map((product) => (
                         <UnorderedList key={product._id} ml={7}>
-                            <ListItem fontFamily='Pacifico' fontSize='3xl' color='#F5EFE6' display='inline-block' mr={5}>
-                                ✔️ {product.name}
-                            </ListItem>
-                            <Text display='inline-block'>In Stock: {product.stock} @</Text>
-                            <Text display='inline-block'>${product.price}.00 each</Text>
+                            <Box id="inv-avail">
+                                <ListItem fontFamily='Pacifico' fontSize='3xl' color='#F5EFE6' display='inline-block' mr={5} id="inv-item">
+                                    ✔️ {product.name}
+                                </ListItem>
+                                <Text display='inline-block' id="list-avail">In Stock: {product.stock} @</Text>
+                                <Text display='inline-block' id="list-avail">${product.price}.00 each</Text>
+                            </Box>
 
-                            <Button type='button' size='xs' id={product._id} onClick={handleDeleteButton} bgColor='#B4CDE6' ml={2} fontFamily="Rubik" fontWeight='bold'>✖️ Remove Item</Button>
+                            <Button type='button' size='xs' mb={5} mt={2} id={product._id} onClick={handleDeleteButton} bgColor='#B4CDE6' ml={2} fontFamily="Rubik" fontWeight='bold'>✖️ Remove Item</Button>
 
                         </UnorderedList>
                     ))}
 
                 </div>
+<<<<<<< HEAD:client/src/pages/PartnerInventory.js
 
                 <Button onClick={handleDeleteInventory} bgColor='#3C2317' _hover={{ bg: '#B4CDE6' }} fontFamily='Pacifico' fontWeight='none' color='#F5EFE6' ml={7} mt={5}>Delete This Inventory</Button>
 
             </Box >
         </div >
+=======
+                <div id="delete-btn">
+                    <Button onClick={handleDeleteInventory} bgColor='#3C2317' _hover={{ bg: '#B4CDE6' }} fontFamily='Pacifico' fontWeight='none' color='#F5EFE6' ml={7} mt={5}>Delete This Inventory</Button>
+                </div>
+            </Box>
+        </div>
+>>>>>>> develop:client/src/pages/PartnerInventory/PartnerInventory.js
     )
 }
 

@@ -36,17 +36,44 @@
   text-shadow: 0 0 8px var(--secondary-color);
 }
 
-#html,
-#body,
-#map-container {
-  height: 100%;
+@media screen and (max-width: 980) {
+
 }
 
-#map {
-  height: 40%;
+@media screen and (max-width: 768) {
+
 }
 
-.leaflet-container {
-  width: "vw";
-  height: "vh"
+
+@media screen and (max-width: 575px) {
+  .blk-let {
+    font-size: 30px;
+    margin-top: 45px;
+  }
+
+  .csv-let {
+    font-size: 50px;
+    margin-top: 65px;
+  }
+
+  #home-text, #available {
+    font-size: small;
+  }
+
+  #home-text {
+    margin-bottom: 2px;
+  }
+
+  #carousel {
+    margin-bottom: 2px;
+    margin-top: 3px;
+  }
+  
+  #home-btn {
+    margin-top: 5px;
+  }
+
+  #background {
+    min-height: 700px;
+  }
 }
