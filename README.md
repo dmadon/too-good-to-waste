@@ -11,6 +11,7 @@ As a user, I want a way to purchase food so that I can reduce food waste.
 
 ## Technologies Used
 * React for the front end
+* CSS component library Chakra UI
 * GraphQL with a Node.js and Express.js server
 * MongoDB for the database
 * Queries and mutations for retrieving, adding, updating, and deleting data
