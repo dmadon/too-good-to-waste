@@ -1,4 +1,4 @@
-const {gql} = require('apollo-server-express');
+const { gql } = require('apollo-server-express');
 
 
 const typeDefs = gql`
@@ -55,6 +55,8 @@ const typeDefs = gql`
         city: String!
         state: String!
         zip: String!
+        lat: String!
+        lng: String!
         inventories: [Inventory]
         orders: [Order]
     }
@@ -67,7 +69,9 @@ const typeDefs = gql`
         streetAddress: String!
         city: String!
         state: String!
-        zip: String!        
+        zip: String!
+        lat: String!
+        lng: String!    
     }
 
     input ProductInput{
