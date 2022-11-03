@@ -78,15 +78,15 @@ export const LOGIN_PARTNER = gql`
                 state
                 zip
                 inventories {
-                _id
-                inventoryDate
-                productCount
-                products {
-                    description
-                    name
-                    price
-                    orderQty
-                }
+                    _id
+                    inventoryDate
+                    productCount
+                    products {
+                        description
+                        name
+                        price
+                        orderQty
+                    }
                 }
                 orders {
                     _id
@@ -218,8 +218,8 @@ export const DELETE_ALL_INVENTORIES = gql`
 // the partnerId will come from the global state object 'selectedPartner' once a user has selected an inventory
 // the products array parameter accepts an input typeDef 'ProductInput', which includes _id(the product's _id), name(the product's name), price(the product's price), orderQty(the quantity set by the user)
 export const CREATE_ORDER = gql`
-    mutation createOrder($products:[ProductInput]!, $partnerId:ID!){
-        createOrder(products:$products, partnerId:$partnerId){
+    mutation createOrder($products:[ProductInput]!){
+        createOrder(products:$products){
             _id
             purchaseDate
             products {
@@ -228,8 +228,8 @@ export const CREATE_ORDER = gql`
                 price
             }
             status
-            customerComment
-            partnerComment
+            
+           
             user {
                 _id
                 firstName

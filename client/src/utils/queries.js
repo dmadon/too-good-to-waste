@@ -48,8 +48,8 @@ export const QUERY_ALL_USERS = gql`
 
 // Retrieve a single user by _id, includes all associated orders
 export const QUERY_USER = gql`
-    query getUser($_id:ID!){
-        getUser(_id:$_id) {
+    {
+        getUser {
             _id
             firstName
             lastName
@@ -58,17 +58,17 @@ export const QUERY_USER = gql`
                 _id
                 purchaseDate
                 products {
-                _id
-                name
-                price
-                orderQty
+                    _id
+                    name
+                    price
+                    orderQty
                 }
                 customerComment
                 status
                 partnerComment
                 partner {
-                _id
-                partnerName
+                    _id
+                    partnerName
                 }
             }
         }
@@ -188,3 +188,10 @@ export const QUERY_INVENTORY = gql`
     }
 `;
 
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($products: [ProductInput]!) {
+    checkout(products: $products) {
+      session
+    }
+  }
+`;

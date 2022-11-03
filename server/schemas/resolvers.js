@@ -3,6 +3,9 @@ const {Product,User,Partner, Inventory,Order} = require('../models');
 const {signUserToken, signPartnerToken} = require('../utils/auth');
 const { GraphQLScalarType, Kind } = require ('graphql');
 const dayjs = require('dayjs');
+const stripe = require('stripe')(process.env.STRIPE_KEY);
+require('dotenv').config();
+
 
 const resolvers = {
     Date: dateScalar = new GraphQLScalarType({
@@ -83,7 +86,46 @@ const resolvers = {
         },
         getOrders: async() => {
             return await Order.find().populate(['user','partner']);
-        }   
+        },
+        checkout: async (parent,args,context) => {
+            const url = new URL(context.headers.referer).origin;
+            const order = new Order({products: args.products});
+            const products = order.products;
+            const line_items = [];
+
+            for (let i = 0; i < products.length; i++) {
+                // generate product id
+                const product = await stripe.products.create({
+                    name: products[i].name,
+                    // description: products[i].description
+                });
+
+                // generate price id using the product id
+                const price = await stripe.prices.create({
+                    product: product.id,
+                    unit_amount: products[i].price * 100,
+                    currency: 'usd',
+                });
+
+                // add price id to the line items array
+                line_items.push({
+                    price: price.id,
+                    quantity: products[i].orderQty
+                });
+            };
+
+            const session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                line_items,
+                mode: 'payment',
+                success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+                cancel_url: `${url}/`
+            });
+            
+            return { session: session.id };
+          
+
+        }
     },
     Mutation:{
         addUser: async (parent,args) => {
@@ -163,7 +205,7 @@ const resolvers = {
                     };
                 }
 
-                console.log(partnerId);
+                console.log(`partner ID: ${partnerId}`);
                 const activeInv = await activateInv() ;
                 return activeInv;
             }
@@ -294,14 +336,14 @@ const resolvers = {
         deleteAllOrders: async () => {
             return await Order.deleteMany();
         },
-        createOrder: async (parent, { products, customerComment, partnerId }, context) => {
+        createOrder: async (parent, { products}, context) => {
             
             if (context.user) {
                 const userId = context.user._id;
 
-                const order = await (await (await Order.create({products:products, user:userId, customerComment:customerComment, partner:partnerId})).populate('user')).populate('partner');
+                const order = await (await (await Order.create({products:products, user:userId})).populate('user')).populate('partner');
                 await User.findByIdAndUpdate(userId, { $push: { orders: order._id } },{new:true}).populate({path:'orders', populate:'products'});
-                await Partner.findByIdAndUpdate(partnerId, { $push:{ orders: order._id } }, {new:true}).populate({path:'orders', populate:'products'});
+                // await Partner.findByIdAndUpdate(partnerId, { $push:{ orders: order._id } }, {new:true}).populate({path:'orders', populate:'products'});
                 return order;
             }
       
