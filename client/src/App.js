@@ -84,8 +84,8 @@ function App() {
                   <Route path="/customer" element={<CustomerPage />} />
                   <Route path="/partnerInventory" element={<PartnerInventory />} />
                   <Route path="/success" element={<Success />} />
-                  <Route path="/orderHistory" element={<OrderHistory />} 
-              />
+                  <Route path="/orderHistory" element={<OrderHistory />}
+                  />
                 </Routes>
               </main>
             </Box>
