@@ -9,6 +9,34 @@
     left: 50%;
     width: 75%;
     transform: translate(-50%, -50%);
-    background-color: rgba(246, 246, 246, 0.5);
+    background-color: rgba(246, 246, 246, 0.6);
     border-radius: 8px;
+}
+
+@media screen and (max-width: 786px) {
+    #info-text {
+        font-size: medium;
+    }
+}
+
+
+@media screen and (max-width: 575px) {
+    #ed-head {
+        margin-top: 2px;
+    }
+    
+    #info-text {
+        font-size: x-small;
+        font-weight: bolder;
+        top: 40%;
+        padding: 5px;
+    }
+    
+    #combat, #compost {
+        font-size: 0.9em;
+    }
+
+    #comp-head {
+        margin-top: 1px;
+    }
 }

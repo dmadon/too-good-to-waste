@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Heading, ListItem, UnorderedList, OrderedList, Link, List} from '@chakra-ui/react';
+import { Box, Text, Heading, ListItem, UnorderedList, OrderedList, Link } from '@chakra-ui/react';
 import { ExternalLinkIcon, CheckCircleIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import FoodWaste from '../../assets/images/food-waste-image.jpg';
 import './Education.css';
@@ -11,12 +11,12 @@ const Education = () => {
 
     return (
         <div>
-            <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Education on Food Waste</Heading>
+            <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' id="ed-head" textAlign={'center'} mt={5} mb={4}>Education on Food Waste</Heading>
 
             <Zoom><Box className="photo-text">
                 <img src={FoodWaste} alt="trash bags full of waste in the street" />  
                 
-                <Text className="info-text" fontSize='2xl' textAlign={'center'} p={5}>The United States throws away more 
+                <Text className="info-text" id="info-text" fontSize='xl' textAlign={'center'} p={5}>The United States throws away more 
                 food than any country in the world - approximately 40 million tons each year. Wasting food has environmental 
                 consequences: wasting water and energy as well as creating greenhouse gasses that are harmful to the environment.
                 Americans waste more than $218 billion each year on food with dairy being the food item we toss out the most. 
@@ -26,10 +26,10 @@ const Education = () => {
 
             <Box minH='1000px' bgColor='#B4CDE6' color='#040303' pt={3}> 
                 <Box ml={5} pb={5}>
-                    <Text fontFamily='Rubik'>Here are some ways you can combat food waste:</Text>
+                    <Text fontFamily='Rubik' id="combat">Here are some ways you can combat food waste:</Text>
                             
-                    <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' mt={3} mb={3}>Composting</Heading>
-                    <Text fontFamily='Rubik' fontSize='18px'>Composting is a natural process where microorganisms, bacteria, and insects break down organic materials
+                    <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' mt={3} mb={3} id="comp-head">Composting</Heading>
+                    <Text fontFamily='Rubik' fontSize='18px' id="compost">Composting is a natural process where microorganisms, bacteria, and insects break down organic materials
                         such as leaves, grass clippings, and certain kitchen scraps into a soil-like substance called compost. It is a form of  
                         recycling, a natural way of returning nutrients to the soil which then feeds the plants and veggies you grow.</Text>
                     

@@ -81,7 +81,7 @@ const PartnersList = ({ title }) => {
                   </Text>
                   <p>
                     {partner.inventories
-                      .filter((inv) => (inv.inventoryDate == dayjs(today).format("MM-DD-YYYY")))
+                      .filter((inv) => (inv.inventoryDate === dayjs(today).format("MM-DD-YYYY")))
                       .filter((match) => (match.productCount > 0))
                       .map(invRecord => (
                         <Link to={'/customer'}><Button onClick={handleSelectPartner} display='inline-block' bgColor='#B4CDE6' fontFamily='Pacifico' color='#3C2317' fontSize={'18px'} key={`btn-${partner._id}`} id={partner._id}>{invRecord.length}View Today's Inventory</Button></Link>)
