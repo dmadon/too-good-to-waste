@@ -3,6 +3,16 @@
 ## Description
 A MERN stack single-page application that works with real-world data to solve a real-world challenge, food waste, with a focus on data and user demand.
 
+## Technologies Used
+* React for the front end
+* GraphQL with a Node.js and Express.js server
+* MongoDB for the database
+* Queries and mutations for retrieving, adding, updating, and deleting data
+* Deployed using Heroku
+* Responsive design
+* Authentication (JWT)
+* API key information on the server
+
 ## Installation
 
 ## User Story
