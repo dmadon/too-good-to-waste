@@ -19,6 +19,8 @@ import Education from './pages/Education/Education';
 import PartnerInventory from './pages/PartnerInventory';
 import Cart from './components/Cart/Cart.js';
 import CustomerPage from './pages/CustomerPage';
+import Success from './pages/Success';
+import OrderHistory from './pages/OrderHistory';
 import { StoreProvider } from './utils/GlobalState.js';
 import Locator from './components/Locator/index'
 import NoMatch from './components/NoMatch'
@@ -79,6 +81,9 @@ function App() {
                   <Route path="/education" element={<Education />} />
                   <Route path="/customer" element={<CustomerPage />} />
                   <Route path="/partnerInventory" element={<PartnerInventory />} />
+                  <Route path="/success" element={<Success />} />
+                  <Route path="/orderHistory" element={<OrderHistory />} 
+              />
                 </Routes>
               </main>
             </Box>
