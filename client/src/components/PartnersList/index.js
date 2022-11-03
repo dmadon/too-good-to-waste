@@ -3,8 +3,6 @@ import { Box, Text, Button } from '@chakra-ui/react';
 import { useStoreContext } from '../../utils/GlobalState';
 import { SET_SELECTED_PARTNER } from '../../utils/actions';
 import { Link } from 'react-router-dom';
-// import { useQuery } from '@apollo/client';
-// import { QUERY_ALL_PARTNERS } from '../../utils/queries';
 import dayjs from 'dayjs';
 
 const PartnersList = ({ partners }) => {
@@ -13,22 +11,6 @@ const PartnersList = ({ partners }) => {
   const [state, dispatch] = useStoreContext();
 
   const { today } = state;
-
-  // const clearSelectedInventory = async () => {
-  //   if (selectedInventory) {
-  //     await dispatch({
-  //       type: SET_SELECTED_INVENTORY,
-  //       inventoryData: {}
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-
-  //   clearSelectedInventory();
-  // }, []);
-
-
 
   const handleSelectPartner = async (event) => {
     // the id attribute of the clicked button should be set to that partner's _id
@@ -40,28 +22,6 @@ const PartnersList = ({ partners }) => {
       _id: id
     });
   };
-
-  // console.log(`selected partner id: ${state.selectedPartner}`)
-
-  // const getPartners = async () => {
-  //   try {
-  //     await data;
-  //     if (data) {
-  //       setPartners(data.getPartners);
-  //     }
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // };
-
-
-  // useEffect(() => {
-  //   getPartners();
-  // }, [data, loading, setPartners, partners])
-
-
-
-  // console.log(partners)
 
   if (!partners.length) {
     return <h3>No stores available currently</h3>;
@@ -76,6 +36,7 @@ const PartnersList = ({ partners }) => {
           <Box >
             <div key={partner._id}>
               <Box border='2px' bordercolor='##040303' borderRadius='6px' mr={8} p={3} mb={4} bgColor='#F5EFE6'>
+
                 <Text fontFamily='Rubik' color='#040303'>
                   {partner.partnerName}
                   <br />
@@ -92,6 +53,7 @@ const PartnersList = ({ partners }) => {
                       <Link to={'/customer'}><Button onClick={handleSelectPartner} display='inline-block' bgColor='#B4CDE6' fontFamily='Pacifico' color='#3C2317' fontSize={'18px'} key={`btn-${partner._id}`} id={partner._id}>{invRecord.length}View Today's Inventory</Button></Link>)
                     )}
                 </p>
+
               </Box>
             </div>
           </Box>

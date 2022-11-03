@@ -60,17 +60,17 @@ const Signup = () => {
             <form onSubmit={handleFormSubmit}>
                 <Box mt={5} pl={5} id="input-box">
                     <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id="form">First Name: </FormLabel>
-                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your first name" onChange={handleChange} id="name-input" />
+                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your first name" value={formState.firstName} name="firstName" onChange={handleChange} id="name-input" />
                     <br />
                     <FormLabel mt={5} fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id="form">Last Name: </FormLabel>
-                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your last name" onChange={handleChange} id="name-input" />
+                    <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your last name" value={formState.lastName} name="lastName" onChange={handleChange} id="name-input" />
                     <br />
                     <FormLabel mt={5} fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id="form">Email address: </FormLabel>
-                    <Input htmlSize={47} width='auto' bgColor='#F5EFE6'placeholder="Enter your email address" onChange={handleChange} type="email" id="email-input" />
+                    <Input htmlSize={47} width='auto' bgColor='#F5EFE6'placeholder="Enter your email address" value={formState.email} name="email" onChange={handleChange} type="email" id="email-input" />
 
                     <InputGroup size='md' mt={5}>
                         <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id="form">Password: </FormLabel>
-                        <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" onChange={handleChange} id="pw-input" />
+                        <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" value={formState.password} name="password" onChange={handleChange} id="pw-input" />
                         <InputRightAddon width="4.5rem">
                             <Button h='1.75rem' size='sm' onClick={handleClick}>
                                 {show ? 'Hide' : 'Show'}
@@ -82,7 +82,7 @@ const Signup = () => {
                     <Button mt={5} ml={5} pb={1} id="btn" boxShadow='0 0 10px #F5EFE6' fontFamily={'Pacifico'} fontSize='20px' bgColor='#3C2317' color='#628E90' onClick={handleFormSubmit}>Sign Up</Button>
                 </Box>
                 {error && <Text fontFamily='Rubik' mt={2}>✖️ Sign up failed!</Text>}
-                </form>
+            </form>
             </Box>
         </div>
     )
