@@ -1,68 +1,78 @@
 const mongoose = require('mongoose');
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 const Inventory = require('./Inventory');
 
 const partnerSchema = new Schema({
-    username:{
+    username: {
         type: String,
         required: true,
         unique: true,
         trim: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
         unique: true,
         trim: true
     },
-    password:{
+    password: {
         type: String,
         required: true,
         minlength: 8,
         trim: true
     },
-    partnerName:{
+    partnerName: {
         type: String,
         required: true,
         trim: true
     },
-    streetAddress:{
+    streetAddress: {
         type: String,
         required: true,
         trim: true
     },
-    city:{
+    city: {
         type: String,
         required: true,
         trim: true
     },
-    state:{
+    state: {
         type: String,
         enum: {
-            values: ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'],
+            values: ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'],
             message: 'Please enter the two-letter state abbreviation'
         },
         required: true,
         trim: true
     },
-    zip:{
+    zip: {
         type: String,
         required: true,
         trim: true
-    },    
+    },
+    lat: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    lng: {
+        type: String,
+        required: true,
+        trim: true
+    },
     inventories: [Inventory.schema],
-    orders:[
+    orders: [
         {
-            type:Schema.Types.ObjectId,
-            ref:'Order'
+            type: Schema.Types.ObjectId,
+            ref: 'Order'
         }
     ]
 });
 
 // hash password before saving to database
-partnerSchema.pre('save', async function(next){
-    if(this.isNew || this.isModified('password')){
+partnerSchema.pre('save', async function (next) {
+    if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
     }
@@ -70,7 +80,7 @@ partnerSchema.pre('save', async function(next){
 });
 
 // method to compare password with hashed password upon login
-partnerSchema.methods.isCorrectPassword = async function(password){
+partnerSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
