@@ -36,17 +36,14 @@
   text-shadow: 0 0 8px var(--secondary-color);
 }
 
-#html,
-#body,
-#map-container {
-  height: 100%;
-}
 
-#map {
-  height: 40%;
-}
+@media screen and (max-width: 575px) {
+  .blk-let {
+    font-size: 20px;
+    margin-top: 25px;
+  }
 
-.leaflet-container {
-  width: "vw";
-  height: "vh"
+  .csv.let {
+    font-size: .25em;
+  }
 }
