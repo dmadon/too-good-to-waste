@@ -24,5 +24,3 @@ As a user, I want a way to purchase food so that I can reduce food waste.
 
 ## Installation
 Visit https://ancient-ocean-76067.herokuapp.com/ to deploy web application.
-
-## License
