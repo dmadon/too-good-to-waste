@@ -37,6 +37,7 @@ const PartnersList = ({ partners }) => {
           <Box >
             <div key={partner._id}>
               <Box border='2px' bordercolor='##040303' borderRadius='6px' mr={8} p={3} mb={4} bgColor='#F5EFE6'>
+
                 <Text fontFamily='Rubik' color='#040303'>
                   {partner.partnerName}
                   <br />
@@ -53,6 +54,7 @@ const PartnersList = ({ partners }) => {
                       <Link to={'/customer'}><Button onClick={handleSelectPartner} display='inline-block' bgColor='#B4CDE6' fontFamily='Pacifico' color='#3C2317' fontSize={'18px'} key={`btn-${partner._id}`} id={partner._id}>{invRecord.length}View Today's Inventory</Button></Link>)
                     )}
                 </p>
+
               </Box>
             </div>
           </Box>
