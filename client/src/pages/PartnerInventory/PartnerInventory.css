@@ -1,0 +1,32 @@
+@media screen and (max-width: 768px) {
+    #delete-btn {
+        padding-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    #add {
+        margin-top: 2px;
+    }
+
+    #text {
+        font-size: large;
+    }
+
+    #inv-item {
+        font-size: 24px;
+        margin-right: 2px;
+    }
+
+    #list-avail {
+        font-size: 18px;
+    }
+
+    #backgorund {
+        min-height: 1000px;
+    }
+
+    #delete-btn {
+        padding-bottom: 10px;
+    }
+}
