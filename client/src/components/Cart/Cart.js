@@ -11,7 +11,10 @@ import { loadStripe } from '@stripe/stripe-js';
 import { idbPromise } from '../../utils/helpers';
 import env from "react-dotenv";
 
-const key = `${env.STRIPE_KEY}`
+// Note: I attempted to put the stripe key in a .env file but I got a lot of console errors telling me not to use my Stripe api key
+// (even though it is only a test key). However, when I hard code the key like in the lesson, it likes it just fine.
+const key = `${env.STRIPE_KEY}` //this was my attempt at using a .env for the Stripe key
+
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
