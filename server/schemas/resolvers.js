@@ -82,7 +82,7 @@ const resolvers = {
         },
         // this is the user-side query that gets an inventory based on the user's chosen partner and specified date
         getInventory: async(parent,{partnerId, inventoryDate}) => {
-            return await Partner.findOne({_id:partnerId, "inventories.inventoryDate":dayjs(inventoryDate).format("MM-DD-YYYY")},{partnerName:1,email:1,streetAddress:1, city:1,state:1,zip:1,"inventories.$":1});
+            return await Partner.findOne({_id:partnerId, "inventories.inventoryDate":dayjs(inventoryDate).format("MM-DD-YYYY")},{partnerName:1,email:1,streetAddress:1, city:1,state:1,zip:1,lat:1,lng:1,"inventories.$":1});
         },
         getOrders: async() => {
             return await Order.find().populate(['user','partner']);

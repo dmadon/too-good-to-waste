@@ -50,10 +50,14 @@ const CustomerPage = () => {
         }
     };
 
+    
+    
     useEffect(() => {
         getInventory();
 
     }, [data, loading, selectedInventory, dispatch]);
+
+
 
 
     return (

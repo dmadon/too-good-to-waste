@@ -10,7 +10,7 @@ const PartnersList = ({ partners }) => {
 
   const [state, dispatch] = useStoreContext();
 
-  const { today } = state;
+  const { selectedPartner, today } = state;
 
   const handleSelectPartner = async (event) => {
     // the id attribute of the clicked button should be set to that partner's _id
@@ -21,6 +21,7 @@ const PartnersList = ({ partners }) => {
       type: SET_SELECTED_PARTNER,
       _id: id
     });
+  
   };
 
 
