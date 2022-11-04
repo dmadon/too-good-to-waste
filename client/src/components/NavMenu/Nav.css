@@ -1,0 +1,74 @@
+:root {
+    --primary-color: #3C2317;
+    --secondary-color: #628E90;
+    --tertiary-color: #B4CDE6;
+    --quaternary-color: #F5EFE6;
+    --quinary-color: #040303;
+  }
+
+.bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+}
+
+.bm-burger-bars {
+    background: var(--quinary-color);
+}
+
+.bm-burger-bars:hover {
+    background: var(--tertiary-color);
+}
+
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+
+.bm-cross {
+    background: var(--secondary-color);
+}
+
+.bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+}
+
+.bm-menu {
+    background: var(--primary-color);
+    opacity: 85%;
+}
+
+.bm-morph-shape {
+    fill: black;
+}
+
+.bm-item-list {
+    color: var(--tertiary-color);
+    padding: 10px;
+    font-weight: bold;
+}
+
+.bm-item {
+    display: inline-block;
+    padding: 2px;
+}
+
+.bm-item:hover {
+    color: var(--quaternary-color);
+}
+
+.bm-overlay {
+    background: white;
+}
+
+@media screen and (max-width: 575px) {
+    .bm-burger-button {
+        width: 24px;
+        height: 18px;
+        left: 24px;
+        top: 36px;
+    }
+}
