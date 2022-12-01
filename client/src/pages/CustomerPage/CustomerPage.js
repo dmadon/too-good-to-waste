@@ -76,6 +76,9 @@ const CustomerPage = () => {
                             price={product.price}
                             stock={product.stock}
                             _id={product._id}
+                            inventoryId={selectedInventory.inventories[0]._id}
+                            partnerId={selectedInventory._id}
+                            partnerName={selectedInventory.partnerName}
                         />))}
 
                 </UnorderedList>

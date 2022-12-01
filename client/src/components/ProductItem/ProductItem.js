@@ -20,13 +20,14 @@ const ProductItem = (item) => {
     
     const addToCart = () => {
         //find item with matching ID
-        const itemInCart = cart.find((cartItem) => cartItem._id === item._id);
+        const itemInCart = cart.find((cartItem) => cartItem._id === item._id && cartItem.inventoryId === item.inventoryId);
 
         //update quantity of cart item
         if (itemInCart) {
             dispatch({
                 type: UPDATE_CART_QUANTITY,
                 _id: item._id,
+                inventoryId: item.inventoryId,
                 orderQty: parseInt(itemInCart.orderQty) + 1
             });
             //update quantitiy in IDB
@@ -51,6 +52,13 @@ const ProductItem = (item) => {
                 <Text fontSize={'24px'} fontFamily='Rubik' color='#040303' display='inline-block' ml={5} id="item-avail">{item.stock} available</Text>
                 <Text fontSize={'16px'} fontFamily='Rubik' color='#040303'>{item.description}</Text>
                 <Text fontSize={'16px'} fontFamily='Rubik' color='#040303'>$ {item.price}.00</Text>
+                <Text fontSize={'16px'} fontFamily='Rubik' color='#040303'>Partner Name: {item.partnerName}</Text>
+                <Text fontSize={'16px'} fontFamily='Rubik' color='#040303'>Partner ID: {item.partnerId}</Text>
+                <Text fontSize={'16px'} fontFamily='Rubik' color='#040303'>Inventory ID: {item.inventoryId}</Text>
+                
+
+
+
                 {/* <NumberInput size='sm' maxW={20} defaultValue={0} min={0} display='inline-block' bgColor='#F5EFE6'>
                     <NumberInputField />
                         <NumberInputStepper>

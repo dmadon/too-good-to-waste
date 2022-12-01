@@ -10,7 +10,8 @@ const CartItem = ({item}) => {
     const removeFromCart = item => {
         dispatch({
             type: REMOVE_FROM_CART,
-            _id: item._id
+            _id: item._id,
+            inventoryId: item.inventoryId
         });
         //delete item from IDB
         idbPromise('cart', 'delete', { ...item });
@@ -30,6 +31,7 @@ const CartItem = ({item}) => {
             dispatch({
                 type: UPDATE_CART_QUANTITY,
                 _id: item._id,
+                inventoryId: item.inventoryId,
                 orderQty: parseInt(value)
             });
             //update product quantity in IDB
@@ -39,7 +41,7 @@ const CartItem = ({item}) => {
 
     return (
         <div className="flex-row" id="cart-box">
-            <Text fontFamily="Rubik" fontSize='medium'>{item.name}, ${item.price}</Text>
+            <Text fontFamily="Rubik" fontSize='medium'>{item.name}, ${item.price}, {item.partnerName}, {item.partnerId}, {item.inventoryId}</Text>
             <div>
                 <span>Qty:</span>
                 <input type="number" placeholder="1" value={item.orderQty} onChange={onChange} />
