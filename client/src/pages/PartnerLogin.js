@@ -53,19 +53,19 @@ const PartnerLogin = () => {
 
     return (
         <div>
-            <Box /*minH='1500px'*/ borderRadius='lg' bgColor='#B4CDE6' color='#040303' p={5} id="background">
+            <Box /*minH='1500px'*/ borderRadius='lg' bgColor='#B4CDE6' color='#040303' p={5} className="background">
             
             <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' id="cust-head" textAlign={'center'} mb={4}>Partner Login</Heading>
 
             <form onSubmit={handleFormSubmit} >
                 <Box mt={5} pl={5} id="input-box">
-                    <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Username: </FormLabel>
+                    <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id='label'>Username: </FormLabel>
                     <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your username" name="username" id="email-input" value={formState.username} onChange={handleChange}/>
 
                     <InputGroup size='md' mt={5}>
-                        <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Password: </FormLabel>
+                        <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id='pw-label'>Password: </FormLabel>
                         <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" id="password-input" value={formState.password} onChange={handleChange}/>
-                        <InputRightAddon width="4.5rem">
+                        <InputRightAddon id="show-btn" width="4.5rem">
                             <Button h='1.75rem' size='sm' onClick={handleClick}>
                                 {show ? 'Hide' : 'Show'}
                             </Button>

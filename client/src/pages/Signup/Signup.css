@@ -1,4 +1,4 @@
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 600px) {
     #sign-head {
         margin-top: 2px;
     }
@@ -38,4 +38,41 @@
     #btn {
         margin-left: 0px;
     }
+}
+
+@media screen and (max-width: 498px) {
+    #form {
+        font-size: 15px;
+        margin-right: 0px;
+    }
+    
+    #email-input, #pw-input, #name-input {
+        font-size: 15px;
+    }
+
+    #pw-input {
+        width: 67%;
+    }
+
+    #show-btn {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 439px) {
+    #form, #pw-label {
+        font-size: 12px;
+    }
+
+    #email-input, #pw-input, #name-input {
+        height: 30px;
+        margin-left: 5px;
+        width: 67%;
+        font-size: 12px;
+    }
+
+    #show-btn {
+        display: none;
+    }
+
 }

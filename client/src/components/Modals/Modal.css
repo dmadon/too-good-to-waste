@@ -33,3 +33,9 @@
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
 } */
+
+@media screen and (max-width: 575px) {
+    .modal-content {
+        max-width: 75%;
+    }
+}

@@ -53,23 +53,25 @@ const Login = () => {
 
     return (
         <div>
-            <Box /*minH='1500px'*/ borderRadius='lg' bgColor='#B4CDE6' color='#040303' p={5} id="background"> 
+            <Box /*minH='1500px'*/ borderRadius='lg' bgColor='#B4CDE6' color='#040303' p={5} className="background"> 
 
             <Heading fontFamily='Pacifico' color='#3C2317' textShadow='0 0 4px #B4CDE6' id="cust-head" textAlign={'center'} mb={4}>Customer Login</Heading>
 
             <form onSubmit={handleFormSubmit}>               
                 <Box mt={5} pl={5} id="input-box">
-                    <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Email address: </FormLabel>
+                    <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id='label'>Email address: </FormLabel>
                     <Input htmlSize={50} width='auto' bgColor='#F5EFE6' placeholder="Enter your email address" type="email" name="email" id="email-input" value={formState.email} onChange={handleChange}/>
 
                     <InputGroup size='md' mt={5}>
-                        <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block'>Password: </FormLabel>
-                        <Input htmlSize={42} width='auto' ml={8} bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" value={formState.password} id="password-input" onChange={handleChange} />
-                        <InputRightAddon width="4.5rem">
-                            <Button h='1.75rem' size='sm' onClick={handleClick}>
-                                {show ? 'Hide' : 'Show'}
-                            </Button>
-                        </InputRightAddon>       
+                        <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id='pw-label'>Password: </FormLabel>
+            
+                            <Input htmlSize={42} display='inline-block' width='auto' ml={8} bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" name="password" value={formState.password} id="password-input" onChange={handleChange} />
+                            <InputRightAddon id="show-btn" width="4.5rem">
+                                <Button h='1.75rem' size='sm' onClick={handleClick}>
+                                    {show ? 'Hide' : 'Show'}
+                                </Button>
+                            </InputRightAddon> 
+                       
                     </InputGroup>
                 </Box>
                 <Box id="login-btn"> 
