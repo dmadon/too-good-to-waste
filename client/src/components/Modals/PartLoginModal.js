@@ -1,6 +1,6 @@
 import React from 'react';
 import './Modal.css';
-import Login from '../../pages/Login/Login';
+import Login from '../../pages/PartnerLogin';
 import { Button } from '@chakra-ui/react';
 
 const Modal = props => {
@@ -9,7 +9,6 @@ const Modal = props => {
     };
 
     return (
-   
         <div className='modal' onClick={props.onClose}>
             <div className='modal-content' onClick={e => e.stopPropagation()}>
                 <Login />
