@@ -53,9 +53,9 @@ const Signup = () => {
 
     return (
         <div>
-            <Heading fontFamily='Pacifico' id="sign-head" color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Sign Up</Heading>
+            <Box /*minH='1500px'*/ borderRadius='lg' bgColor='#B4CDE6' color='#040303' p={5} id="background">     
 
-            <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3} id="background">             
+            <Heading fontFamily='Pacifico' id="sign-head" color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mb={4}>Sign Up</Heading>        
                 
             <form onSubmit={handleFormSubmit}>
                 <Box mt={5} pl={5} id="input-box">
