@@ -53,9 +53,9 @@ const Signup = () => {
 
     return (
         <div>
-            <Heading fontFamily='Pacifico' id="sign-head" color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mt={5} mb={4}>Sign Up</Heading>
+            <Box /*minH='1500px'*/ borderRadius='lg' bgColor='#B4CDE6' color='#040303' p={5} className="background">     
 
-            <Box minH='1500px' bgColor='#B4CDE6' color='#040303' pt={3} id="background">             
+            <Heading fontFamily='Pacifico' id="sign-head" color='#3C2317' textShadow='0 0 4px #B4CDE6' textAlign={'center'} mb={4}>Sign Up</Heading>        
                 
             <form onSubmit={handleFormSubmit}>
                 <Box mt={5} pl={5} id="input-box">
@@ -71,7 +71,7 @@ const Signup = () => {
                     <InputGroup size='md' mt={5}>
                         <FormLabel fontFamily={'Rubik'} fontWeight={'bold'} display='inline-block' id="form">Password: </FormLabel>
                         <Input htmlSize={42} width='auto' bgColor='#F5EFE6' type={show ? 'text' : 'password'} placeholder="Enter password" value={formState.password} name="password" onChange={handleChange} id="pw-input" />
-                        <InputRightAddon width="4.5rem">
+                        <InputRightAddon id='show-btn' width="4.5rem">
                             <Button h='1.75rem' size='sm' onClick={handleClick}>
                                 {show ? 'Hide' : 'Show'}
                             </Button>
