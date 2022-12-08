@@ -25,10 +25,6 @@ const PartnersList = ({ partners }) => {
   };
 
 
-  
-
-
-
   if (!partners.length) {
     return <h3>No stores available currently</h3>;
   }
