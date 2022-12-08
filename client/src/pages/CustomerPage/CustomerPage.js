@@ -27,6 +27,11 @@ const CustomerPage = () => {
         }
     })
 
+    console.log(selectedPartner)
+    console.log(selectedInventory)
+    console.log(data)
+    console.log(state)
+
     const getInventory = async () => {
         try {
             await data;

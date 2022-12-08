@@ -7,7 +7,6 @@ import { SET_SELECTED_INVENTORY } from '../../utils/actions';
 import { QUERY_ALL_PARTNERS } from '../../utils/queries';
 import './style.css';
 import RMap from '../RMap';
-// import MapBox from '../Map';
 
 
 function Locator() {
