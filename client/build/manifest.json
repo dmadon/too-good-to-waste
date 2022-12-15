@@ -1,0 +1,8 @@
+{
+  "short_name": "Too Good To Waste",
+  "name": "Too Good To Waste",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
