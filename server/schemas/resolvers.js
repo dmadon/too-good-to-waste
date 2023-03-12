@@ -336,21 +336,53 @@ const resolvers = {
         deleteAllOrders: async () => {
             return await Order.deleteMany();
         },
-        createOrder: async (parent, { products}, context) => {
+        createOrder: async (parent, {products, userId}, context) => {
             
-            if (context.user) {
-                const userId = context.user._id;
+            // if (context.user) {
+                // const userId = context.user._id;
+                const user = userId;
 
-                const order = await (await (await Order.create({products:products, user:userId})).populate('user')).populate('partner');
-                await User.findByIdAndUpdate(userId, { $push: { orders: order._id } },{new:true}).populate({path:'orders', populate:'products'});
-                // await Partner.findByIdAndUpdate(partnerId, { $push:{ orders: order._id } }, {new:true}).populate({path:'orders', populate:'products'});
-                return order;
-            }
+                const orderMap = new Map();
+
+                
+
+                // create a map of each partner represented in the cart with an array to put the products belonging to that partner
+                await products.forEach(product => {
+                    if (orderMap.has(product.partnerName)){
+                        const current = orderMap.get(product.partnerName);
+                        current.products.push(product);
+                        return
+                    }
+                    else {orderMap.set(
+                        // key is the partnerName
+                        product.partnerName,
+                        // value is an object holding the product data 
+                        {
+                            partnerId:product.partnerId,
+                            inventoryId:product.inventoryId,
+                            products:[],
+                        })
+                        const current = orderMap.get(product.partnerName);
+                        current.products.push(product);
+                        return
+                    }; 
+                });
+
+                var orders = [];
+
+                for (const [key,value] of orderMap.entries()){
+                    let orderInfo = (await(await(await Order.create({products:value.products, user:userId, partner:value.partnerId})).populate('user')).populate('partner'));
+                    orders.push(orderInfo);
+                }
+
+                
+                return orders;     
       
-            throw new AuthenticationError('Please log in.');
-          },
+            // throw new AuthenticationError('Please log in.');
+        },
 
     }
+
 };
 
 module.exports = resolvers

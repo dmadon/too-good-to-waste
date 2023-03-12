@@ -1,6 +1,5 @@
 const { gql } = require('apollo-server-express');
 
-
 const typeDefs = gql`
 
     scalar Date
@@ -81,6 +80,9 @@ const typeDefs = gql`
         orderQty:Int!
         description:String
         stock:Int
+        partnerName:String
+        partnerId:String
+        inventoryId:String
     }
 
     input InvProductInput{
@@ -121,7 +123,7 @@ const typeDefs = gql`
         deleteFromInventory(inventoryId:ID!,productId:ID!):Partner
         deleteInventory(inventoryId:ID!):Partner
         deleteInventories:Partner        
-        createOrder(products: [ProductInput]!): Order
+        createOrder(products: [ProductInput]!, userId:ID!): [Order]
         deleteAllOrders:Order
     }
 
