@@ -348,35 +348,103 @@ const resolvers = {
 
                 // create a map of each partner represented in the cart with an array to put the products belonging to that partner
                 await products.forEach(product => {
-                    if (orderMap.has(product.partnerName)){
-                        const current = orderMap.get(product.partnerName);
+
+                    const inventoryId = product.inventoryId;
+                    const partnerId = product.partnerId;
+                    const partnerName = product.partnerName;
+                    const productId = product._id;
+
+
+                    if (orderMap.has(inventoryId)){
+                        const current = orderMap.get(inventoryId);
                         current.products.push(product);
                         return
                     }
                     else {orderMap.set(
                         // key is the partnerName
-                        product.partnerName,
+                        inventoryId,
                         // value is an object holding the product data 
                         {
-                            partnerId:product.partnerId,
-                            inventoryId:product.inventoryId,
+                            partnerId:partnerId,
+                            partnerName:partnerName,
                             products:[],
                         })
-                        const current = orderMap.get(product.partnerName);
+                        const current = orderMap.get(inventoryId);
                         current.products.push(product);
                         return
                     }; 
+
+
+
+
+
+
                 });
+
+
+
+                
 
                 var orders = [];
 
                 for (const [key,value] of orderMap.entries()){
-                    let orderInfo = (await(await(await Order.create({products:value.products, user:userId, partner:value.partnerId})).populate('user')).populate('partner'));
+                    let orderInfo = (         
+                        await(
+                            await(
+                                await(
+                                    await Order.create({products:value.products, user:userId, partner:value.partnerId, inventoryId:key}))
+                                .populate('user')
+                            ).populate('partner')
+                        ).populate({path:'partner',populate:'inventories'})
+                    );
                     orders.push(orderInfo);
                 }
 
+
+                for (const order of orders){
+                    // locate the partner by id
+                   
+                    
+                    // locate the partner's inventory by inventory id
+                    // const partner = await Partner.findOne(
+                    //     {_id:order.partner._id, "inventories._id":order.inventoryId},
+                    //     {_id:1, username:1,partnerName:1,"inventories.$":1}
+                    // );
+                    
+                 
+                    for (const product of order.products){
+                        const update = await Partner.findOneAndUpdate(
+                            {_id:order.partner._id, "inventories._id":order.inventoryId},
+                            {$set:{"inventories.$[outer].products.$[inner]":{"stock":4444}}},
+                            {"arrayFilters":[{"outer._id":order.inventoryId},{"inner._id":product._id}],new:true})
+
+                            
+                    }
+                  
+
+                    
+                   
+                    // locate the product in the inventory and set it's stock value to stock - orderQty
+
+                    // await Partner.findOneAndUpdate(
+                    //     {_id:order.partner._id, "inventories._id":order.inventoryId},                    
+                    //     // add products to the correct inventory by specifying that we are going to provide the inventory's _id, using the positional identifier '$' and an identifier [outer]
+                    //     // we are also providing the specific product's id that we wish to update in the products array by using the positional identifier '$' and an identifier [inner]
+                        
+                        
+                        
+                    //     {$set: {"inventories.$[outer].products.$[inner]":{"_id":foundProd._id,"name":foundProd.name,"description":foundProd.description,"price":product.price, "stock":product.stock}}},
+                    //     // give the identifiers' _id properties the value of the inventoryId and _id that were passed in by the user and return the updated partner object
+                    //     {"arrayFilters": [{"outer._id": order.inventoryId}, {"inner._id":foundProd._id}], new:true},
+                    // );
+
+
+                }
+
+
+
                 
-                return orders;     
+                // return orders;     
       
             // throw new AuthenticationError('Please log in.');
         },

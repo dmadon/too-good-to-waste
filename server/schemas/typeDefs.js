@@ -21,8 +21,9 @@ const typeDefs = gql`
         customerComment: String
         status: String
         partnerComment: String
-        user:User
-        partner:Partner
+        user: User
+        partner: Partner
+        inventoryId: String
     }
 
     type Inventory {
@@ -79,8 +80,8 @@ const typeDefs = gql`
         price:Float!
         orderQty:Int!
         description:String
-        stock:Int
-        partnerName:String
+            stock:Int
+            partnerName:String
         partnerId:String
         inventoryId:String
     }

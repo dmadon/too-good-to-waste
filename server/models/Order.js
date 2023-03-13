@@ -34,6 +34,10 @@ const orderSchema = new Schema({
   partner: {
     type:Schema.Types.ObjectId,
     ref:'Partner'
+  },
+  inventoryId: {
+    type:String,
+    trim:true
   }
 },
 {
